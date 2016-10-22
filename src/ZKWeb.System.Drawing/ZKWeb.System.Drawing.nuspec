@@ -5,8 +5,10 @@
     <version>2.0.0-beta-1</version>
     <authors>ZKWeb.System.Drawing</authors>
     <owners>ZKWeb.System.Drawing</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>This is a .Net Core compatible System.Drawing implementation modified from mono project, works on windows and linux. Please see project site for more information.</description>
+    <projectUrl>https://github.com/zkweb-framework/zkweb.system.drawing</projectUrl>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <tags></tags>
     <dependencies>
       <group targetFramework=".NETFramework4.5" />

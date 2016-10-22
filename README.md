@@ -1,6 +1,6 @@
 # System.Drawing for .NET Core, that really work
 
-This is a .Net Core compatible System.Drawing implementation modified from mono project.
+This is a .Net Core compatible System.Drawing implementation modified from mono project.<br/>
 Works on windows and linux.
 
 [![NuGet](https://buildstats.info/nuget/ZKWeb.System.Drawing)](http://www.nuget.org/packages/ZKWeb.System.Drawing)
@@ -20,7 +20,7 @@ These features should work:
 
 Known issues:
 
-- TODO
+- #1 Save icon file large than 255x255 will cause arithmetic overflow error
 
 # How can I get it work?
 
