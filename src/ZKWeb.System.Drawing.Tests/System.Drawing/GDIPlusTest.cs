@@ -98,6 +98,7 @@ namespace MonoTests.System.Drawing {
 		[Category ("NotWorking")]
 		public void DeleteFontFamily_DoubleDispose ()
 		{
+			Assert.Fail("Wont pass on linux");
 			IntPtr font_family;
 			GDIPlus.GdipGetGenericFontFamilySerif (out font_family);
 			// first dispose

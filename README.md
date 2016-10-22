@@ -28,7 +28,10 @@ On windows, just install package `ZKWeb.System.Drawing` from nuget, nothing else
 
 On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need install `libgdiplus`.<br/>
 
-- Ubuntu: apt-get install libgdiplus
+- Ubuntu:
+	- apt-get install libgdiplus
+	- cd /usr/lib
+	- ln -s libgdiplus.so gdiplus.dll
 - Other distribution: see https://github.com/mono/libgdiplus
 
 # Huh? What's the different with CoreCompat.System.Drawing?
@@ -37,8 +40,11 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 - Copied all files from mono 4.6.1.13, you will actually compile it without seeing hundreds error
 - Really tested on linux and really work
 - You can actually run tests from `dotnet test`, no joke
-	- .Net Core Test Count: 1857, Passed: 1517, Failed: 331, Inconclusive: 0, Skipped: 9
-	- .Net Framework Test Count: 1869, Passed: 1524, Failed: 336, Inconclusive: 0, Skipped: 9
+	- Windows
+		- .Net Core Test Count: 1857, Passed: 1517, Failed: 331, Inconclusive: 0, Skipped: 9
+		- .Net Framework Test Count: 1869, Passed: 1524, Failed: 336, Inconclusive: 0, Skipped: 9
+	- Linux
+		- .Net Core Test Count: 1857, Passed: 1510, Failed: 339, Inconclusive: 0, Skipped: 8
 - No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
 
 # Mac support
