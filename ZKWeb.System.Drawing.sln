@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ZKWeb.System.Drawing", "src\ZKWeb.System.Drawing\ZKWeb.System.Drawing.xproj", "{C86230AD-BBD1-406A-9A31-793E0FD86684}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ZKWeb.System.Drawing.Tests", "src\ZKWeb.System.Drawing.Tests\ZKWeb.System.Drawing.Tests.xproj", "{BC872146-C856-47CA-B1E9-8D1256D57FA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +24,16 @@ Global
 		{C86230AD-BBD1-406A-9A31-793E0FD86684}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C86230AD-BBD1-406A-9A31-793E0FD86684}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C86230AD-BBD1-406A-9A31-793E0FD86684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C86230AD-BBD1-406A-9A31-793E0FD86684} = {9A80874A-7F99-4F2B-A041-BC8F068CCB8F}
+		{BC872146-C856-47CA-B1E9-8D1256D57FA9} = {9A80874A-7F99-4F2B-A041-BC8F068CCB8F}
 	EndGlobalSection
 EndGlobal
