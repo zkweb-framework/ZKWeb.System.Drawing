@@ -26,6 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if false
 using NUnit.Framework;
 using System;
 using System.Drawing;
@@ -34,7 +35,7 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class SystemIconsTest {
 
 		[Test]
@@ -62,14 +63,16 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ObjectDisposedException))]
 		public void Clone_Dispose ()
 		{
+			Assert.Throws<ObjectDisposedException>(() =>
+			{
 			// Clones of SystemIcons icon's can be disposed
 			Icon app = SystemIcons.Application;
 			Icon clone = (Icon) app.Clone ();
 			clone.Dispose ();
-			Assert.IsNotNull (clone.ToBitmap ());
+			Assert.IsNotNull (clone.ToBitmap ());});
 		}
 	}
 }
+#endif

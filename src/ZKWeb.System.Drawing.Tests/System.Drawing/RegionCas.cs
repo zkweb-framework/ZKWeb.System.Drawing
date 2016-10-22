@@ -33,7 +33,9 @@ using System.Drawing;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+#if !NETCORE
 using System.Security.Policy;
+#endif
 
 namespace MonoCasTests.System.Drawing {
 
@@ -45,7 +47,7 @@ namespace MonoCasTests.System.Drawing {
 		private MethodInfo fromHwndInternal;
 		private MethodInfo releaseHdcInternal;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			// this executes at fulltrust
@@ -57,39 +59,49 @@ namespace MonoCasTests.System.Drawing {
 		[SetUp]
 		public void SetUp ()
 		{
+#if !NETCORE
 			if (!SecurityManager.SecurityEnabled)
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+#endif
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
+		
 		public void FromHrgn_Deny_UnmanagedCode ()
 		{
-			Region.FromHrgn (IntPtr.Zero);
+			Assert.Throws<SecurityException>(() =>
+			{
+				Region.FromHrgn (IntPtr.Zero);
+			});
 		}
 
 		[Test]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentException))]
 		public void FromHrgn_PermitOnly_UnmanagedCode ()
 		{
-			Region.FromHrgn (IntPtr.Zero);
+			Assert.Throws<ArgumentException>(() =>
+			{
+				Region.FromHrgn (IntPtr.Zero);
+			});
 		}
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
+		
 		public void ReleaseHrgn_Deny_UnmanagedCode ()
 		{
-			new Region ().ReleaseHrgn (IntPtr.Zero);
+			Assert.Throws<SecurityException>(() =>
+			{
+				new Region ().ReleaseHrgn (IntPtr.Zero);
+			});
 		}
 
 		[Test]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void ReleaseHrgn_PermitOnly_UnmanagedCode ()
 		{
-			new Region ().ReleaseHrgn (IntPtr.Zero);
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				new Region ().ReleaseHrgn (IntPtr.Zero);
+			});
 		}
 	}
 }

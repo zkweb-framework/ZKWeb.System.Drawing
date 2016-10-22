@@ -38,10 +38,10 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class TiffCodecTest {
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void SetUp ()
 		{
 			HostIgnoreList.CheckTest ("MonoTests.System.Drawing.Imaging.TiffCodecTest");
@@ -51,9 +51,8 @@ namespace MonoTests.System.Drawing.Imaging {
 		internal string getOutSufix ()
 		{
 			string s;
-
-			int p = (int) Environment.OSVersion.Platform;
-			if ((p == 4) || (p == 128) || (p == 6))
+			
+			if (GDIPlus.RunningOnUnix())
 				s = "-unix";
 			else
 				s = "-windows";

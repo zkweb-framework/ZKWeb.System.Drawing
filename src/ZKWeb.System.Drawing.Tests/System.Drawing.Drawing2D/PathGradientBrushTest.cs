@@ -36,7 +36,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Drawing2D {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class PathGradientBrushTest {
 
 		private Point[] pts_2i;
@@ -82,7 +82,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.AreEqual (-1, pgb.CenterColor.ToArgb (), "CenterColor");
 		}
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			pts_2i = new Point[2] { new Point (1, 2), new Point (20, 30) };
@@ -91,31 +91,34 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Constructor_GraphicsPath_Null ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			GraphicsPath gp = null;
-			new PathGradientBrush (gp);
+			new PathGradientBrush (gp);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void Constructor_GraphicsPath_Empty ()
 		{
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				new PathGradientBrush (gp);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void Constructor_GraphicsPath_SinglePoint ()
 		{
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (new Point[1] { new Point (1, 1) });
 				// Special case - a line with a single point is valid
 				new PathGradientBrush (gp);
-			}
+			}});
 		}
 
 		[Test]
@@ -131,27 +134,30 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Constructor_Point_Null ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			Point[] pts = null;
-			new PathGradientBrush (pts);
+			new PathGradientBrush (pts);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void Constructor_Point_Empty ()
 		{
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
 			Point[] pts = new Point [0];
-			new PathGradientBrush (pts);
+			new PathGradientBrush (pts);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void Constructor_Point_One ()
 		{
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
 			Point[] pts = new Point[1] { new Point (1, 1) };
-			new PathGradientBrush (pts);
+			new PathGradientBrush (pts);});
 		}
 
 		[Test]
@@ -209,27 +215,30 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Constructor_PointF_Null ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			PointF[] pts = null;
-			new PathGradientBrush (pts);
+			new PathGradientBrush (pts);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void Constructor_PointF_Empty ()
 		{
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
 			PointF[] pts = new PointF[0];
-			new PathGradientBrush (pts);
+			new PathGradientBrush (pts);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void Constructor_PointF_One ()
 		{
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
 			PointF[] pts = new PointF[1] { new PointF (1, 1) };
-			new PathGradientBrush (pts);
+			new PathGradientBrush (pts);});
 		}
 
 		[Test]
@@ -242,10 +251,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (InvalidEnumArgumentException))]
 		public void Constructor_PointF_WrapMode_Invalid ()
 		{
-			PathGradientBrush pgb = new PathGradientBrush (pts_2f, (WrapMode)Int32.MinValue);
+			Assert.Throws<ArgumentException>(() =>
+			{
+				PathGradientBrush pgb = new PathGradientBrush (pts_2f, (WrapMode)Int32.MinValue);
+			});
 		}
 
 		[Test]
@@ -398,12 +409,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SurroundColors_Empty ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				pgb.SurroundColors = new Color[0];
-			}
+			}});
 		}
 
 		[Test]
@@ -448,10 +460,11 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Transform_Null ()
 		{
-			new PathGradientBrush (pts_2f, WrapMode.Clamp).Transform = null;
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+			new PathGradientBrush (pts_2f, WrapMode.Clamp).Transform = null;});
 		}
 
 		[Test]
@@ -464,12 +477,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Transform_NonInvertible ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.Transform = new Matrix (123, 24, 82, 16, 47, 30);
-			}
+			}});
 		}
 
 		[Test]
@@ -484,12 +498,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (InvalidEnumArgumentException))]
 		public void WrapMode_Invalid ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.WrapMode = (WrapMode) Int32.MinValue;
-			}
+			}});
 		}
 
 		[Test]
@@ -507,21 +522,23 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void MultiplyTransform1_Null ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.MultiplyTransform (null);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void MultiplyTransform2_Null ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.MultiplyTransform (null, MatrixOrder.Append);
-			}
+			}});
 		}
 
 		[Test]
@@ -533,14 +550,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void MultiplyTransform_NonInvertible ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (Matrix noninvertible = new Matrix (123, 24, 82, 16, 47, 30)) {
 				using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 					pgb.MultiplyTransform (noninvertible);
 				}
-			}
+			}});
 		}
 
 		[Test]
@@ -607,12 +625,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void RotateTransform_InvalidOrder ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.RotateTransform (720, (MatrixOrder) Int32.MinValue);
-			}
+			}});
 		}
 
 		[Test]
@@ -649,12 +668,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ScaleTransform_InvalidOrder ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.ScaleTransform (1, 1, (MatrixOrder) Int32.MinValue);
-			}
+			}});
 		}
 
 		[Test]
@@ -692,39 +712,43 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetBlendTriangularShape_FocusTooSmall ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetBlendTriangularShape (-1);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetBlendTriangularShape_FocusTooBig ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetBlendTriangularShape (1.01f);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetBlendTriangularShape_ScaleTooSmall ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetBlendTriangularShape (1, -1);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetBlendTriangularShape_ScaleTooBig ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetBlendTriangularShape (1, 1.01f);
-			}
+			}});
 		}
 
 		[Test]
@@ -762,39 +786,43 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetSigmaBellShape_FocusTooSmall ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetSigmaBellShape (-1);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetSigmaBellShape_FocusTooBig ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetSigmaBellShape (1.01f);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetSigmaBellShape_ScaleTooSmall ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetSigmaBellShape (1, -1);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void SetSigmaBellShape_ScaleTooBig ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.SetSigmaBellShape (1, 1.01f);
-			}
+			}});
 		}
 
 		[Test]
@@ -823,12 +851,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void TranslateTransform_InvalidOrder ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.TranslateTransform (1, 1, (MatrixOrder) Int32.MinValue);
-			}
+			}});
 		}
 
 		[Test]
@@ -877,39 +906,42 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void Blend_Null ()
 		{
+			Assert.Throws<NullReferenceException>(() =>
+			{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (pts_2f);
 				using (PathGradientBrush pgb = new PathGradientBrush (gp)) {
 					pgb.Blend = null;
 				}
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void InterpolationColors_Null ()
 		{
+			Assert.Throws<NullReferenceException>(() =>
+			{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (pts_2f);
 				using (PathGradientBrush pgb = new PathGradientBrush (gp)) {
 					pgb.InterpolationColors = null;
 				}
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void SurroundColors_Null ()
 		{
+			Assert.Throws<NullReferenceException>(() =>
+			{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (pts_2f);
 				using (PathGradientBrush pgb = new PathGradientBrush (gp)) {
 					pgb.SurroundColors = null;
 				}
-			}
+			}});
 		}
 	}
 }

@@ -6,10 +6,7 @@
     },
 
     "buildOptions": {
-        "allowUnsafe": true,
-        "compile": {
-            "exclude": [ "Obsleted/*.cs" ]
-        }
+        "allowUnsafe": true
     },
 
     "frameworks": {

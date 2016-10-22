@@ -38,7 +38,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class MetafileTest {
 
 		public const string Bitmap = "bitmaps/non-inverted.bmp";
@@ -57,32 +57,36 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_Stream_Null ()
 		{
-			new Metafile ((Stream)null);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Metafile ((Stream)null);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Metafile_String_Null ()
 		{
-			new Metafile ((string) null);
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+			new Metafile ((string) null);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_String_Empty ()
 		{
-			new Metafile (String.Empty);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Metafile (String.Empty);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ExternalException))]
 		public void Metafile_String_FileDoesNotExists ()
 		{
+			Assert.Throws<Exception>(() =>
+			{
 			string filename = getInFile ("telescope_02.wmf");
-			new Metafile (filename);
+			new Metafile (filename);});
 		}
 
 		[Test]
@@ -94,10 +98,12 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ExternalException))]
 		public void GetMetafileHeader_Bitmap ()
 		{
-			new Metafile (getInFile (Bitmap));
+			Assert.Throws<Exception>(() =>
+			{
+				new Metafile (getInFile (Bitmap));
+			});
 		}
 
 		static public void Check_MetaHeader_WmfPlaceable (MetaHeader mh)
@@ -205,7 +211,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				MetaHeader mh2 = mf.GetMetafileHeader ().WmfHeader;
 				Assert.IsFalse (Object.ReferenceEquals (mh1, mh2), "Same object");
 			}
-			ms.Close ();
+			ms.Dispose ();
 		}
 
 		public static void Check_MetafileHeader_Emf (MetafileHeader header)
@@ -280,14 +286,15 @@ namespace MonoTests.System.Drawing.Imaging {
 				MetafileHeader header1 = mf.GetMetafileHeader ();
 				Check_MetafileHeader_Emf (header1);
 			}
-			ms.Close ();
+			ms.Dispose ();
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void Static_GetMetafileHeader_Stream_Null ()
 		{
-			MetafileHeader header = Metafile.GetMetafileHeader ((Stream)null);
+			Assert.Throws<NullReferenceException>(() =>
+			{
+			MetafileHeader header = Metafile.GetMetafileHeader ((Stream)null);});
 		}
 
 		[Test]
@@ -301,10 +308,11 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Static_GetMetafileHeader_Filename_Null ()
 		{
-			MetafileHeader header = Metafile.GetMetafileHeader ((string) null);
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+			MetafileHeader header = Metafile.GetMetafileHeader ((string) null);});
 		}
 
 		[Test]
@@ -321,7 +329,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 		private Font test_font;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			try {
@@ -332,16 +340,18 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Static_GetMetafileHeader_IntPtr_Zero ()
 		{
-			Metafile.GetMetafileHeader (IntPtr.Zero);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			Metafile.GetMetafileHeader (IntPtr.Zero);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Static_GetMetafileHeader_IntPtr ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			string filename = MetafileTest.getInFile (MetafileTest.WmfPlaceable);
 			using (Metafile mf = new Metafile (filename)) {
 
@@ -349,21 +359,23 @@ namespace MonoTests.System.Drawing.Imaging {
 				Assert.IsTrue (hemf != IntPtr.Zero, "GetHenhmetafile");
 
 				Metafile.GetMetafileHeader (hemf);
-			}
+			}});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_IntPtrBool_Zero ()
 		{
-			new Metafile (IntPtr.Zero, false);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Metafile (IntPtr.Zero, false);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_IntPtrEmfType_Zero ()
 		{
-			new Metafile (IntPtr.Zero, EmfType.EmfOnly);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Metafile (IntPtr.Zero, EmfType.EmfOnly);});
 		}
 
 		private void CheckEmptyHeader (Metafile mf, EmfType type)
@@ -407,10 +419,11 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_IntPtrEmfType_Invalid ()
 		{
-			Metafile_IntPtrEmfType ((EmfType)Int32.MinValue);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			Metafile_IntPtrEmfType ((EmfType)Int32.MinValue);});
 		}
 
 		[Test]
@@ -432,10 +445,11 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_IntPtrRectangle_Zero ()
 		{
-			new Metafile (IntPtr.Zero, new Rectangle (1, 2, 3, 4));
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Metafile (IntPtr.Zero, new Rectangle (1, 2, 3, 4));});
 		}
 
 		[Test]
@@ -456,10 +470,11 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_IntPtrRectangleF_Zero ()
 		{
-			new Metafile (IntPtr.Zero, new RectangleF (1, 2, 3, 4));
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Metafile (IntPtr.Zero, new RectangleF (1, 2, 3, 4));});
 		}
 
 		[Test]
@@ -496,10 +511,11 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void Metafile_StreamIntPtrEmfType_Null ()
 		{
-			Metafile_StreamEmfType (null, EmfType.EmfOnly);
+			Assert.Throws<NullReferenceException>(() =>
+			{
+			Metafile_StreamEmfType (null, EmfType.EmfOnly);});
 		}
 
 		[Test]
@@ -511,12 +527,13 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Metafile_StreamIntPtrEmfType_Invalid ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			using (MemoryStream ms = new MemoryStream ()) {
 				Metafile_StreamEmfType (ms, (EmfType)Int32.MinValue);
-			}
+			}});
 		}
 
 		private void CreateFilename (EmfType type, bool single)
@@ -575,24 +592,27 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void CreateFilename_MultipleGraphics_EmfOnly ()
 		{
-			CreateFilename (EmfType.EmfOnly, false);
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
+			CreateFilename (EmfType.EmfOnly, false);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void CreateFilename_MultipleGraphics_EmfPlusDual ()
 		{
-			CreateFilename (EmfType.EmfPlusDual, false);
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
+			CreateFilename (EmfType.EmfPlusDual, false);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (OutOfMemoryException))]
 		public void CreateFilename_MultipleGraphics_EmfPlusOnly ()
 		{
-			CreateFilename (EmfType.EmfPlusOnly, false);
+			Assert.Throws<OutOfMemoryException>(() =>
+			{
+			CreateFilename (EmfType.EmfPlusOnly, false);});
 		}
 
 		[Test]

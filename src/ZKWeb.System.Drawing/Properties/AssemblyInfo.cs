@@ -17,3 +17,5 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("c86230ad-bbd1-406a-9a31-793e0fd86684")]
+
+[assembly: InternalsVisibleTo("ZKWeb.System.Drawing.Tests")]

@@ -35,7 +35,7 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing.Drawing2D
 {
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class BlendTest
 	{
 		[TearDown]

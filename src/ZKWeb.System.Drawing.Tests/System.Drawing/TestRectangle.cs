@@ -33,7 +33,7 @@ namespace MonoTests.System.Drawing
 {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class TestRectangle {
 
 		Rectangle rect_0;

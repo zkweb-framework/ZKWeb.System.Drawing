@@ -39,7 +39,7 @@ using System.Text.RegularExpressions;
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class ImageCodecInfoTest {
 
 		Hashtable decoders;
@@ -54,7 +54,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			return (ImageCodecInfo) decoders [clsid];
 		}
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureGetReady()		
 		{
 			decoders = new Hashtable ();

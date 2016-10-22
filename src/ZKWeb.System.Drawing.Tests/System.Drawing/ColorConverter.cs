@@ -30,13 +30,15 @@ using System.ComponentModel.Design.Serialization;
 using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
+using System.Linq;
+using System.Reflection;
 
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class ColorConverterTest {
 
 		Color col;
@@ -167,72 +169,81 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFrom_x1 ()
 		{
-				colconv.ConvertFrom (null, CultureInfo.InvariantCulture, "10, 20");
+			Assert.Throws<ArgumentException>(() =>
+			{
+				colconv.ConvertFrom (null, CultureInfo.InvariantCulture, "10, 20");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFrom_x2 ()
 		{
-			colconv.ConvertFrom (null, CultureInfo.InvariantCulture, "-10, 20, 30");
+			Assert.Throws<ArgumentException>(() =>
+			{
+			colconv.ConvertFrom (null, CultureInfo.InvariantCulture, "-10, 20, 30");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFrom_x3 ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			colconv.ConvertFrom (null, CultureInfo.InvariantCulture,
-					"1, 1, 1, 1, 1");
+					"1, 1, 1, 1, 1");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (Exception))]
 		public void ConvertFrom_x4 ()
 		{
+			Assert.Throws<Exception>(() =>
+			{
 			colconv.ConvertFrom (null, CultureInfo.InvariantCulture,
-				"*1, 1");
+				"*1, 1");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertFrom_x5 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertFrom (null, CultureInfo.InvariantCulture,
-					new Point (10, 10));
+					new Point (10, 10));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertFrom_x6 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertFrom (null, CultureInfo.InvariantCulture,
-					new PointF (10, 10));
+					new PointF (10, 10));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertFrom_x7 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertFrom (null, CultureInfo.InvariantCulture,
-					new Size (10, 10));
+					new Size (10, 10));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertFrom_x8 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertFrom (null, CultureInfo.InvariantCulture,
-					new SizeF (10, 10));
+					new SizeF (10, 10));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertFrom_x9 ()
 		{
-			colconv.ConvertFrom (null, CultureInfo.InvariantCulture, 0x10);
+			Assert.Throws<NotSupportedException>(() =>
+			{
+			colconv.ConvertFrom (null, CultureInfo.InvariantCulture, 0x10);});
 		}
 
 		[Test]
@@ -264,43 +275,48 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertTo_x1 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertTo (null, CultureInfo.InvariantCulture, col,
-					typeof (Color));
+					typeof (Color));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertTo_x2 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertTo (null, CultureInfo.InvariantCulture, col,
-					typeof (SizeF));
+					typeof (SizeF));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertTo_x3 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertTo (null, CultureInfo.InvariantCulture, col,
-					typeof (Point));
+					typeof (Point));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertTo_x4 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertTo (null, CultureInfo.InvariantCulture, col,
-					typeof (PointF));
+					typeof (PointF));});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
 		public void ConvertTo_x5 ()
 		{
+			Assert.Throws<NotSupportedException>(() =>
+			{
 			colconv.ConvertTo (null, CultureInfo.InvariantCulture, col,
-					typeof (int));
+					typeof (int));});
 		}
 
 		[Test]
@@ -339,7 +355,7 @@ namespace MonoTests.System.Drawing {
 
 			Assert.AreEqual (null, colconv.GetProperties (null, col, null), "GP2#1");
 
-			attrs = Attribute.GetCustomAttributes (typeof (Color), true);
+			attrs = typeof(Color).GetTypeInfo().GetCustomAttributes().ToArray();
 			Assert.AreEqual (null, colconv.GetProperties (null, col, attrs), "GP3#5");
 		}
 
@@ -351,10 +367,11 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromInvariantString_InvalidComponentCount ()
 		{
-			colconv.ConvertFromInvariantString ("1, 2, 3, 4, 5");
+			Assert.Throws<ArgumentException>(() =>
+			{
+			colconv.ConvertFromInvariantString ("1, 2, 3, 4, 5");});
 		}
 
 		[Test]
@@ -378,12 +395,13 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromString_InvalidComponentCount ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			CultureInfo culture = CultureInfo.CurrentCulture;
 			colconv.ConvertFromString (string.Format (culture,
-				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator[0]));
+				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator[0]));});
 		}
 
 		[Test]
@@ -428,10 +446,11 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (Exception))]
 		public void ConvertFromString_FromHtml_PoundTooLarge ()
 		{
-			colconv.ConvertFromString ("#100000000");
+			Assert.Throws<Exception>(() =>
+			{
+			colconv.ConvertFromString ("#100000000");});
 		}
 	}
 }

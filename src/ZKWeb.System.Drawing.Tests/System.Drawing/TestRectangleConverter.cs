@@ -36,13 +36,15 @@ using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Threading;
+using System.Linq;
+using System.Reflection;
 
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class RectangleConverterTest
 	{
 		Rectangle rect;
@@ -305,15 +307,16 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void TestCreateInstance_CaseSensitive ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Hashtable ht = new Hashtable ();
 			ht.Add ("x", -10);
 			ht.Add ("Y", -10);
 			ht.Add ("Width", 20);
 			ht.Add ("Height", 30);
-			rconv.CreateInstance (null, ht);
+			rconv.CreateInstance (null, ht);});
 		}
 
 		[Test]
@@ -359,7 +362,7 @@ namespace MonoTests.System.Drawing
 			Assert.AreEqual (rect.IsEmpty, propsColl["IsEmpty"].GetValue (rect), "GP3#12");
 
 			Type type = typeof (Rectangle);
-			attrs = Attribute.GetCustomAttributes (type, true);
+			attrs = type.GetTypeInfo().GetCustomAttributes().ToArray();
 			propsColl = rconv.GetProperties (null, rect, attrs);
 			Assert.AreEqual (0, propsColl.Count, "GP3#13");
 		}
@@ -374,10 +377,11 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromInvariantString_string_exc_1 ()
 		{
-			rconv.ConvertFromInvariantString ("1, 2, 3");
+			Assert.Throws<ArgumentException>(() =>
+			{
+			rconv.ConvertFromInvariantString ("1, 2, 3");});
 		}
 
 		[Test]
@@ -397,7 +401,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertFromString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformConvertFromStringTest (new CultureInfo ("en-US"));
@@ -405,17 +409,18 @@ namespace MonoTests.System.Drawing
 				PerformConvertFromStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromString_string_exc_1 ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			CultureInfo culture = CultureInfo.CurrentCulture;
 			rconv.ConvertFromString (string.Format(culture,
-				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator));
+				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator));});
 		}
 
 		[Test]
@@ -443,7 +448,7 @@ namespace MonoTests.System.Drawing
 		[Test]
 		public void ConvertToString_string () {
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformConvertToStringTest (new CultureInfo ("en-US"));
@@ -451,7 +456,7 @@ namespace MonoTests.System.Drawing
 				PerformConvertToStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
@@ -476,7 +481,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertFromStringTest (CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (rect, rconv.ConvertFromString (CreateRectangleString (rect)),
@@ -488,7 +493,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertToStringTest (CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (CreateRectangleString (rect), rconv.ConvertToString (rect),
@@ -509,7 +514,6 @@ namespace MonoTests.System.Drawing
 				rectangle.Width.ToString (culture), rectangle.Height.ToString (culture));
 		}
 
-		[Serializable]
 		private sealed class MyCultureInfo : CultureInfo
 		{
 			internal MyCultureInfo ()

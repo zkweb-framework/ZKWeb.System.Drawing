@@ -36,13 +36,15 @@ using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Threading;
+using System.Reflection;
+using System.Linq;
 
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class SizeConverterTest
 	{
 		Size sz;
@@ -256,13 +258,14 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void TestCreateInstance_CaseSensitive ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Hashtable ht = new Hashtable ();
 			ht.Add ("width", 20);
 			ht.Add ("Height", 30);
-			szconv.CreateInstance (null, ht);
+			szconv.CreateInstance (null, ht);});
 		}
 
 		[Test]
@@ -295,7 +298,7 @@ namespace MonoTests.System.Drawing
 			Assert.AreEqual (sz.IsEmpty, propsColl["IsEmpty"].GetValue (sz), "GP3#4");
 
 			Type type = typeof (Size);
-			attrs = Attribute.GetCustomAttributes (type, true);
+			attrs = type.GetTypeInfo().GetCustomAttributes().ToArray();
 			propsColl = szconv.GetProperties (null, sz, attrs);
 			Assert.AreEqual (0, propsColl.Count, "GP3#5");
 		}
@@ -310,10 +313,11 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromInvariantString_string_exc_1 ()
 		{
-			szconv.ConvertFromInvariantString ("1, 2, 3");
+			Assert.Throws<ArgumentException>(() =>
+			{
+			szconv.ConvertFromInvariantString ("1, 2, 3");});
 		}
 
 		[Test]
@@ -333,7 +337,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertFromString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformConvertFromStringTest (new CultureInfo ("en-US"));
@@ -341,17 +345,18 @@ namespace MonoTests.System.Drawing
 				PerformConvertFromStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromString_string_exc_1 ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			CultureInfo culture = CultureInfo.CurrentCulture;
 			szconv.ConvertFromString (string.Format(culture,
-				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator));
+				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator));});
 		}
 
 		[Test]
@@ -380,7 +385,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertToString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformConvertToStringTest (new CultureInfo ("en-US"));
@@ -388,7 +393,7 @@ namespace MonoTests.System.Drawing
 				PerformConvertToStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
@@ -413,7 +418,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertFromStringTest (CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (sz, szconv.ConvertFromString (CreateSizeString (culture, sz)),
@@ -425,7 +430,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertToStringTest (CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (CreateSizeString (culture, sz), szconv.ConvertToString (sz),
@@ -445,7 +450,6 @@ namespace MonoTests.System.Drawing
 				culture.TextInfo.ListSeparator, size.Height.ToString (culture));
 		}
 
-		[Serializable]
 		private sealed class MyCultureInfo : CultureInfo
 		{
 			internal MyCultureInfo () : base ("en-US")

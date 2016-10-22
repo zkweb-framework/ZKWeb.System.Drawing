@@ -44,7 +44,7 @@ namespace MonoTests.System.Drawing{
 
 		private string name;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			try {
@@ -59,7 +59,7 @@ namespace MonoTests.System.Drawing{
 
 		// Test basic Font clone, properties and contructor
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		
 		public void TestClone()
 		{		
 			Font f = new Font("Arial",12);	
@@ -80,7 +80,7 @@ namespace MonoTests.System.Drawing{
 			Assert.AreEqual (f.Unit, f2.Unit, "Unit");
 		}
 
-		[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
+		[StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
 		class LOGFONT {
 			public int lfHeight;
 			public int lfWidth;
@@ -99,7 +99,7 @@ namespace MonoTests.System.Drawing{
 			public string lfFaceName;
 		}
 
-		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Auto)]
+		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 		struct LOGFONT_STRUCT {
 			public int lfHeight;
 			public int lfWidth;
@@ -120,17 +120,19 @@ namespace MonoTests.System.Drawing{
 
 		[Test]
 		[Category ("CAS")]
-		[ExpectedException (typeof (SecurityException))]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		
 		public void ToLogFont_DenyUnmanagedCode ()
 		{
-			Font f;
-			LOGFONT	lf;
+			Assert.Throws<SecurityException>(() =>
+			{
+				Font f;
+				LOGFONT lf;
 
-			lf = new LOGFONT();
-			f = new Font("Arial", 10);
+				lf = new LOGFONT();
+				f = new Font("Arial", 10);
 
-			f.ToLogFont(lf);
+				f.ToLogFont(lf);
+			});
 		}
 
 		[Test]
@@ -167,13 +169,15 @@ namespace MonoTests.System.Drawing{
 
 		[Test]
 		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ToLogFont_TooSmall ()
 		{
-			Font f = new Font ("Arial", 10);
-			object o = new object ();
-			f.ToLogFont (o);
-			// no PInvoke conversion exists !?!?
+			Assert.Throws<ArgumentException>(() =>
+			{
+				Font f = new Font("Arial", 10);
+				object o = new object();
+				f.ToLogFont(o);
+				// no PInvoke conversion exists !?!?});
+			});
 		}
 
 		[Test]
@@ -186,14 +190,19 @@ namespace MonoTests.System.Drawing{
 			Assert.AreEqual (1, i);
 		}
 
+#if !NETCORE
 		[Test]
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
-		[ExpectedException (typeof (AccessViolationException))]
-		public void ToLogFont_Null ()
+		[SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
+		public void ToLogFont_Null()
 		{
-			Font f = new Font ("Arial", 10);
-			f.ToLogFont (null);
+			Assert.Throws<AccessViolationException>(() =>
+			{
+				Font f = new Font("Arial", 10);
+				f.ToLogFont(null);
+			});
 		}
+#endif
+
 		[Test]
 		public void Font_StringNull_Float ()
 		{
@@ -260,10 +269,11 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Font_String_Float_FontStyle_GraphicsUnit_Display ()
 		{
-			new Font (name, 12.5f, FontStyle.Italic, GraphicsUnit.Display);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Font (name, 12.5f, FontStyle.Italic, GraphicsUnit.Display);});
 		}
 
 		[Test]
@@ -303,19 +313,21 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void Font_FontFamilyNull_Float ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			FontFamily ff = null;
-			new Font (ff, 12.5f);
+			new Font (ff, 12.5f);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void Font_FontNull_FontStyle ()
 		{
+			Assert.Throws<NullReferenceException>(() =>
+			{
 			Font f = null;
-			new Font (f, FontStyle.Bold);
+			new Font (f, FontStyle.Bold);});
 		}
 
 		[Test]
@@ -373,10 +385,11 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Display ()
 		{
-			new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Display);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Display);});
 		}
 
 		[Test]
@@ -435,22 +448,24 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Dispose_Height ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Font f = new Font (name, 12.5f);
 			f.Dispose ();
-			Assert.AreEqual (0, f.Height, "Name");
+			Assert.AreEqual (0, f.Height, "Name");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Dispose_ToLogFont ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Font f = new Font (name, 12.5f);
 			f.Dispose ();
 			LOGFONT	lf = new LOGFONT();
-			f.ToLogFont (lf);
+			f.ToLogFont (lf);});
 		}
 
 		[Test]
@@ -503,22 +518,25 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Dispose_ToHFont ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Font f = new Font (name, 12.5f);
 			f.Dispose ();
-			f.ToHfont ();
+			f.ToHfont ();});
 		}
 		
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		[Category ("NotWorking")]
 		public void UnavailableStyleException ()
 		{
-			// Marked NotWorking because it is dependent on what fonts/styles are available
-			// on the OS.  This test is written for Windows.
-			Font f = new Font ("Monotype Corsiva", 8, FontStyle.Regular);
+			Assert.Throws<ArgumentException>(() =>
+			{
+				// Marked NotWorking because it is dependent on what fonts/styles are available
+				// on the OS.  This test is written for Windows.
+				Font f = new Font("Monotype Corsiva", 8, FontStyle.Regular);
+			});
 		}
 
 		[Test]
@@ -547,12 +565,13 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void GetHeight_Graphics_Null ()
 		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
 			using (Font f = new Font (name, 12.5f)) {
 				Assert.AreEqual (0, f.GetHeight (null), "0");
-			}
+			}});
 		}
 
 		[Test]

@@ -306,8 +306,7 @@ namespace System.Drawing
 				throw new ArgumentException (string.Format ("Null or empty path."), "filePath");
 			if (!File.Exists (filePath))
 				throw new FileNotFoundException (string.Format("Couldn't find specified file."), filePath);
-
-			return SystemIcons.WinLogo;
+			throw new NotSupportedException();
 		}	
 
 		public void Dispose ()

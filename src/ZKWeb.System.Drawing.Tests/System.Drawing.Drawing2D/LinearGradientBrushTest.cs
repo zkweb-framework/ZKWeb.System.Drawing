@@ -36,7 +36,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Drawing2D {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class LinearGradientBrushTest {
 
 		private Point pt1;
@@ -47,7 +47,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		private Matrix empty_matrix;
 		private RectangleF rect;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			pt1 = new Point (0, 0);
@@ -325,33 +325,37 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void InterpolationColors_Colors_InvalidBlend ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			// default Blend doesn't allow getting this property
-			Assert.IsNotNull (default_brush.InterpolationColors.Colors);
+			Assert.IsNotNull (default_brush.InterpolationColors.Colors);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void InterpolationColors_Positions_InvalidBlend ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			// default Blend doesn't allow getting this property
-			Assert.IsNotNull (default_brush.InterpolationColors.Positions);
+			Assert.IsNotNull (default_brush.InterpolationColors.Positions);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
 		public void LinearColors_Empty ()
 		{
-			default_brush.LinearColors = new Color[0];
+			Assert.Throws<IndexOutOfRangeException>(() =>
+			{
+			default_brush.LinearColors = new Color[0];});
 		}
 
 		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
 		public void LinearColors_One ()
 		{
-			default_brush.LinearColors = new Color[1];
+			Assert.Throws<IndexOutOfRangeException>(() =>
+			{
+			default_brush.LinearColors = new Color[1];});
 		}
 
 		[Test]
@@ -417,10 +421,11 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Transform_NonInvertible ()
 		{
-			default_brush.Transform = new Matrix (123, 24, 82, 16, 47, 30);
+			Assert.Throws<ArgumentException>(() =>
+			{
+			default_brush.Transform = new Matrix (123, 24, 82, 16, 47, 30);});
 		}
 
 		[Test]
@@ -447,10 +452,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (InvalidEnumArgumentException))]
 		public void WrapMode_Invalid ()
 		{
-			default_brush.WrapMode = (WrapMode) Int32.MinValue;
+			Assert.Throws<ArgumentException>(() =>
+			{
+				default_brush.WrapMode = (WrapMode) Int32.MinValue;
+			});
 		}
 
 
@@ -470,17 +477,19 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void MultiplyTransform1_Null ()
 		{
-			default_brush.MultiplyTransform (null);
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+			default_brush.MultiplyTransform (null);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void MultiplyTransform2_Null ()
 		{
-			default_brush.MultiplyTransform (null, MatrixOrder.Append);
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+			default_brush.MultiplyTransform (null, MatrixOrder.Append);});
 		}
 
 		[Test]
@@ -490,11 +499,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void MultiplyTransform_NonInvertible ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Matrix noninvertible = new Matrix (123, 24, 82, 16, 47, 30);
-			default_brush.MultiplyTransform (noninvertible);
+			default_brush.MultiplyTransform (noninvertible);});
 		}
 
 		[Test]

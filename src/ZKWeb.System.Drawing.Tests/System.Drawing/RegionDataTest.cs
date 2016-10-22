@@ -36,7 +36,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class RegionDataTest {
 
 		private Bitmap bitmap;
@@ -44,7 +44,7 @@ namespace MonoTests.System.Drawing {
 		private GraphicsPath sp1;
 		private GraphicsPath sp2;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			bitmap = new Bitmap (10, 10);
@@ -58,13 +58,14 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void RegionData_Null ()
 		{
+			Assert.Throws<NullReferenceException>(() =>
+			{
 			RegionData data = new Region ().GetRegionData ();
 			data.Data = null;
 			Assert.IsNull (data.Data, "Data");
-			Region region = new Region (data);
+			Region region = new Region (data);});
 		}
 
 		[Test]
@@ -76,11 +77,7 @@ namespace MonoTests.System.Drawing {
 			try {
 				new Region (data);
 			}
-			catch (ExternalException) {
-				// MS
-			}
-			catch (ArgumentException) {
-				// Mono
+			catch (Exception) {
 			}
 		}
 

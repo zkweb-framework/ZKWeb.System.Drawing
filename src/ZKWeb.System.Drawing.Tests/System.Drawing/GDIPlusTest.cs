@@ -41,7 +41,7 @@ namespace MonoTests.System.Drawing {
 	public class GDIPlusTest {
 
 		// for the moment this LOGFONT is different (and ok) from the one defined internally in SD
-		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Auto)]
+		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 		public class LOGFONT {
 			public int lfHeight = 0;
 			public int lfWidth = 0;
@@ -322,6 +322,7 @@ namespace MonoTests.System.Drawing {
 		[Category ("NotWorking")] // incomplete GdipDrawImageRectRect[I] support
 		public void Graphics_FromImage_Metafile ()
 		{
+			Assert.Fail("This test case will cause memory error, ignore for now");
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppArgb)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
 					IntPtr metafile = IntPtr.Zero;
@@ -911,9 +912,10 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (FileNotFoundException))]
 		public void GdipLoadImageFromFile_FileNotFound ()
 		{
+			Assert.Throws<FileNotFoundException>(() =>
+			{
 			string filename = "filenotfound";
 
 			IntPtr image;
@@ -921,20 +923,21 @@ namespace MonoTests.System.Drawing {
 			Assert.AreEqual (IntPtr.Zero, image, "image handle");
 
 			// this doesn't throw a OutOfMemoryException
-			Image.FromFile (filename);
+			Image.FromFile (filename);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void GdipCreateBitmapFromFile_FileNotFound ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			string filename = "filenotfound";
 
 			IntPtr bitmap;
 			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipCreateBitmapFromFile (filename, out bitmap), "GdipCreateBitmapFromFile");
 			Assert.AreEqual (IntPtr.Zero, bitmap, "bitmap handle");
 
-			new Bitmap (filename);
+			new Bitmap (filename);});
 		}
 
 		[Test]

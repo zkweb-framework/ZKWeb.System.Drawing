@@ -33,7 +33,9 @@ using System.Drawing;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+#if !NETCORE
 using System.Security.Policy;
+#endif
 
 namespace MonoCasTests.System.Drawing {
 
@@ -45,7 +47,7 @@ namespace MonoCasTests.System.Drawing {
 		private MethodInfo getHbitmap2;
 		private MethodInfo getHicon;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			// this executes at fulltrust
@@ -57,12 +59,14 @@ namespace MonoCasTests.System.Drawing {
 		[SetUp]
 		public void SetUp ()
 		{
+#if !NETCORE
 			if (!SecurityManager.SecurityEnabled)
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
+#endif
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		
 		public void GetHbitmap ()
 		{
 			Bitmap b = new Bitmap (10, 10);
@@ -81,7 +85,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+		
 		public void GetHicon ()
 		{
 			Bitmap b = new Bitmap (10, 10);
@@ -98,36 +102,39 @@ namespace MonoCasTests.System.Drawing {
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
+		
 		public void GetHbitmap_Empty_LinkDemand ()
 		{
+			Assert.Throws<SecurityException>(() =>
+			{
 			// requires FullTrust, so denying anything break the requirements
 			Assert.IsNotNull (getHbitmap1, "GetHbitmap");
 			Bitmap b = new Bitmap (10, 10);
-			getHbitmap1.Invoke (b, null);
+			getHbitmap1.Invoke (b, null);});
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
+		
 		public void GetHbitmap_Color_LinkDemand ()
 		{
+			Assert.Throws<SecurityException>(() =>
+			{
 			// requires FullTrust, so denying anything break the requirements
 			Assert.IsNotNull (getHbitmap2, "GetHbitmap(Color)");
 			Bitmap b = new Bitmap (10, 10);
-			getHbitmap2.Invoke (b, new object[1] { Color.Aqua });
+			getHbitmap2.Invoke (b, new object[1] { Color.Aqua });});
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
+		
 		public void GetHicon_LinkDemand ()
 		{
+			Assert.Throws<SecurityException>(() =>
+			{
 			// requires FullTrust, so denying anything break the requirements
 			Assert.IsNotNull (getHicon, "GetHicon");
 			Bitmap b = new Bitmap (10, 10);
-			getHicon.Invoke (b, null);
+			getHicon.Invoke (b, null);});
 		}
 	}
 }

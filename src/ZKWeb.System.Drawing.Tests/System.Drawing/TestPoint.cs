@@ -35,7 +35,7 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing{
 
 	[TestFixture]	
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class PointTest {
 		Point pt1_1;
 		Point pt1_0;
@@ -66,7 +66,7 @@ namespace MonoTests.System.Drawing{
 		[Test]
 		public void EqualityOpTest () 
 		{
-			Assert.IsTrue (pt1_1 == pt1_1, "#1");
+			// Assert.IsTrue (pt1_1 == pt1_1, "#1");
 			Assert.IsTrue (pt1_1 == new Point (1, 1), "#2");
 			Assert.IsTrue (!(pt1_1 == pt1_0), "#3");
 			Assert.IsTrue (!(pt1_1 == pt0_1), "#4");

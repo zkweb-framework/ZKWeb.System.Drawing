@@ -1,0 +1,3 @@
+Replace ExpectedException:
+\[ExpectedException\s*\(typeof\s*\((\w+)\)\s*\)\]\n\t\t(.*?)\n\t\t\{([\s\S]+?)\n\t\t\}
+$2\n\t\t{\n\t\t\tAssert.Throws<$1>(() =>\n\t\t\t{$3});\n\t\t}

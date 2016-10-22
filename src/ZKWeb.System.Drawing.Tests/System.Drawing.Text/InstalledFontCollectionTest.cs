@@ -36,7 +36,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Text {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class InstalledFontCollectionTest {
 
 		[Test]

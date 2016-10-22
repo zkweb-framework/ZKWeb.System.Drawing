@@ -5,10 +5,18 @@ Works on windows and linux.
 
 [![NuGet](https://buildstats.info/nuget/ZKWeb.System.Drawing)](http://www.nuget.org/packages/ZKWeb.System.Drawing)
 
-These systems are tested:
+These system are tested:
 
-Windows 8.1 64bit
-Ubuntu Server 16.04 LTS 64bit
+- Windows 8.1 64bit
+- Ubuntu Server 16.04 LTS 64bit
+
+These features should work:
+
+- TODO
+
+Known issues:
+
+- TODO
 
 # How can I get it work?
 
@@ -27,8 +35,10 @@ Otherwise you will need build `libgdiplus.so` yourself, Here is steps.
 
 - No fake strong name is used, will not mess up Asp.Net and OWIN.
 - Copied all files from mono 4.6.1.13, you will actually compile it without seeing hundreds error
+- Really tested on linux and really work
 - You can actually run tests from `dotnet test`, no joke
-- Really tested on linux, if that's not work with you please fill an issue
+	- .Net Core Test Count: 1857, Passed: 1517, Failed: 331, Inconclusive: 0, Skipped: 9
+	- .Net Framework Test Count: 1869, Passed: 1524, Failed: 336, Inconclusive: 0, Skipped: 9
 - No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
 
 # You have compiled `libgdiplus.so` for other distribution?

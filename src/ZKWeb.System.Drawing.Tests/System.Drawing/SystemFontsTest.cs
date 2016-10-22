@@ -41,7 +41,7 @@ namespace MonoTests.System.Drawing {
 		// avoid lots of failures if no fonts are available (e.g. headless systems)
 		static bool font_available;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void FixtureSetUp ()
 		{
 			try {
@@ -130,13 +130,14 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Dispose_Instance ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Font f1 = SystemFonts.CaptionFont;
 			float height = f1.GetHeight (72f);
 			f1.Dispose ();
-			f1.GetHeight (72f);
+			f1.GetHeight (72f);});
 		}
 
 		[Test]

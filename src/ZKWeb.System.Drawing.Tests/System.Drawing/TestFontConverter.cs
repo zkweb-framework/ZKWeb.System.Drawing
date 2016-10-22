@@ -35,7 +35,7 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing{
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class FontNameConverterTest {
 
 		[Test]
@@ -48,20 +48,24 @@ namespace MonoTests.System.Drawing{
 			Assert.IsFalse (f.GetStandardValuesExclusive (), "standard values exclusive");
 		}
 		
-		[ExpectedException (typeof (NotSupportedException))]
 		[Test]
 		public void ExTestConvertFrom ()
 		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			f.ConvertFrom (null);
+			Assert.Throws<NotSupportedException>(() =>
+			{
+				FontConverter.FontNameConverter f = new FontConverter.FontNameConverter();
+				f.ConvertFrom(null);
+			});
 		}
-
-		[ExpectedException (typeof (NotSupportedException))]
+		
 		[Test]
 		public void ExTestConvertFrom2 ()
 		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			f.ConvertFrom (1);
+			Assert.Throws<NotSupportedException>(() =>
+			{
+				FontConverter.FontNameConverter f = new FontConverter.FontNameConverter();
+				f.ConvertFrom(1);
+			});
 		}
 	}
 }

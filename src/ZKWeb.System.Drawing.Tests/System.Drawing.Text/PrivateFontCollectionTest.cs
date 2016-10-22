@@ -38,7 +38,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Text {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class PrivateFontCollectionTest {
 
 		[Test]
@@ -49,41 +49,47 @@ namespace MonoTests.System.Drawing.Text {
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
 		public void AddFontFile_Null ()
 		{
-			new PrivateFontCollection ().AddFontFile (null);
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+			new PrivateFontCollection ().AddFontFile (null);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void AddFontFile_Empty ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			// badly formetted filename
-			new PrivateFontCollection ().AddFontFile (String.Empty);
+			new PrivateFontCollection ().AddFontFile (String.Empty);});
 		}
 
 		[Test]
-		[ExpectedException (typeof (FileNotFoundException))]
 		[Category ("NotWorking")] // it seems fontconfig doesn't validate on add...
 		public void AddFontFile_NotAFontFile ()
 		{
-			string file = Path.GetTempFileName ();
-			Assert.IsTrue (File.Exists (file), "Exists");
-			// even if the file exists....
-			new PrivateFontCollection ().AddFontFile (file);
+			Assert.Throws<FileNotFoundException>(() =>
+			{ 
+				string file = Path.GetTempFileName ();
+				Assert.IsTrue (File.Exists (file), "Exists");
+				// even if the file exists....
+				new PrivateFontCollection ().AddFontFile (file);
+			});
 		}
 
 		// tests for AddMemoryFont are available in the CAS unit tests
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Dispose_Family ()
 		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			pfc.Dispose ();
-			Assert.IsNotNull (pfc.Families);
-			// no it's not a ObjectDisposedException
+			Assert.Throws<ArgumentException>(() =>
+			{
+				PrivateFontCollection pfc = new PrivateFontCollection();
+				pfc.Dispose();
+				Assert.IsNotNull(pfc.Families);
+				// no it's not a ObjectDisposedException});
+			});
 		}
 	}
 }

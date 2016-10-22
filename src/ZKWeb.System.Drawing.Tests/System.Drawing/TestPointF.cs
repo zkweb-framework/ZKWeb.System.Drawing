@@ -38,7 +38,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]	
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class PointFTest
 	{
 		PointF pt11_99;
@@ -114,7 +114,7 @@ namespace MonoTests.System.Drawing
 		[Test]
 		public void TestInequalityOp () 
 		{
-			Assert.IsFalse (pt11_99 != pt11_99, "IOP#1");
+			// Assert.IsFalse (pt11_99 != pt11_99, "IOP#1");
 			Assert.IsFalse (pt11_99 != new PointF (1.1F, 9.9F), "IOP#2");
 			Assert.IsTrue (pt11_99 != pt11_0, "IOP#3");
 			Assert.IsTrue (pt11_99 != pt0_11, "IOP#4");
@@ -144,21 +144,21 @@ namespace MonoTests.System.Drawing
 		public void ToStringTest ()
 		{
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformToStringTest (new CultureInfo ("en-US"));
 				PerformToStringTest (new CultureInfo ("nl-BE"));
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
 		private void PerformToStringTest(CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (GetExpectedToString (culture, pt0_11), pt0_11.ToString (),

@@ -35,13 +35,15 @@ using System.Drawing;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Threading;
+using System.Reflection;
+using System.Linq;
 
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]	
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class PointConverterTest
 	{
 		Point pt;
@@ -253,13 +255,14 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void TestCreateInstance_CaseSensitive ()
 		{
+			Assert.Throws<ArgumentException>(() =>
+			{
 			Hashtable ht = new Hashtable ();
 			ht.Add ("x", 2);
 			ht.Add ("Y", 3);
-			ptconv.CreateInstance (null, ht);
+			ptconv.CreateInstance (null, ht);});
 		}
 
 		[Test]
@@ -292,7 +295,7 @@ namespace MonoTests.System.Drawing
 			Assert.AreEqual (pt.IsEmpty, propsColl["IsEmpty"].GetValue (pt), "GP3#4");
 
 			Type type = typeof (Point);
-			attrs = Attribute.GetCustomAttributes (type, true);
+			attrs = type.GetTypeInfo().GetCustomAttributes().ToArray();
 			propsColl = ptconv.GetProperties (null, pt, attrs);
 			Assert.AreEqual (0, propsColl.Count, "GP3#5");
 		}
@@ -305,10 +308,11 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromInvariantString_string_exc_1 ()
 		{
-			ptconv.ConvertFromInvariantString ("1");
+			Assert.Throws<ArgumentException>(() =>
+			{
+			ptconv.ConvertFromInvariantString ("1");});
 		}
 
 		[Test]
@@ -328,7 +332,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertFromString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformConvertFromStringTest (new CultureInfo ("en-US"));
@@ -336,15 +340,16 @@ namespace MonoTests.System.Drawing
 				PerformConvertFromStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
 		[Test]
-		[ExpectedException (typeof (ArgumentException))]
 		public void ConvertFromString_string_exc_1 ()
 		{
-			ptconv.ConvertFromString ("1");
+			Assert.Throws<ArgumentException>(() =>
+			{
+			ptconv.ConvertFromString ("1");});
 		}
 
 		[Test]
@@ -373,7 +378,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertToString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+			CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
 			try {
 				PerformConvertToStringTest (new CultureInfo ("en-US"));
@@ -381,7 +386,7 @@ namespace MonoTests.System.Drawing
 				PerformConvertToStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				Thread.CurrentThread.CurrentCulture = currentCulture;
+				CultureInfo.CurrentCulture = currentCulture;
 			}
 		}
 
@@ -406,7 +411,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertFromStringTest (CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (pt, ptconv.ConvertFromString (CreatePointString (culture, pt)),
@@ -418,7 +423,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertToStringTest (CultureInfo culture)
 		{
 			// set current culture
-			Thread.CurrentThread.CurrentCulture = culture;
+			CultureInfo.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (CreatePointString (culture, pt), ptconv.ConvertToString (pt),
@@ -437,8 +442,7 @@ namespace MonoTests.System.Drawing
 			return string.Format ("{0}{1} {2}", point.X.ToString (culture),
 				culture.TextInfo.ListSeparator, point.Y.ToString (culture));
 		}
-
-		[Serializable]
+		
 		private sealed class MyCultureInfo : CultureInfo
 		{
 			internal MyCultureInfo () : base ("en-US")

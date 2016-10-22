@@ -38,16 +38,15 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class PngCodecTest {
 
 		/* Get suffix to add to the filename */
 		internal string getOutSufix ()
 		{
 			string s;
-
-			int p = (int) Environment.OSVersion.Platform;
-			if ((p == 4) || (p == 128) || (p == 6))
+			
+			if (GDIPlus.RunningOnUnix())
 				s = "-unix";
 			else
 				s = "-windows";
@@ -73,7 +72,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 		private bool IsArm64Process ()
 		{
-			if (Environment.OSVersion.Platform != PlatformID.Unix || !Environment.Is64BitProcess)
+			if (!GDIPlus.RunningOnUnix())
 				return false;
 
 			try {

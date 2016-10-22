@@ -36,7 +36,7 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing.Drawing2D 
 {
 	[TestFixture]	
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class ColorBlendTest {
 
 		[Test]
@@ -96,10 +96,11 @@ namespace MonoTests.System.Drawing.Drawing2D
 		}
 
 		[Test]
-		[ExpectedException (typeof (OverflowException))]
 		public void ColorBlend_Negative ()
 		{
-			ColorBlend cb = new ColorBlend (-1);
+			Assert.Throws<OverflowException>(() =>
+			{
+			ColorBlend cb = new ColorBlend (-1);});
 		}
 
 		[Test]

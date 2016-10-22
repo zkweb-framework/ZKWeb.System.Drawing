@@ -31,7 +31,7 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class ColorTranslatorTest {
 
 		[Test]
@@ -84,24 +84,27 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Test]
-		[ExpectedException (typeof (Exception))]
 		public void FromHtml_PoundNegative ()
 		{
-			ColorTranslator.FromHtml ("#-1");
+			Assert.Throws<Exception>(() =>
+			{
+			ColorTranslator.FromHtml ("#-1");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (Exception))]
 		public void FromHtml_PoundTooLarge ()
 		{
-			ColorTranslator.FromHtml ("#100000000");
+			Assert.Throws<Exception>(() =>
+			{
+			ColorTranslator.FromHtml ("#100000000");});
 		}
 
 		[Test]
-		[ExpectedException (typeof (Exception))]
 		public void FromHtml_Unknown ()
 		{
-			ColorTranslator.FromHtml ("unknown-color-test");
+			Assert.Throws<Exception>(() =>
+			{
+			ColorTranslator.FromHtml ("unknown-color-test");});
 		}
 
 		[Test]

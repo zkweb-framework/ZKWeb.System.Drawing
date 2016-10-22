@@ -36,43 +36,51 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
+	
 	public class ColorMatrixTest {
 
 		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
 		public void Constructor_Null ()
 		{
-			new ColorMatrix (null);
-		}
-
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void Constructor_TooSmallArraySize ()
-		{
-			new ColorMatrix (new float[][] { });
-		}
-
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void Constructor_TooWideArraySize ()
-		{
-			new ColorMatrix (new float[][] {
-				new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f }
+			Assert.Throws<NullReferenceException>(() =>
+			{
+				new ColorMatrix(null);
 			});
 		}
 
 		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
+		public void Constructor_TooSmallArraySize ()
+		{
+			Assert.Throws<IndexOutOfRangeException>(() =>
+			{
+				new ColorMatrix(new float[][] { });
+			});
+		}
+
+		[Test]
+		public void Constructor_TooWideArraySize ()
+		{
+			Assert.Throws<IndexOutOfRangeException>(() =>
+			{
+				new ColorMatrix(new float[][] {
+					new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f }
+				});
+			});
+		}
+
+		[Test]
 		public void Constructor_TooTallArraySize ()
 		{
-			new ColorMatrix (new float[][] {
-				new float[] { 0.0f },
-				new float[] { 1.0f },
-				new float[] { 2.0f },
-				new float[] { 3.0f },
-				new float[] { 4.0f },
-				new float[] { 5.0f }
+			Assert.Throws<IndexOutOfRangeException>(() =>
+			{
+				new ColorMatrix(new float[][] {
+					new float[] { 0.0f },
+					new float[] { 1.0f },
+					new float[] { 2.0f },
+					new float[] { 3.0f },
+					new float[] { 4.0f },
+					new float[] { 5.0f }
+				});
 			});
 		}
 
@@ -116,18 +124,20 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
 		public void TooBigItems ()
 		{
-			ColorMatrix cm = new ColorMatrix (new float[][] {
-				new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f },
-				new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f },
-				new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f },
-				new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f },
-				new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f },
-				new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
+			Assert.Throws<IndexOutOfRangeException>(() =>
+			{
+				ColorMatrix cm = new ColorMatrix(new float[][] {
+					new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f },
+					new float[] { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f },
+					new float[] { 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f },
+					new float[] { 3.0f, 3.1f, 3.2f, 3.3f, 3.4f, 3.5f },
+					new float[] { 4.0f, 4.1f, 4.2f, 4.3f, 4.4f, 4.5f },
+					new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
+				});
+					Assert.AreEqual(5.5f, cm[5, 5], "out");
 			});
-			Assert.AreEqual (5.5f, cm[5,5], "out");
 		}
 
 		[Test]
