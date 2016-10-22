@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ZKWeb.System.Drawing</id>
+    <version>2.0.0-beta-1</version>
+    <authors>ZKWeb.System.Drawing</authors>
+    <owners>ZKWeb.System.Drawing</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This is a .Net Core compatible System.Drawing implementation modified from mono project, works on windows and linux. Please see project site for more information.</description>
+    <tags></tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETStandard1.5">
+        <dependency id="System.ComponentModel.TypeConverter" version="4.1.0" />
+        <dependency id="System.Collections.NonGeneric" version="4.0.1" />
+        <dependency id="System.Collections.Specialized" version="4.0.1" />
+        <dependency id="System.Runtime.Serialization.Primitives" version="4.1.1" />
+        <dependency id="System.Runtime.InteropServices" version="4.1.0" />
+        <dependency id="System.Threading.Thread" version="4.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\net45\ZKWeb.System.Drawing.dll" target="lib\net45" />
+    <file src="bin\Release\netstandard1.5\ZKWeb.System.Drawing.dll" target="lib\netstandard1.5" />
+  </files>
+</package>

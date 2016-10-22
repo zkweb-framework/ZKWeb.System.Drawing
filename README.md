@@ -12,7 +12,11 @@ These system are tested:
 
 These features should work:
 
-- TODO
+- Open jpg, bmp, ico, png
+- Save jpg, bmp, ico, png 
+- Resize image
+- Draw graphics with brush and pen
+- Open font and draw string
 
 Known issues:
 
@@ -22,14 +26,10 @@ Known issues:
 
 On windows, just install package `ZKWeb.System.Drawing` from nuget, nothing else need.
 
-On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need put `libgdiplus.so` to `/usr/lib` or `/usr/lib64`.<br/>
-You can found a pre-compiled `libgdiplus.so` if you're using following distribution.
+On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need install `libgdiplus`.<br/>
 
-- Ubuntu Server 16.04 LTS 64bit
-
-Otherwise you will need build `libgdiplus.so` yourself, Here is steps.
-
-- TODO
+- Ubuntu: apt-get install libgdiplus
+- Other distribution: see https://github.com/mono/libgdiplus
 
 # Huh? What's the different with CoreCompat.System.Drawing?
 
@@ -40,10 +40,6 @@ Otherwise you will need build `libgdiplus.so` yourself, Here is steps.
 	- .Net Core Test Count: 1857, Passed: 1517, Failed: 331, Inconclusive: 0, Skipped: 9
 	- .Net Framework Test Count: 1869, Passed: 1524, Failed: 336, Inconclusive: 0, Skipped: 9
 - No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
-
-# You have compiled `libgdiplus.so` for other distribution?
-
-Please upload it, other guys will thank you.
 
 # Mac support
 
