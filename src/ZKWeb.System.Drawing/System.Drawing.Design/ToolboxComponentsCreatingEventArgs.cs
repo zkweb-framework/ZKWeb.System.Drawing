@@ -30,6 +30,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System.ComponentModel.Design;
 using System.Security.Permissions;
 
@@ -53,5 +54,5 @@ namespace System.Drawing.Design
 		}
 	}	
 }
-
+#endif
 

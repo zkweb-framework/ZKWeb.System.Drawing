@@ -49,7 +49,7 @@ namespace System.Drawing
 			get {
 				if (!isReplaced) {
 					isReplaced = true;
-					DescriptionValue = Locale.GetText (DescriptionValue);
+					DescriptionValue = string.Format (DescriptionValue);
 				}
 				return DescriptionValue;
 			}

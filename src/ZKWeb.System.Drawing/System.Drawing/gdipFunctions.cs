@@ -40,6 +40,7 @@ using System.Drawing.Text;
 using System.Globalization;
 using System.Security;
 using System.Runtime.InteropServices.ComTypes;
+using System.Diagnostics;
 
 namespace System.Drawing
 {
@@ -91,8 +92,15 @@ namespace System.Drawing
 
 		static GDIPlus ()
 		{
-			int platform = (int) Environment.OSVersion.Platform;
-			if ((platform == 4) || (platform == 6) || (platform == 128)) {
+			// from https://github.com/qmfrederik/mono/commit/df857823d21e5159af6f8bd97815257e66a1d513
+			bool isLinuxOrMac = false;
+#if !CORECLR
+			int platform = (int)Environment.OSVersion.Platform;
+			isLinuxOrMac = ((platform == 4) || (platform == 6) || (platform == 128));
+#else
+			isLinuxOrMac = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+#endif
+			if (isLinuxOrMac) {
 				if (Environment.GetEnvironmentVariable ("not_supported_MONO_MWF_USE_NEW_X11_BACKEND") != null || Environment.GetEnvironmentVariable ("MONO_MWF_MAC_FORCE_X11") != null) {
 					UseX11Drawable = true;
 				} else {
@@ -125,8 +133,10 @@ namespace System.Drawing
 					Environment.NewLine);
 			}
 
+#if !NETCORE
 			// under MS 1.x this event is raised only for the default application domain
 			AppDomain.CurrentDomain.ProcessExit += new EventHandler (ProcessExit);
+#endif
 		}
 
 		static public bool RunningOnWindows ()
@@ -205,49 +215,49 @@ namespace System.Drawing
 			case Status.Ok:
 				return;
 			case Status.GenericError:
-				msg = Locale.GetText ("Generic Error [GDI+ status: {0}]", status);
+				msg = string.Format ("Generic Error [GDI+ status: {0}]", status);
 				throw new Exception (msg);
 			case Status.InvalidParameter:
-				msg = Locale.GetText ("A null reference or invalid value was found [GDI+ status: {0}]", status);
+				msg = string.Format ("A null reference or invalid value was found [GDI+ status: {0}]", status);
 				throw new ArgumentException (msg);
 			case Status.OutOfMemory:
-				msg = Locale.GetText ("Not enough memory to complete operation [GDI+ status: {0}]", status);
+				msg = string.Format ("Not enough memory to complete operation [GDI+ status: {0}]", status);
 				throw new OutOfMemoryException (msg);
 			case Status.ObjectBusy:
-				msg = Locale.GetText ("Object is busy and cannot state allow this operation [GDI+ status: {0}]", status);
+				msg = string.Format ("Object is busy and cannot state allow this operation [GDI+ status: {0}]", status);
 				throw new MemberAccessException (msg);
 			case Status.InsufficientBuffer:
-				msg = Locale.GetText ("Insufficient buffer provided to complete operation [GDI+ status: {0}]", status);
-				throw new InternalBufferOverflowException (msg);
+				msg = string.Format ("Insufficient buffer provided to complete operation [GDI+ status: {0}]", status);
+				throw new OverflowException (msg);
 			case Status.PropertyNotSupported:
-				msg = Locale.GetText ("Property not supported [GDI+ status: {0}]", status);
+				msg = string.Format ("Property not supported [GDI+ status: {0}]", status);
 				throw new NotSupportedException (msg);
 			case Status.FileNotFound:
-				msg = Locale.GetText ("Requested file was not found [GDI+ status: {0}]", status);
+				msg = string.Format ("Requested file was not found [GDI+ status: {0}]", status);
 				throw new FileNotFoundException (msg);
 			case Status.AccessDenied:
-				msg = Locale.GetText ("Access to resource was denied [GDI+ status: {0}]", status);
+				msg = string.Format ("Access to resource was denied [GDI+ status: {0}]", status);
 				throw new UnauthorizedAccessException (msg);
 			case Status.UnknownImageFormat:
-				msg = Locale.GetText ("Either the image format is unknown or you don't have the required libraries to decode this format [GDI+ status: {0}]", status);
+				msg = string.Format ("Either the image format is unknown or you don't have the required libraries to decode this format [GDI+ status: {0}]", status);
 				throw new NotSupportedException (msg);
 			case Status.NotImplemented:
-				msg = Locale.GetText ("The requested feature is not implemented [GDI+ status: {0}]", status);
+				msg = string.Format ("The requested feature is not implemented [GDI+ status: {0}]", status);
 				throw new NotImplementedException (msg);
 			case Status.WrongState:
-				msg = Locale.GetText ("Object is not in a state that can allow this operation [GDI+ status: {0}]", status);
+				msg = string.Format ("Object is not in a state that can allow this operation [GDI+ status: {0}]", status);
 				throw new ArgumentException (msg);
 			case Status.FontFamilyNotFound:
-				msg = Locale.GetText ("The requested FontFamily could not be found [GDI+ status: {0}]", status);
+				msg = string.Format ("The requested FontFamily could not be found [GDI+ status: {0}]", status);
 				throw new ArgumentException (msg);
 			case Status.ValueOverflow:
-				msg = Locale.GetText ("Argument is out of range [GDI+ status: {0}]", status);
+				msg = string.Format ("Argument is out of range [GDI+ status: {0}]", status);
 				throw new OverflowException (msg);
 			case Status.Win32Error:
-				msg = Locale.GetText ("The operation is invalid [GDI+ status: {0}]", status);
+				msg = string.Format ("The operation is invalid [GDI+ status: {0}]", status);
 				throw new InvalidOperationException (msg);
 			default:
-				msg = Locale.GetText ("Unknown Error [GDI+ status: {0}]", status);
+				msg = string.Format ("Unknown Error [GDI+ status: {0}]", status);
 				throw new Exception (msg);
 			}
 		}
@@ -978,22 +988,22 @@ namespace System.Drawing
 		internal static extern Status GdipBitmapSetPixel (IntPtr bmp, int x, int y, int argb);
 
 		// Image functions
-		[DllImport("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipLoadImageFromFile ( [MarshalAs(UnmanagedType.LPWStr)] string filename, out IntPtr image );
 
 #if !TEST
 		// Stream functions for Win32 (original Win32 ones)
 		[DllImport("gdiplus.dll", ExactSpelling=true, CharSet=CharSet.Unicode)]
-		internal static extern Status GdipLoadImageFromStream([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream stream, out IntPtr image);
+		internal static extern Status GdipLoadImageFromStream([MarshalAs(UnmanagedType.Interface)] IStream stream, out IntPtr image);
   		
 		[DllImport("gdiplus.dll", ExactSpelling=true, CharSet=CharSet.Unicode)]
-		internal static extern Status GdipSaveImageToStream(HandleRef image, [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream stream, [In()] ref Guid clsidEncoder, HandleRef encoderParams);
-#endif  		
+		internal static extern Status GdipSaveImageToStream(HandleRef image, [MarshalAs(UnmanagedType.Interface)] IStream stream, [In()] ref Guid clsidEncoder, HandleRef encoderParams);
+#endif
 				
 		[DllImport("gdiplus.dll")]
 		internal static extern Status GdipCloneImage(IntPtr image, out IntPtr imageclone);
  
-		[DllImport("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipLoadImageFromFileICM ( [MarshalAs(UnmanagedType.LPWStr)] string filename, out IntPtr image );
 		
 		[DllImport("gdiplus.dll")]
@@ -1158,10 +1168,10 @@ namespace System.Drawing
 		[DllImport("gdiplus.dll")]		
 		internal static extern Status GdipCreateHBITMAPFromBitmap (IntPtr bmp, out IntPtr HandleBmp, int clrbackground);
 
-		[DllImport("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipCreateBitmapFromFile ([MarshalAs (UnmanagedType.LPWStr)] string filename, out IntPtr bitmap);
 
-		[DllImport("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipCreateBitmapFromFileICM ([MarshalAs (UnmanagedType.LPWStr)] string filename, out IntPtr bitmap);
 		
 		[DllImport("gdiplus.dll")]
@@ -1406,7 +1416,7 @@ namespace System.Drawing
 		internal static extern Status GdipSetImageAttributesOutputChannel (IntPtr imageattr,
 			ColorAdjustType type, bool enableFlag, 	ColorChannelFlag channelFlags);
 		
-		[DllImport ("gdiplus.dll", CharSet=CharSet.Auto)]     
+		[DllImport ("gdiplus.dll", CharSet=CharSet.Unicode)]     
 		internal static extern Status GdipSetImageAttributesOutputChannelColorProfile (IntPtr imageattr,
 			ColorAdjustType type, bool enableFlag, [MarshalAs (UnmanagedType.LPWStr)] string profileName);
 				
@@ -1435,12 +1445,12 @@ namespace System.Drawing
 		internal static extern Status GdipCreateFont (IntPtr fontFamily, float emSize, FontStyle style, GraphicsUnit  unit,  out IntPtr font);
 		[DllImport("gdiplus.dll")]                   
 		internal static extern Status GdipDeleteFont (IntPtr font);		
-		[DllImport("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipGetLogFont(IntPtr font, IntPtr graphics, [MarshalAs(UnmanagedType.AsAny), Out] object logfontA);
 
 		[DllImport("gdiplus.dll")]                   
 		internal static extern Status GdipCreateFontFromDC(IntPtr hdc, out IntPtr font);
-		[DllImport("gdiplus.dll", SetLastError=true, CharSet=CharSet.Auto)]
+		[DllImport("gdiplus.dll", SetLastError=true, CharSet=CharSet.Unicode)]
 		internal static extern Status GdipCreateFontFromLogfont(IntPtr hdc, ref LOGFONT lf, out IntPtr ptr);
 
 		// These are our private functions, they exists in our own libgdiplus library, this way we
@@ -1449,7 +1459,7 @@ namespace System.Drawing
 		internal static extern Status GdipCreateFontFromHfont(IntPtr hdc, out IntPtr font, ref LOGFONT lf);
 
 		// This is win32/gdi, not gdiplus, but it's easier to keep in here, also see above comment
-		[DllImport("gdi32.dll", CallingConvention=CallingConvention.StdCall, CharSet = CharSet.Auto)]
+		[DllImport("gdi32.dll", CallingConvention=CallingConvention.StdCall, CharSet = CharSet.Unicode)]
 		internal static extern IntPtr CreateFontIndirect (ref LOGFONT logfont);	
 		[DllImport("user32.dll", EntryPoint="GetDC", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Ansi)]
 		internal static extern IntPtr GetDC(IntPtr hwnd);	
@@ -1530,7 +1540,7 @@ namespace System.Drawing
 		[DllImport ("gdiplus.dll")]
 		internal static extern Status GdipDeletePrivateFontCollection (ref IntPtr collection);
 		
-		[DllImport ("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport ("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipPrivateAddFontFile (IntPtr collection,
                                 [MarshalAs (UnmanagedType.LPWStr)] string fileName );
 		
@@ -1538,7 +1548,7 @@ namespace System.Drawing
 		internal static extern Status GdipPrivateAddMemoryFont (IntPtr collection, IntPtr mem, int length);
 
 		//FontFamily
-		[DllImport ("gdiplus.dll", CharSet=CharSet.Auto)]
+		[DllImport ("gdiplus.dll", CharSet=CharSet.Unicode)]
 		internal static extern Status GdipCreateFontFamilyFromName (
                         [MarshalAs(UnmanagedType.LPWStr)] string fName, IntPtr collection, out IntPtr fontFamily);
 
@@ -1628,13 +1638,13 @@ namespace System.Drawing
                 internal static extern Status GdipGetStringFormatTabStops(IntPtr format, int count, out float firstTabOffset, [In, Out] float [] tabStops);
                 		
 		// metafile
-		[DllImport ("gdiplus.dll", CharSet = CharSet.Auto)]
+		[DllImport ("gdiplus.dll", CharSet = CharSet.Unicode)]
 		internal static extern Status GdipCreateMetafileFromFile ([MarshalAs (UnmanagedType.LPWStr)] string filename, out IntPtr metafile);
 		[DllImport ("gdiplus.dll")]
 		internal static extern Status GdipCreateMetafileFromEmf (IntPtr hEmf, bool deleteEmf, out IntPtr metafile);
 		[DllImport ("gdiplus.dll")]
 		internal static extern Status GdipCreateMetafileFromWmf (IntPtr hWmf, bool deleteWmf, WmfPlaceableFileHeader wmfPlaceableFileHeader, out IntPtr metafile);
-		[DllImport ("gdiplus.dll", CharSet = CharSet.Auto)]
+		[DllImport ("gdiplus.dll", CharSet = CharSet.Unicode)]
 		internal static extern Status GdipGetMetafileHeaderFromFile ([MarshalAs (UnmanagedType.LPWStr)] string filename, IntPtr header);
 		[DllImport ("gdiplus.dll")]
 		internal static extern Status GdipGetMetafileHeaderFromMetafile (IntPtr metafile, IntPtr header);
@@ -1665,15 +1675,15 @@ namespace System.Drawing
 			ref Rectangle frameRect, MetafileFrameUnit frameUnit, [MarshalAs (UnmanagedType.LPWStr)] string description, out IntPtr metafile);
 #if !TEST
 		[DllImport("gdiplus.dll", ExactSpelling=true, CharSet=CharSet.Unicode)]
-		internal static extern Status GdipCreateMetafileFromStream([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream stream, out IntPtr metafile);
+		internal static extern Status GdipCreateMetafileFromStream([MarshalAs(UnmanagedType.Interface)] IStream stream, out IntPtr metafile);
 		[DllImport("gdiplus.dll", ExactSpelling=true, CharSet=CharSet.Unicode)]
-		internal static extern Status GdipGetMetafileHeaderFromStream([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream stream, IntPtr header);
+		internal static extern Status GdipGetMetafileHeaderFromStream([MarshalAs(UnmanagedType.Interface)] IStream stream, IntPtr header);
 
 		[DllImport ("gdiplus.dll")]
-		internal static extern Status GdipRecordMetafileStream ([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream stream, IntPtr hdc, 
+		internal static extern Status GdipRecordMetafileStream ([MarshalAs(UnmanagedType.Interface)] IStream stream, IntPtr hdc, 
 			EmfType type, ref RectangleF frameRect, MetafileFrameUnit frameUnit, [MarshalAs (UnmanagedType.LPWStr)] string description, out IntPtr metafile);
 		[DllImport ("gdiplus.dll")]
-		internal static extern Status GdipRecordMetafileStreamI ([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef=typeof(ComIStreamMarshaler))] IStream stream, IntPtr hdc, 
+		internal static extern Status GdipRecordMetafileStreamI ([MarshalAs(UnmanagedType.Interface)] IStream stream, IntPtr hdc, 
 			EmfType type, ref Rectangle frameRect, MetafileFrameUnit frameUnit, [MarshalAs (UnmanagedType.LPWStr)] string description, out IntPtr metafile);
 #endif
 		//ImageCodecInfo functions
@@ -1890,7 +1900,7 @@ namespace System.Drawing
 			
 			public void StreamCloseImpl ()
 			{
-				stream.Close ();
+				stream.Dispose ();
 			}
 
 			public StreamCloseDelegate CloseDelegate {

@@ -32,6 +32,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System;
 using System.ComponentModel;
 
@@ -209,3 +210,4 @@ namespace System.Drawing.Printing
 		public event QueryPageSettingsEventHandler QueryPageSettings;
 	}
 }
+#endif

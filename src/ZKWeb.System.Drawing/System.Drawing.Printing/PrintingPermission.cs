@@ -29,12 +29,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System.Globalization;
 using System.Security;
 using System.Security.Permissions;
 
 namespace System.Drawing.Printing {
-
 	[Serializable]
 	public sealed class PrintingPermission : CodeAccessPermission, IUnrestrictedPermission {
 
@@ -59,7 +59,7 @@ namespace System.Drawing.Printing {
 			get { return _Level; }
 			set {
 				if (!Enum.IsDefined (typeof (PrintingPermissionLevel), value)) {
-					string msg = Locale.GetText ("Invalid enum {0}");
+					string msg = string.Format ("Invalid enum {0}");
 					throw new ArgumentException (String.Format (msg, value), "Level");
 				}
 				 _Level = value;
@@ -181,12 +181,12 @@ namespace System.Drawing.Printing {
 				break;
 			case PermissionState.Unrestricted:
 				if (!allowUnrestricted) {
-					msg = Locale.GetText ("Unrestricted isn't not allowed for identity permissions.");
+					msg = string.Format ("Unrestricted isn't not allowed for identity permissions.");
 					throw new ArgumentException (msg, "state");
 				}
 				break;
 			default:
-				msg = String.Format (Locale.GetText ("Invalid enum {0}"), state);
+				msg = String.Format (string.Format ("Invalid enum {0}"), state);
 				throw new ArgumentException (msg, "state");
 			}
 			return state;
@@ -200,7 +200,7 @@ namespace System.Drawing.Printing {
 
 			string c = se.Attribute ("class");
 			if (c == null) {
-				string msg = Locale.GetText ("Missing 'class' attribute.");
+				string msg = string.Format ("Missing 'class' attribute.");
 				throw new ArgumentException (msg, parameterName);
 			}
 			// we assume minimum version if no version number is supplied
@@ -211,14 +211,14 @@ namespace System.Drawing.Printing {
 					version = Int32.Parse (v);
 				}
 				catch (Exception e) {
-					string msg = Locale.GetText ("Couldn't parse version from '{0}'.");
+					string msg = string.Format ("Couldn't parse version from '{0}'.");
 					msg = String.Format (msg, v);
 					throw new ArgumentException (msg, parameterName, e);
 				}
 			}
 
 			if ((version < minimumVersion) || (version > maximumVersion)) {
-				string msg = Locale.GetText ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
+				string msg = string.Format ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
 				msg = String.Format (msg, version, minimumVersion, maximumVersion);
 				throw new ArgumentException (msg, parameterName);
 			}
@@ -236,9 +236,10 @@ namespace System.Drawing.Printing {
 
 		internal static void ThrowInvalidPermission (IPermission target, Type expected) 
 		{
-			string msg = Locale.GetText ("Invalid permission type '{0}', expected type '{1}'.");
+			string msg = string.Format ("Invalid permission type '{0}', expected type '{1}'.");
 			msg = String.Format (msg, target.GetType (), expected);
 			throw new ArgumentException (msg, "target");
 		}
 	}
 }
+#endif

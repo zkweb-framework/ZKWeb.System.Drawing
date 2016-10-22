@@ -42,12 +42,12 @@ namespace System.Drawing.Design
 		static UITypeEditor ()
 		{
 			Hashtable editors = new Hashtable ();
-			editors [typeof (Array)] = "System.ComponentModel.Design.ArrayEditor, " + Consts.AssemblySystem_Design;
-			editors [typeof (byte [])] = "System.ComponentModel.Design.BinaryEditor, " + Consts.AssemblySystem_Design;
-			editors [typeof (DateTime)] = "System.ComponentModel.Design.DateTimeEditor, " + Consts.AssemblySystem_Design;
-			editors [typeof (IList)] = "System.ComponentModel.Design.CollectionEditor, " + Consts.AssemblySystem_Design;
-			editors [typeof (ICollection)] = "System.ComponentModel.Design.CollectionEditor, " + Consts.AssemblySystem_Design;
-			editors [typeof (string[])] = "System.Windows.Forms.Design.StringArrayEditor, " + Consts.AssemblySystem_Design;
+			editors [typeof (Array)] = "System.ComponentModel.Design.ArrayEditor, System.Design";
+			editors [typeof (byte [])] = "System.ComponentModel.Design.BinaryEditor, System.Design";
+			editors [typeof (DateTime)] = "System.ComponentModel.Design.DateTimeEditor, System.Design";
+			editors [typeof (IList)] = "System.ComponentModel.Design.CollectionEditor, System.Design";
+			editors [typeof (ICollection)] = "System.ComponentModel.Design.CollectionEditor, System.Design";
+			editors [typeof (string[])] = "System.Windows.Forms.Design.StringArrayEditor, System.Design";
 #if !MOBILE
 			TypeDescriptor.AddEditorTable (typeof (UITypeEditor), editors);
 #endif

@@ -101,7 +101,7 @@ namespace System.Drawing {
 
 			set {
 				if ((value < StringAlignment.Near) || (value > StringAlignment.Far))
-					throw new InvalidEnumArgumentException ("Alignment");
+					throw new ArgumentException ("Alignment");
 
 				Status status = GDIPlus.GdipSetStringFormatAlign (nativeStrFmt, value);
 				GDIPlus.CheckStatus (status);
@@ -119,7 +119,7 @@ namespace System.Drawing {
 
 			set {
 				if ((value < StringAlignment.Near) || (value > StringAlignment.Far))
-					throw new InvalidEnumArgumentException ("Alignment");
+					throw new ArgumentException ("Alignment");
 
 				Status status = GDIPlus.GdipSetStringFormatLineAlign (nativeStrFmt, value);
 				GDIPlus.CheckStatus (status);
@@ -152,7 +152,7 @@ namespace System.Drawing {
 
 			set {
 				if ((value < HotkeyPrefix.None) || (value > HotkeyPrefix.Hide))
-					throw new InvalidEnumArgumentException ("HotkeyPrefix");
+					throw new ArgumentException("HotkeyPrefix");
 
 				Status status = GDIPlus.GdipSetStringFormatHotkeyPrefix (nativeStrFmt, value);
 				GDIPlus.CheckStatus (status);
@@ -170,7 +170,7 @@ namespace System.Drawing {
 
 			set {
 				if ((value < StringTrimming.None) || (value > StringTrimming.EllipsisPath))
-					throw new InvalidEnumArgumentException ("Trimming");
+					throw new ArgumentException ("Trimming");
 
 				Status status = GDIPlus.GdipSetStringFormatTrimming (nativeStrFmt, value);
 				GDIPlus.CheckStatus (status);

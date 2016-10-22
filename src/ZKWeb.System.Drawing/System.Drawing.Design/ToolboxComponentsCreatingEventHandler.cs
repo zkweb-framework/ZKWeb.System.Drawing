@@ -26,7 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 namespace System.Drawing.Design {
 
 	public delegate void ToolboxComponentsCreatingEventHandler (object sender, ToolboxComponentsCreatingEventArgs e);
 }
+#endif

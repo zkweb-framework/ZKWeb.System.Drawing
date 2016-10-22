@@ -57,7 +57,7 @@ namespace System.Drawing {
 		{
 			if (destinationType == typeof (string))
 				return true;
-
+			
 			if (destinationType == typeof (InstanceDescriptor))
 				return true;
 
@@ -105,7 +105,7 @@ namespace System.Drawing {
 					return size.Width.ToString (culture) + culture.TextInfo.ListSeparator 
 						+ " " + size.Height.ToString (culture);
 				} else if (destinationType == typeof (InstanceDescriptor)) {
-					ConstructorInfo ctor = typeof(Size).GetConstructor (new Type[] {typeof(int), typeof(int)});
+					ConstructorInfo ctor = typeof(Size).GetTypeInfo().GetConstructor (new Type[] {typeof(int), typeof(int)});
 					return new InstanceDescriptor (ctor, new object[] { size.Width, size.Height });
 				}
 			}

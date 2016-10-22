@@ -32,8 +32,6 @@
 using System.ComponentModel;
 
 namespace System.Drawing.Drawing2D {
-
-	[MonoTODO ("libgdiplus/cairo doesn't support path gradients - unless it can be mapped to a radial gradient")]
 	public sealed class PathGradientBrush : Brush {
 
 		internal PathGradientBrush (IntPtr native) : base (native)
@@ -62,7 +60,7 @@ namespace System.Drawing.Drawing2D {
 			if (points == null)
 				throw new ArgumentNullException ("points");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new InvalidEnumArgumentException ("WrapMode");
+				throw new ArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreatePathGradientI (points, points.Length, wrapMode, out nativeObject);
 			GDIPlus.CheckStatus (status);
@@ -73,7 +71,7 @@ namespace System.Drawing.Drawing2D {
 			if (points == null)
 				throw new ArgumentNullException ("points");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new InvalidEnumArgumentException ("WrapMode");
+				throw new ArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreatePathGradient (points, points.Length, wrapMode, out nativeObject);
 			GDIPlus.CheckStatus (status);
@@ -283,7 +281,7 @@ namespace System.Drawing.Drawing2D {
 			}
 			set {
 				if ((value < WrapMode.Tile) || (value > WrapMode.Clamp))
-					throw new InvalidEnumArgumentException ("WrapMode");
+					throw new ArgumentException ("WrapMode");
 
 				Status status = GDIPlus.GdipSetPathGradientWrapMode (nativeObject, value);
 				GDIPlus.CheckStatus (status);

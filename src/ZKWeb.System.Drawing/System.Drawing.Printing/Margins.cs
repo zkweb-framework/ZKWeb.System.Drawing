@@ -103,7 +103,7 @@ namespace System.Drawing.Printing
 
 		private void InvalidMargin (string property)
 		{
-			string msg = Locale.GetText ("All Margins must be greater than 0");
+			string msg = string.Format ("All Margins must be greater than 0");
 			throw new System.ArgumentException (msg, property);
 		}
 		

@@ -36,7 +36,13 @@ using System.Runtime.InteropServices;
 namespace System.Drawing.Imaging {
 
 	[StructLayout(LayoutKind.Sequential)]
-	public sealed class ImageAttributes : ICloneable, IDisposable {
+	public sealed class ImageAttributes :
+#if NETCORE
+		IDisposable
+#else
+		ICloneable, IDisposable
+#endif
+	{
 		
 		private IntPtr nativeImageAttr;
 		
@@ -208,7 +214,6 @@ namespace System.Drawing.Imaging {
 			return new ImageAttributes (imgclone);
 		}
 
-		[MonoTODO ("Not supported by libgdiplus")]
 		public void GetAdjustedPalette (ColorPalette palette, ColorAdjustType type)
 		{
 			IntPtr colorPalette = palette.getGDIPalette ();
@@ -311,26 +316,22 @@ namespace System.Drawing.Imaging {
 			GDIPlus.CheckStatus (status);
 		}
 
-		[MonoTODO ("Not supported by libgdiplus")]
 		public void SetOutputChannel (ColorChannelFlag flags)
 		{
 			SetOutputChannel (flags, ColorAdjustType.Default);
 		}
-
-		[MonoTODO ("Not supported by libgdiplus")]
+		
 		public void SetOutputChannel (ColorChannelFlag flags, ColorAdjustType type)
 		{
 			Status status = GDIPlus.GdipSetImageAttributesOutputChannel (nativeImageAttr, type, true, flags);
 			GDIPlus.CheckStatus (status);
 		}
-
-		[MonoTODO ("Not supported by libgdiplus")]
+		
 		public void SetOutputChannelColorProfile (string colorProfileFilename)
 		{
 			SetOutputChannelColorProfile (colorProfileFilename, ColorAdjustType.Default);
 		}
-
-		[MonoTODO ("Not supported by libgdiplus")]
+		
 		public void SetOutputChannelColorProfile (string colorProfileFilename, ColorAdjustType type)
 		{
 			Status status = GDIPlus.GdipSetImageAttributesOutputChannelColorProfile (nativeImageAttr, 
@@ -368,13 +369,11 @@ namespace System.Drawing.Imaging {
 			}
 		}		
 
-		[MonoTODO ("Not supported by libgdiplus")]
 		public void SetThreshold (float threshold)
 		{
 			SetThreshold (threshold, ColorAdjustType.Default);
 		}
 
-		[MonoTODO ("Not supported by libgdiplus")]
 		public void SetThreshold (float threshold, ColorAdjustType type)
 		{
 			Status status = GDIPlus.GdipSetImageAttributesThreshold (nativeImageAttr, type, true, 0);

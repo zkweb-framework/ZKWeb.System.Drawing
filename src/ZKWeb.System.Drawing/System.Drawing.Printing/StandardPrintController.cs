@@ -32,6 +32,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System;
 
 namespace System.Drawing.Printing
@@ -66,3 +67,4 @@ namespace System.Drawing.Printing
 		}
 	}
 }
+#endif

@@ -30,6 +30,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System;
 using System.Collections;
 using System.Drawing.Imaging;
@@ -49,12 +50,10 @@ namespace System.Drawing.Printing
 			get { return true; }
 		}
 
-		[MonoTODO]
 		public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
 		{
 		}
 
-		[MonoTODO]
 		public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
 		{
 			if (!document.PrinterSettings.IsValid)
@@ -67,12 +66,10 @@ namespace System.Drawing.Printing
 			pageInfoList.Clear ();
 		}
 
-		[MonoTODO]
 		public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
 		{
 		}
 
-		[MonoTODO]
 		public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
 		{
 			Image image = new Bitmap (e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height);
@@ -102,3 +99,4 @@ namespace System.Drawing.Printing
 
 	}
 }
+#endif

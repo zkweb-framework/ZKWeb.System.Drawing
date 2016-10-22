@@ -87,7 +87,6 @@ namespace System.Drawing.Imaging {
 		public int		logical_dpi_y;
 	}
 
-	[MonoTODO ("Metafiles, both WMF and EMF formats, aren't supported.")]
 	[StructLayout(LayoutKind.Sequential)]
 	public sealed class MetafileHeader {
 
@@ -102,7 +101,6 @@ namespace System.Drawing.Imaging {
 
 		// methods
 
-		[MonoTODO ("always returns false")]
 		public bool IsDisplay ()
 		{
 			return false;

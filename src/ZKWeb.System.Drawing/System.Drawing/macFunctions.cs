@@ -49,14 +49,18 @@ namespace System.Drawing {
 #endif
 
 		static MacSupport () {
+			// from https://github.com/qmfrederik/mono/commit/df857823d21e5159af6f8bd97815257e66a1d513
+			// there no System.Windows.Forms in .Net Core
+#if !NETCORE
 			foreach (Assembly asm in AppDomain.CurrentDomain.GetAssemblies ()) {
 				if (String.Equals (asm.GetName ().Name, "System.Windows.Forms")) {
 					Type driver_type = asm.GetType ("System.Windows.Forms.XplatUICarbon");
 					if (driver_type != null) {
-						hwnd_delegate = (Delegate) driver_type.GetField ("HwndDelegate", BindingFlags.NonPublic | BindingFlags.Static).GetValue (null);
+						hwnd_delegate = (Delegate) driver_type.GetTypeInfo().GetField ("HwndDelegate", BindingFlags.NonPublic | BindingFlags.Static).GetValue (null);
 					}
 				}
 			}
+#endif
 		}
 
 		internal static CocoaContext GetCGContextForNSView (IntPtr handle) {
@@ -186,7 +190,7 @@ namespace System.Drawing {
 			}
 		}
 
-		#region Cocoa Methods
+#region Cocoa Methods
 		[DllImport("libobjc.dylib")]
 		public static extern IntPtr objc_getClass(string className); 
 		[DllImport("libobjc.dylib")]
@@ -199,7 +203,7 @@ namespace System.Drawing {
 		public static extern bool bool_objc_msgSend (IntPtr handle, IntPtr selector);
 		[DllImport("libobjc.dylib")]
 		public static extern IntPtr sel_registerName(string selectorName);         
-		#endregion
+#endregion
 
 		[DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
 		internal static extern IntPtr CGMainDisplayID ();

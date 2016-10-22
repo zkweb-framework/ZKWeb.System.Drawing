@@ -62,13 +62,12 @@ namespace System.Drawing {
 			if (image == null)
 				throw new ArgumentNullException ("image");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new InvalidEnumArgumentException ("WrapMode");
+				throw new ArgumentNullException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreateTexture (image.nativeObject, wrapMode, out nativeObject);
 			GDIPlus.CheckStatus (status);
 		}
 
-		[MonoLimitation ("ImageAttributes are ignored when using libgdiplus")]
 		public TextureBrush (Image image, Rectangle dstRect, ImageAttributes imageAttr)
 		{
 			if (image == null)
@@ -79,8 +78,7 @@ namespace System.Drawing {
 				dstRect.Width, dstRect.Height, out nativeObject);
 			GDIPlus.CheckStatus (status);
 		}
-
-		[MonoLimitation ("ImageAttributes are ignored when using libgdiplus")]
+		
 		public TextureBrush (Image image, RectangleF dstRect, ImageAttributes imageAttr)
 		{	
 			if (image == null)
@@ -97,7 +95,7 @@ namespace System.Drawing {
 			if (image == null)
 				throw new ArgumentNullException ("image");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new InvalidEnumArgumentException ("WrapMode");
+				throw new ArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreateTexture2I (image.nativeObject, wrapMode, dstRect.X, dstRect.Y, 
 				dstRect.Width, dstRect.Height, out nativeObject);
@@ -109,7 +107,7 @@ namespace System.Drawing {
 			if (image == null)
 				throw new ArgumentNullException ("image");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new InvalidEnumArgumentException ("WrapMode");
+				throw new ArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreateTexture2 (image.nativeObject, wrapMode, dstRect.X, dstRect.Y, 
 				dstRect.Width, dstRect.Height, out nativeObject);
@@ -157,7 +155,7 @@ namespace System.Drawing {
 			}
 			set {
 				if ((value < WrapMode.Tile) || (value > WrapMode.Clamp))
-					throw new InvalidEnumArgumentException ("WrapMode");
+					throw new ArgumentException ("WrapMode");
 
 				Status status = GDIPlus.GdipSetTextureWrapMode (nativeObject, value);
 				GDIPlus.CheckStatus (status);

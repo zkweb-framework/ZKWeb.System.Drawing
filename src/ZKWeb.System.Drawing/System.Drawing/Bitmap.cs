@@ -37,19 +37,22 @@
 
 using System.IO;
 using System.Drawing.Imaging;
+#if !NETCORE
 using System.Runtime.Serialization;
+#endif
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using System.Reflection;
 using System.Security.Permissions;
 
 namespace System.Drawing
 {
 	[Serializable]
 	[ComVisible (true)]
-	[Editor ("System.Drawing.Design.BitmapEditor, " + Consts.AssemblySystem_Drawing_Design, typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.BitmapEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
 	public sealed class Bitmap : Image
 	{
-		#region constructors
+#region constructors
 		// constructors
 
 		// required for XmlSerializer (#323246)
@@ -133,9 +136,9 @@ namespace System.Drawing
 			if (resource == null)
 				throw new ArgumentException ("resource");
 
-			Stream s = type.Assembly.GetManifestResourceStream (type, resource);
+			Stream s = type.GetTypeInfo().Assembly.GetManifestResourceStream (resource);
 			if (s == null) {
-				string msg = Locale.GetText ("Resource '{0}' was not found.", resource);
+				string msg = string.Format ("Resource '{0}' was not found.", resource);
 				throw new FileNotFoundException (msg);
 			}
 
@@ -162,12 +165,14 @@ namespace System.Drawing
 			nativeObject = bmp;						 								
 		}
 
+#if !NETCORE
 		private Bitmap (SerializationInfo info, StreamingContext context)
 			: base (info, context)
 		{
 		}
+#endif
 
-		#endregion
+#endregion
 		// methods
 		public Color GetPixel (int x, int y) {
 			
@@ -186,7 +191,7 @@ namespace System.Drawing
 				// check is done in case of an error only to avoid another
 				// unmanaged call for normal (successful) calls
 				if ((this.PixelFormat & PixelFormat.Indexed) != 0) {
-					string msg = Locale.GetText ("SetPixel cannot be called on indexed bitmaps.");
+					string msg = string.Format ("SetPixel cannot be called on indexed bitmaps.");
 					throw new InvalidOperationException (msg);
 				}
 			}

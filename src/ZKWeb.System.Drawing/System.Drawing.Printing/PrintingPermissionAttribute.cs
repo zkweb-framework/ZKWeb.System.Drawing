@@ -29,6 +29,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System.Security;
 using System.Security.Permissions;
 
@@ -50,7 +51,7 @@ namespace System.Drawing.Printing {
 			get { return _level; }
 			set {
 				if (!Enum.IsDefined (typeof (PrintingPermissionLevel), value)) {
-					string msg = Locale.GetText ("Invalid enum {0}");
+					string msg = string.Format ("Invalid enum {0}");
 					throw new ArgumentException (String.Format (msg, value), "Level");
 				}
 				_level = value;
@@ -66,3 +67,4 @@ namespace System.Drawing.Printing {
 		}
 	}
 }
+#endif

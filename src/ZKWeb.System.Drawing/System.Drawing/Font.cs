@@ -40,7 +40,7 @@ namespace System.Drawing
 {
 	[Serializable]
 	[ComVisible (true)]
-	[Editor ("System.Drawing.Design.FontEditor, " + Consts.AssemblySystem_Drawing_Design, typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.FontEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
 	[TypeConverter (typeof (FontConverter))]
 	public sealed class Font : MarshalByRefObject, ISerializable, ICloneable, IDisposable
 	{
@@ -70,11 +70,12 @@ namespace System.Drawing
 			Status status = GDIPlus.GdipCreateFont (family.NativeObject, emSize,  style, unit, out fontObject);
 			
 			if (status == Status.FontStyleNotFound)
-				throw new ArgumentException (Locale.GetText ("Style {0} isn't supported by font {1}.", style.ToString (), familyName));
+				throw new ArgumentException (string.Format ("Style {0} isn't supported by font {1}.", style.ToString (), familyName));
 				
 			GDIPlus.CheckStatus (status);
 		}
 
+#if !NETCORE
        		private Font (SerializationInfo info, StreamingContext context)
 		{
 			string		name;
@@ -89,7 +90,8 @@ namespace System.Drawing
  
 			CreateFont(name, size, style, unit, DefaultCharSet, false);
 		}
-
+#endif
+		
 		void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
 		{
 			si.AddValue("Name", Name);
@@ -261,7 +263,7 @@ namespace System.Drawing
 		public IntPtr ToHfont ()
 		{
 			if (fontObject == IntPtr.Zero)
-				throw new ArgumentException (Locale.GetText ("Object has been disposed."));
+				throw new ArgumentException (string.Format ("Object has been disposed."));
 
 			if (GDIPlus.RunningOnUnix ())
 				return fontObject;
@@ -431,7 +433,7 @@ namespace System.Drawing
 				if (systemFontName == null)
 					return false;
 
-				return StringComparer.InvariantCulture.Compare (systemFontName, string.Empty) != 0;
+				return StringComparer.Ordinal.Compare (systemFontName, string.Empty) != 0;
 			}
 		}
 
@@ -447,7 +449,7 @@ namespace System.Drawing
 		private string _name;
 
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Editor ("System.Drawing.Design.FontNameEditor, " + Consts.AssemblySystem_Drawing_Design, typeof (System.Drawing.Design.UITypeEditor))]
+		[Editor ("System.Drawing.Design.FontNameEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
 		[TypeConverter (typeof (FontConverter.FontNameConverter))]
 		public string Name {
 			get {
@@ -553,14 +555,12 @@ namespace System.Drawing
 
 			return _hashCode;
 		}
-
-		[MonoTODO ("The hdc parameter has no direct equivalent in libgdiplus.")]
+		
 		public static Font FromHdc (IntPtr hdc)
 		{
 			throw new NotImplementedException ();
 		}
-
-		[MonoTODO ("The returned font may not have all it's properties initialized correctly.")]
+		
 		public static Font FromLogFont (object lf, IntPtr hdc)
 		{
 			IntPtr newObject;
@@ -590,7 +590,7 @@ namespace System.Drawing
 				GDIPlus.ReleaseDC (IntPtr.Zero, hDC);
 			}
 		}
-
+		
 		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
 		public void ToLogFont (object logFont)
 		{
@@ -615,7 +615,7 @@ namespace System.Drawing
 				}
 			}
 		}
-
+		
 		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
 		public void ToLogFont (object logFont, Graphics graphics)
 		{
@@ -623,12 +623,14 @@ namespace System.Drawing
 				throw new ArgumentNullException ("graphics");
 
 			if (logFont == null) {
-				throw new AccessViolationException ("logFont");
+				throw new ArgumentNullException ("logFont");
 			}
 
 			Type st = logFont.GetType ();
+#if !NETCORE
 			if (!st.IsLayoutSequential)
-				throw new ArgumentException ("logFont", Locale.GetText ("Layout must be sequential."));
+				throw new ArgumentException ("logFont", string.Format ("Layout must be sequential."));
+#endif
 
 			// note: there is no exception if 'logFont' isn't big enough
 			Type lf = typeof (LOGFONT);

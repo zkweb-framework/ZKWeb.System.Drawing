@@ -107,7 +107,7 @@ namespace System.Drawing
 					newPosition = length + dlibMove;
 					break;
 				default:
-					throw new ExternalException(null, STG_E_INVALIDFUNCTION);
+					throw new InvalidOperationException("STG_E_INVALIDFUNCTION");
 			}
 
 			if (newPosition > length)
@@ -169,17 +169,17 @@ namespace System.Drawing
 
 		public void Revert()
 		{
-			throw new ExternalException(null, STG_E_INVALIDFUNCTION);
+			throw new InvalidOperationException("STG_E_INVALIDFUNCTION");
 		}
 
 		public void LockRegion(long libOffset, long cb, int dwLockType)
 		{
-			throw new ExternalException(null, STG_E_INVALIDFUNCTION);
+			throw new InvalidOperationException("STG_E_INVALIDFUNCTION");
 		}
 
 		public void UnlockRegion(long libOffset, long cb, int dwLockType)
 		{
-			throw new ExternalException(null, STG_E_INVALIDFUNCTION);
+			throw new InvalidOperationException("STG_E_INVALIDFUNCTION");
 		}
 
 		public void Stat(out STATSTG pstatstg, int grfStatFlag)
@@ -191,7 +191,7 @@ namespace System.Drawing
 		public void Clone(out IStream ppstm)
 		{
 			ppstm = null;
-			throw new ExternalException(null, STG_E_INVALIDFUNCTION);
+			throw new InvalidOperationException("STG_E_INVALIDFUNCTION");
 		}
 	}
 }

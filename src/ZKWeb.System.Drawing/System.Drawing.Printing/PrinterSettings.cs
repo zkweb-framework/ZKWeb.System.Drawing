@@ -255,7 +255,7 @@ namespace System.Drawing.Printing
 			set { 
 				if (value != PrintRange.AllPages && value != PrintRange.Selection &&
 					value != PrintRange.SomePages)
-					throw new InvalidEnumArgumentException ("The value of the PrintRange property is not one of the PrintRange values");
+					throw new ArgumentException ("The value of the PrintRange property is not one of the PrintRange values");
 				
 				print_range = value;
 			}
@@ -298,67 +298,56 @@ namespace System.Drawing.Printing
 			return ps;
 		}
 
-		[MonoTODO("PrinterSettings.CreateMeasurementGraphics")]
 		public Graphics CreateMeasurementGraphics()
 		{
 			throw new NotImplementedException();
 		}
-		[MonoTODO("PrinterSettings.CreateMeasurementGraphics")]
 		public Graphics CreateMeasurementGraphics(bool honorOriginAtMargins)		
 		{
 			throw new NotImplementedException();
 		}
 		
-		[MonoTODO("PrinterSettings.CreateMeasurementGraphics")]
 		public Graphics CreateMeasurementGraphics(PageSettings pageSettings)		
 		{
 			throw new NotImplementedException();
 		}
 		
-		[MonoTODO("PrinterSettings.CreateMeasurementGraphics")]
 		public Graphics CreateMeasurementGraphics (PageSettings pageSettings, bool honorOriginAtMargins)		
 		{
 			throw new NotImplementedException();
 		} 
 
-		[MonoTODO("PrinterSettings.GetHdevmode")]
 		public IntPtr GetHdevmode()
 		{
 			throw new NotImplementedException();
 		}
 
-		[MonoTODO("PrinterSettings.GetHdevmode")]
 		public IntPtr GetHdevmode(PageSettings pageSettings)
 		{
 			throw new NotImplementedException();
 		}
 
-		[MonoTODO("PrinterSettings.GetHdevname")]
 		public IntPtr GetHdevnames()
 		{
 			throw new NotImplementedException();
 		}
 		
 
-		[MonoTODO("IsDirectPrintingSupported")]
 		public bool IsDirectPrintingSupported (Image image)
 		{
 			throw new NotImplementedException();
 		}
 		
-		[MonoTODO("IsDirectPrintingSupported")]
 		public bool IsDirectPrintingSupported (ImageFormat imageFormat)
 		{
 			throw new NotImplementedException();
 		}
 
-		[MonoTODO("PrinterSettings.SetHdevmode")]
 		public void SetHdevmode(IntPtr hdevmode)
 		{
 			throw new NotImplementedException();
 		}
 
-		[MonoTODO("PrinterSettings.SetHdevnames")]
 		public void SetHdevnames(IntPtr hdevnames)
 		{
 			throw new NotImplementedException();

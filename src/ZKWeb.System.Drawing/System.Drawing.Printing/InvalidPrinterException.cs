@@ -30,33 +30,19 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
 namespace System.Drawing.Printing {
-
 	[Serializable]
-	public class InvalidPrinterException : SystemException {
+	public class InvalidPrinterException : Exception {
 
 //		private PrinterSettings settings;
 
 		public InvalidPrinterException (PrinterSettings settings): base(InvalidPrinterException.GetMessage(settings))
 		{
 //			this.settings = settings;
-		}
-
-		protected InvalidPrinterException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-
-		[SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
-
-			base.GetObjectData (info, context);
 		}
 		
 		private static string GetMessage(PrinterSettings settings)

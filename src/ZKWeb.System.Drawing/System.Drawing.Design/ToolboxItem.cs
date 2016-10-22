@@ -31,6 +31,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if !NETCORE
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -43,7 +44,6 @@ namespace System.Drawing.Design
 	[Serializable]
 	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
 	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
-	[MonoTODO ("Implementation is incomplete.")]
 	public class ToolboxItem : ISerializable {
 
 		private bool locked = false;
@@ -336,7 +336,7 @@ namespace System.Drawing.Design
 				throw new ArgumentNullException ("value");
 
 			if ((value != null) && !expectedType.Equals (value.GetType ())) {
-				string msg = Locale.GetText ("Type mismatch between value ({0}) and expected type ({1}).",
+				string msg = string.Format ("Type mismatch between value ({0}) and expected type ({1}).",
 					value.GetType (), expectedType);
 				throw new ArgumentException (msg, "value");
 			}
@@ -392,3 +392,4 @@ namespace System.Drawing.Design
 		public event ToolboxComponentsCreatingEventHandler ComponentsCreating;
 	}
 }
+#endif

@@ -32,7 +32,9 @@
 //
 
 using System;
+#if !NETCORE
 using System.Runtime.Remoting;
+#endif
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
@@ -44,7 +46,7 @@ namespace System.Drawing
 {
 [Serializable]
 [ComVisible (true)]
-[Editor ("System.Drawing.Design.ImageEditor, " + Consts.AssemblySystem_Drawing_Design, typeof (System.Drawing.Design.UITypeEditor))]
+[Editor ("System.Drawing.Design.ImageEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
 [TypeConverter (typeof(ImageConverter))]
 [ImmutableObject (true)]
 public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISerializable 
@@ -62,7 +64,8 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 	internal  Image()
 	{	
 	}
-	
+
+#if !NETCORE
 	internal Image (SerializationInfo info, StreamingContext context)
 	{
 		foreach (SerializationEntry serEnum in info) {
@@ -79,6 +82,7 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 			}
 		}
 	}
+#endif
 
 	// FIXME - find out how metafiles (another decoder-only codec) are handled
 	void ISerializable.GetObjectData (SerializationInfo si, StreamingContext context)
@@ -141,14 +145,11 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 		return LoadFromStream (stream, false);
 	}
 
-	[MonoLimitation ("useEmbeddedColorManagement  isn't supported.")]
 	public static Image FromStream (Stream stream, bool useEmbeddedColorManagement)
 	{
 		return LoadFromStream (stream, false);
 	}
 
-	// See http://support.microsoft.com/default.aspx?scid=kb;en-us;831419 for performance discussion	
-	[MonoLimitation ("useEmbeddedColorManagement  and validateImageData aren't supported.")]
 	public static Image FromStream (Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
 	{
 		return LoadFromStream (stream, false);
@@ -179,7 +180,7 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 		case ImageType.Metafile:
 			return new Metafile (handle);
 		default:
-			throw new NotSupportedException (Locale.GetText ("Unknown image type."));
+			throw new NotSupportedException (string.Format ("Unknown image type."));
 		}
 	}
 
@@ -436,7 +437,7 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 			// second chance
 			encoder = findEncoderForFormat (RawFormat);
 			if (encoder == null) {
-				string msg = Locale.GetText ("No codec available for saving format '{0}'.", format.Guid);
+				string msg = string.Format ("No codec available for saving format '{0}'.", format.Guid);
 				throw new ArgumentException (msg, "format");
 			}
 		}
@@ -795,7 +796,7 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 			Status status = GDIPlus.GdipDisposeImage (nativeObject);
 			// dispose the stream (set under Win32 only if SD owns the stream) and ...
 			if (stream != null) {
-				stream.Close ();
+				stream.Dispose ();
 				stream = null;
 			}
 			// ... set nativeObject to null before (possibly) throwing an exception

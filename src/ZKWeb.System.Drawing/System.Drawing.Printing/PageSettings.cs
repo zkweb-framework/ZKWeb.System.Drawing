@@ -209,14 +209,10 @@ namespace System.Drawing.Printing
 			return ps;
 		}
 
-
-		[MonoTODO("PageSettings.CopyToHdevmode")]
 		public void CopyToHdevmode (IntPtr hdevmode){
 			throw new NotImplementedException ();
 		}
 
-
-		[MonoTODO("PageSettings.SetHdevmode")]
 		public void SetHdevmode (IntPtr hdevmode){
 			throw new NotImplementedException ();
 		}	

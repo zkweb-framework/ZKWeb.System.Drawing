@@ -107,7 +107,7 @@ namespace System.Drawing {
 		public string Name {
 			get {
 				if (nativeFontFamily == IntPtr.Zero)
-					throw new ArgumentException ("Name", Locale.GetText ("Object was disposed."));
+					throw new ArgumentException ("Name", string.Format ("Object was disposed."));
 				if (name == null)
 					refreshName ();
 				return name;
@@ -161,8 +161,7 @@ namespace System.Drawing {
 
 			return (int) outProperty;
 		}
-
-		[MonoDocumentationNote ("When used with libgdiplus this method always return true (styles are created on demand).")]
+		
 		public bool IsStyleAvailable (FontStyle style)
 		{
 			bool outProperty;
@@ -211,7 +210,6 @@ namespace System.Drawing {
 			return fntcol.Families;			
 		}
 		
-		[MonoLimitation ("The language parameter is ignored. We always return the name using the default system language.")]
 		public string GetName (int language)
 		{
 			return Name;

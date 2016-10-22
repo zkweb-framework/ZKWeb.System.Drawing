@@ -77,7 +77,6 @@ namespace System.Drawing
 		//
 		// Properties
 		//
-		[MonoLimitation ("Libgdiplus doesn't use this property for rendering")]
 		public PenAlignment Alignment {
 			get {
 				PenAlignment retval;
@@ -88,13 +87,13 @@ namespace System.Drawing
 
 			set {
 				if ((value < PenAlignment.Center) || (value > PenAlignment.Right))
-					throw new InvalidEnumArgumentException ("Alignment", (int)value, typeof (PenAlignment));
+					throw new ArgumentException ("Alignment");
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenMode (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
 
@@ -110,7 +109,7 @@ namespace System.Drawing
 				if (value == null)
 					throw new ArgumentNullException ("Brush");
 				if (!isModifiable)
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 
 				Status status = GDIPlus.GdipSetPenBrushFill (nativeObject, value.nativeObject);
 				GDIPlus.CheckStatus (status);
@@ -131,7 +130,7 @@ namespace System.Drawing
 
 			set {
 				if (!isModifiable)
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 
 				Status status = GDIPlus.GdipSetPenColor (nativeObject, value.ToArgb ());
 				GDIPlus.CheckStatus (status);
@@ -164,7 +163,7 @@ namespace System.Drawing
 					Status status = GDIPlus.GdipSetPenCompoundArray (nativeObject, value, value.Length);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
 
@@ -179,7 +178,7 @@ namespace System.Drawing
 					GDIPlus.CheckStatus (status);
 					endCap = value;
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
 
@@ -194,7 +193,7 @@ namespace System.Drawing
 					GDIPlus.CheckStatus (status);
 					startCap = value;
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
 
@@ -209,13 +208,13 @@ namespace System.Drawing
 
                         set {
 				if ((value < DashCap.Flat) || (value > DashCap.Triangle))
-					throw new InvalidEnumArgumentException ("DashCap", (int)value, typeof (DashCap));
+					throw new ArgumentException ("DashCap");
 
 				if (isModifiable) {
                                 	Status status = GDIPlus.GdipSetPenDashCap197819 (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                         }
                 }
 
@@ -233,7 +232,7 @@ namespace System.Drawing
                                 	Status status = GDIPlus.GdipSetPenDashOffset (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                         }
                 }
 
@@ -270,7 +269,7 @@ namespace System.Drawing
                                 	Status status = GDIPlus.GdipSetPenDashArray (nativeObject, value, value.Length);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                         }
                 }
 
@@ -284,13 +283,13 @@ namespace System.Drawing
 
 			set {
 				if ((value < DashStyle.Solid) || (value > DashStyle.Custom))
-					throw new InvalidEnumArgumentException ("DashStyle", (int)value, typeof (DashStyle));
+					throw new ArgumentException ("DashStyle");
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenDashStyle (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
 
@@ -305,13 +304,13 @@ namespace System.Drawing
 
 			set {
 				if ((value < LineCap.Flat) || (value > LineCap.Custom))
-					throw new InvalidEnumArgumentException ("StartCap", (int)value, typeof (LineCap));
+					throw new ArgumentException ("StartCap");
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenStartCap (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
  
@@ -326,13 +325,13 @@ namespace System.Drawing
 
 			set {
 				if ((value < LineCap.Flat) || (value > LineCap.Custom))
-					throw new InvalidEnumArgumentException ("EndCap", (int)value, typeof (LineCap));
+					throw new ArgumentException ("EndCap");
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenEndCap (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
  
@@ -347,13 +346,13 @@ namespace System.Drawing
 
                         set {
 				if ((value < LineJoin.Miter) || (value > LineJoin.MiterClipped))
-					throw new InvalidEnumArgumentException ("LineJoin", (int)value, typeof (LineJoin));
+					throw new ArgumentException ("LineJoin");
 
 				if (isModifiable) {
                                 	Status status = GDIPlus.GdipSetPenLineJoin (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                        }
                                 
                 }
@@ -372,7 +371,7 @@ namespace System.Drawing
                                 	Status status = GDIPlus.GdipSetPenMiterLimit (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format("This Pen object can't be modified."));
                         }
                                 
                 }
@@ -405,7 +404,7 @@ namespace System.Drawing
                                 	Status status = GDIPlus.GdipSetPenTransform (nativeObject, value.nativeMatrix);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format("This Pen object can't be modified."));
                         }
                 }
 
@@ -421,7 +420,7 @@ namespace System.Drawing
 					Status status = GDIPlus.GdipSetPenWidth (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 			}
 		}
 
@@ -446,7 +445,7 @@ namespace System.Drawing
 		private void Dispose (bool disposing)
 		{
 			if (disposing && !isModifiable)
-				throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+				throw new ArgumentException (string.Format ("This Pen object can't be modified."));
 
 			if (nativeObject != IntPtr.Zero) {
 				Status status = GDIPlus.GdipDeletePen (nativeObject);
@@ -505,7 +504,7 @@ namespace System.Drawing
 				Status status = GDIPlus.GdipSetPenLineCap197819 (nativeObject, startCap, endCap, dashCap);
 				GDIPlus.CheckStatus (status);
 			} else
-				throw new ArgumentException (Locale.GetText ("This Pen object can't be modified."));
+				throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                 }
 
                 public void TranslateTransform (float dx, float dy)
