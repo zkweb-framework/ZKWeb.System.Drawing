@@ -67,3 +67,7 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 # Mac support
 
 I'm a poor man doesn't have a shiny mac book now, so I can't test with macosx, somebody can please tell me.
+
+# Remark
+
+To run dotnet on Fedora 24 please see https://github.com/dotnet/cli/issues/2018
