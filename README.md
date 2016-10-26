@@ -37,7 +37,7 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 - Fedora 23 and above:
 	- dnf install libgdiplus
 	- cd /usr/lib64/
-	- ln -s libgdiplus.so gdiplus.dll
+	- ln -s libgdiplus.so.0 gdiplus.dll
 - CentOS 7 and above:
 	- yum install autoconf automake libtool
 	- yum install freetype-devel fontconfig libXft-devel
