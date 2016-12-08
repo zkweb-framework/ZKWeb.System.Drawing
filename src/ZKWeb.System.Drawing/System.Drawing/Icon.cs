@@ -136,6 +136,33 @@ namespace System.Drawing
 				// If this structure defines an icon, the hot spot is always in the center of the icon
 				iconSize = new Size (ii.xHotspot * 2, ii.yHotspot * 2);
 				bitmap = (Bitmap) Image.FromHbitmap (ii.hbmColor);
+
+				// Support alpha icon
+				var originalBitmap = bitmap;
+				var originalBitmapData = originalBitmap.LockBits(
+					new Rectangle(0, 0, originalBitmap.Width, originalBitmap.Height),
+					ImageLockMode.ReadOnly, originalBitmap.PixelFormat);
+				try {
+					if (BitmapHasAlpha(originalBitmapData)) {
+						var alphaBitmap = new Bitmap(
+							originalBitmap.Width, originalBitmap.Height, PixelFormat.Format32bppArgb);
+						var alphaBitmapData = alphaBitmap.LockBits(
+							new Rectangle(0, 0, originalBitmapData.Width, originalBitmapData.Height),
+							ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+						try {
+							CopyBitmapData(originalBitmapData, alphaBitmapData);
+						} finally {
+							alphaBitmap.UnlockBits(alphaBitmapData);
+						}
+						bitmap = alphaBitmap;
+					}
+				} finally {
+					originalBitmap.UnlockBits(originalBitmapData);
+				}
+
+				// Support alpha icon with color key
+				Color transparentColor = Color.FromArgb(13, 11, 12);
+				bitmap.MakeTransparent(transparentColor);
 			}
 			undisposable = true;
 		}
@@ -864,6 +891,46 @@ Console.WriteLine ("\tbih.biClrImportant: {0}", bih.biClrImportant);
 			}			
 
 			reader.Dispose();
+		}
+
+		// Copied from original System.Drawing
+		private unsafe static bool BitmapHasAlpha(BitmapData bmpData) {
+			bool result = false;
+			for (int i = 0; i < bmpData.Height; i++) {
+				for (int j = 3; j < Math.Abs(bmpData.Stride); j += 4) {
+					if (((byte*)((byte*)bmpData.Scan0.ToPointer() + i * bmpData.Stride))[j] != 0) {
+						result = true;
+						return result;
+					}
+				}
+			}
+			return result;
+		}
+
+		// Copied from original System.Drawing
+		private unsafe static void CopyBitmapData(BitmapData sourceData, BitmapData targetData) {
+			int num = 0;
+			int num2 = 0;
+			for (int i = 0; i < Math.Min(sourceData.Height, targetData.Height); i++) {
+				IntPtr intPtr;
+				IntPtr intPtr2;
+				if (IntPtr.Size == 4) {
+					intPtr = new IntPtr(sourceData.Scan0.ToInt32() + num);
+					intPtr2 = new IntPtr(targetData.Scan0.ToInt32() + num2);
+				} else {
+					intPtr = new IntPtr(sourceData.Scan0.ToInt64() + (long)num);
+					intPtr2 = new IntPtr(targetData.Scan0.ToInt64() + (long)num2);
+				}
+				unsafe
+				{
+					byte* s = (byte*)intPtr;
+					byte* d = (byte*)intPtr2;
+					for (int j = 0, k = Math.Abs(targetData.Stride); j < k; j++)
+						*d++ = *s++;
+				}
+				num += sourceData.Stride;
+				num2 += targetData.Stride;
+			}
 		}
 	}
 }
