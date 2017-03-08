@@ -71,3 +71,7 @@ I'm a poor man doesn't have a shiny mac book now, so I can't test with macosx, s
 # Remark
 
 To run dotnet on Fedora 24 please see https://github.com/dotnet/cli/issues/2018
+
+When upgraded to vs 2017 you may see an error about this package confict with .Net Framework's System.Drawing,
+
+To solve this problem, please add `<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>` under PropertyGroup section.
