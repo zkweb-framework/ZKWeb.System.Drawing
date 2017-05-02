@@ -32,7 +32,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	[SuppressUnmanagedCodeSecurity]
 	internal static class MacSupport {

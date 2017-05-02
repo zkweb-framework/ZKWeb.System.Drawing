@@ -34,7 +34,7 @@ using System.Collections;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Design {
+namespace System.DrawingCore.Design {
 
 	[ComImport]
 	[Guid("4BACD258-DE64-4048-BC4E-FEDBEF9ACB76"),

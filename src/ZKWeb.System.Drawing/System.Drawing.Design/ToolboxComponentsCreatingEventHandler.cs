@@ -27,7 +27,7 @@
 //
 
 #if !NETCORE
-namespace System.Drawing.Design {
+namespace System.DrawingCore.Design {
 
 	public delegate void ToolboxComponentsCreatingEventHandler (object sender, ToolboxComponentsCreatingEventArgs e);
 }

@@ -36,7 +36,7 @@
 using System;
 using System.ComponentModel;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	[DefaultEvent ("PrintPage"), DefaultProperty ("DocumentName")]
 	[ToolboxItemFilter ("System.Drawing.Printing", ToolboxItemFilterType.Allow)]

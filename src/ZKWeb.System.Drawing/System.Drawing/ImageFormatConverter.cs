@@ -34,11 +34,11 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	/// <summary>
 	/// Summary description for ImageFormatConverter.

@@ -29,7 +29,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Drawing.Text {
+namespace System.DrawingCore.Text {
 
 	public abstract class FontCollection : IDisposable {
 		

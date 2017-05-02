@@ -30,15 +30,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
+using System.DrawingCore.Drawing2D;
+using System.DrawingCore.Imaging;
+using System.DrawingCore.Text;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public sealed class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
 	{

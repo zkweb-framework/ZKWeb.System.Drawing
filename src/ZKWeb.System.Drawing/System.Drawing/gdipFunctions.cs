@@ -34,15 +34,15 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
+using System.DrawingCore.Drawing2D;
+using System.DrawingCore.Imaging;
+using System.DrawingCore.Text;
 using System.Globalization;
 using System.Security;
 using System.Runtime.InteropServices.ComTypes;
 using System.Diagnostics;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	/// <summary>
 	/// GDI+ API Functions

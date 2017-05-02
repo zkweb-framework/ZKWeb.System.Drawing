@@ -33,7 +33,7 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	[TypeConverter (typeof (ImageFormatConverter))]
 	public sealed class ImageFormat {

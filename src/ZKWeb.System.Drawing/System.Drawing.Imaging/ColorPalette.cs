@@ -31,10 +31,10 @@
 //
 
 using System;
-using System.Drawing;
+using System.DrawingCore;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging
+namespace System.DrawingCore.Imaging
 {
 	public sealed class ColorPalette {
 		// 0x1: the color values in the array contain alpha information

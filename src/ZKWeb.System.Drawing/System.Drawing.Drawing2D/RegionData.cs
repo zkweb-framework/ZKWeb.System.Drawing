@@ -33,7 +33,7 @@
 
 using System;
 
-namespace System.Drawing.Drawing2D
+namespace System.DrawingCore.Drawing2D
 {
 	/// <summary>
 	/// Summary description for RegionData.

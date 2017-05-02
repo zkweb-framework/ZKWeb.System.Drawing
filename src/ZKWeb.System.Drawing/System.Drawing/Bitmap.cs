@@ -36,7 +36,7 @@
 //
 
 using System.IO;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 #if !NETCORE
 using System.Runtime.Serialization;
 #endif
@@ -45,11 +45,11 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Security.Permissions;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[Serializable]
 	[ComVisible (true)]
-	[Editor ("System.Drawing.Design.BitmapEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.BitmapEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	public sealed class Bitmap : Image
 	{
 #region constructors

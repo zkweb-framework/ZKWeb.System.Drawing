@@ -34,18 +34,18 @@
 
 using System.Collections;
 using System.ComponentModel;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Reflection;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[Serializable]	
 #if !MONOTOUCH
-	[Editor ("System.Drawing.Design.IconEditor, Systen.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.IconEditor, Systen.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 #endif
 	[TypeConverter(typeof(IconConverter))]
 

@@ -28,7 +28,7 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing.Design {
+namespace System.DrawingCore.Design {
 
 	public delegate void PropertyValueUIItemInvokeHandler (
 				   ITypeDescriptorContext context,

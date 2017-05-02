@@ -31,8 +31,8 @@
 
 using NUnit.Framework;
 using System;
-using System.Drawing;
-using System.Drawing.Text;
+using System.DrawingCore;
+using System.DrawingCore.Text;
 using System.Security;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;

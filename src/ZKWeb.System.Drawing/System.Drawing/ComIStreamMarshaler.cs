@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using STATSTG = System.Runtime.InteropServices.ComTypes.STATSTG;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	// Mono does not implement COM interface marshaling
 	// This custom marshaler should be replaced with UnmanagedType.Interface

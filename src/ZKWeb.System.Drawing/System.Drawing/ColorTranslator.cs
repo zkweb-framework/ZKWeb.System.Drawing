@@ -32,7 +32,7 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public sealed class ColorTranslator {
 

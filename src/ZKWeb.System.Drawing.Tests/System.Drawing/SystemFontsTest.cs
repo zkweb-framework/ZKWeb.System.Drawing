@@ -29,7 +29,7 @@
 
 
 using System;
-using System.Drawing;
+using System.DrawingCore;
 
 using NUnit.Framework;
 

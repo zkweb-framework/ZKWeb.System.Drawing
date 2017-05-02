@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9A80874A-7F99-4F2B-A041-BC8F068CCB8F}"
 EndProject
@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ZKWeb.System.Drawing", "src\ZKWeb.System.Drawing\ZKWeb.System.Drawing.xproj", "{C86230AD-BBD1-406A-9A31-793E0FD86684}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZKWeb.System.Drawing", "src\ZKWeb.System.Drawing\ZKWeb.System.Drawing.csproj", "{C86230AD-BBD1-406A-9A31-793E0FD86684}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ZKWeb.System.Drawing.Tests", "src\ZKWeb.System.Drawing.Tests\ZKWeb.System.Drawing.Tests.xproj", "{BC872146-C856-47CA-B1E9-8D1256D57FA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZKWeb.System.Drawing.Tests", "src\ZKWeb.System.Drawing.Tests\ZKWeb.System.Drawing.Tests.csproj", "{BC872146-C856-47CA-B1E9-8D1256D57FA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZKWeb.System.Drawing.Console", "src\ZKWeb.System.Drawing.Console\ZKWeb.System.Drawing.Console.csproj", "{845D375F-D569-4D14-A8C4-AA4B60B68A87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC872146-C856-47CA-B1E9-8D1256D57FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{845D375F-D569-4D14-A8C4-AA4B60B68A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{845D375F-D569-4D14-A8C4-AA4B60B68A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{845D375F-D569-4D14-A8C4-AA4B60B68A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{845D375F-D569-4D14-A8C4-AA4B60B68A87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C86230AD-BBD1-406A-9A31-793E0FD86684} = {9A80874A-7F99-4F2B-A041-BC8F068CCB8F}
 		{BC872146-C856-47CA-B1E9-8D1256D57FA9} = {9A80874A-7F99-4F2B-A041-BC8F068CCB8F}
+		{845D375F-D569-4D14-A8C4-AA4B60B68A87} = {9A80874A-7F99-4F2B-A041-BC8F068CCB8F}
 	EndGlobalSection
 EndGlobal

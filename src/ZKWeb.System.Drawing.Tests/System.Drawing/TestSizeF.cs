@@ -29,7 +29,7 @@
 //
 
 using System;
-using System.Drawing;
+using System.DrawingCore;
 using System.Security.Permissions;
 using System.Globalization;
 using System.Threading;

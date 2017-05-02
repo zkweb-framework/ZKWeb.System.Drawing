@@ -33,7 +33,7 @@
 
 using System;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	public sealed class FrameDimension {
 

@@ -30,7 +30,7 @@
 using System;
 using System.ComponentModel;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[Serializable]
 	public struct RectangleF

@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public sealed class BufferedGraphics : IDisposable
 	{

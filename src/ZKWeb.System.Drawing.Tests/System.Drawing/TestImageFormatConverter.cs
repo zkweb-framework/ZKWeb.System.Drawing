@@ -31,8 +31,8 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
+using System.DrawingCore;
+using System.DrawingCore.Imaging;
 using System.Globalization;
 using System.Security.Permissions;
 

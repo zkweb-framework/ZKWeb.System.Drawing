@@ -35,7 +35,7 @@
 #if !NETCORE
 using System;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	public class StandardPrintController : PrintController
 	{		

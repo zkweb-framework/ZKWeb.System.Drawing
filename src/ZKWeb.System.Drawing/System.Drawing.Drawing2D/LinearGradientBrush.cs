@@ -30,7 +30,7 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing.Drawing2D {
+namespace System.DrawingCore.Drawing2D {
 
 	public sealed class LinearGradientBrush : Brush
 	{

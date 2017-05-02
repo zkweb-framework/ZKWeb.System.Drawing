@@ -36,11 +36,11 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing 
+namespace System.DrawingCore 
 {
 #if !MONOTOUCH && !MONOMAC
 	[TypeConverter(typeof(ColorConverter))]
-	[Editor ("System.Drawing.Design.ColorEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.ColorEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 #endif
 	[Serializable]
 	public struct Color {

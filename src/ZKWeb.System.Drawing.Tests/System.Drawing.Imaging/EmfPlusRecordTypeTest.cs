@@ -27,7 +27,7 @@
 //
 
 using System;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.Security.Permissions;
 using NUnit.Framework;
 

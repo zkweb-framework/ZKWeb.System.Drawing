@@ -30,10 +30,10 @@
 //
 
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+using System.DrawingCore.Drawing2D;
+using System.DrawingCore.Imaging;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public sealed class TextureBrush : Brush {
 

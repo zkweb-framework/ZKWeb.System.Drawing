@@ -34,10 +34,10 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	[Serializable]
-	[Editor ("System.Drawing.Design.MetafileEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.MetafileEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	public sealed class Metafile : Image {
 
 		// constructors

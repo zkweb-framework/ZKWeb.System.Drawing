@@ -35,9 +35,9 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	/// <summary>
 	/// Summary description for ImageConverter.
@@ -80,7 +80,7 @@ namespace System.Drawing
 			if (value == null)
 				return "(none)";
 
-			if (value is System.Drawing.Image) {
+			if (value is System.DrawingCore.Image) {
 				if (destinationType == typeof (string)) {
 					return value.ToString ();
 				} else if (CanConvertTo (null, destinationType)) {

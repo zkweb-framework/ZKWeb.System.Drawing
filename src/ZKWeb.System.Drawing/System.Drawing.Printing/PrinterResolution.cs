@@ -33,7 +33,7 @@
 //
 using System;
 
-namespace System.Drawing.Printing 
+namespace System.DrawingCore.Printing 
 {
 
 	[Serializable]

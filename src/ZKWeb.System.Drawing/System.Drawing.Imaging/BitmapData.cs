@@ -30,7 +30,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging
+namespace System.DrawingCore.Imaging
 {
 	// MUST BE KEPT IN SYNC WITH gdip.h in libgdiplus!
 	// The first 6 fields MUST also match MS definition

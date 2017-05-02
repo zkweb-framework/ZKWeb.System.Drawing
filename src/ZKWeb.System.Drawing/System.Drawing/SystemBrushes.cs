@@ -35,7 +35,7 @@
 
 using System;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	/// <summary>
 	/// Summary description for SystemBrushes.

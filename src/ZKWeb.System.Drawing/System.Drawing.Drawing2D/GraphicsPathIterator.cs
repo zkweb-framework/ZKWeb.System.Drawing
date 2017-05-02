@@ -30,9 +30,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Drawing;
+using System.DrawingCore;
 
-namespace System.Drawing.Drawing2D
+namespace System.DrawingCore.Drawing2D
 {
 	public sealed class GraphicsPathIterator : MarshalByRefObject, IDisposable
 	{

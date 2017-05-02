@@ -36,11 +36,11 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.ComponentModel;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[Serializable]
 	[ComVisible (true)]
-	[Editor ("System.Drawing.Design.FontEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.FontEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	[TypeConverter (typeof (FontConverter))]
 	public sealed class Font : MarshalByRefObject, ISerializable, ICloneable, IDisposable
 	{
@@ -449,7 +449,7 @@ namespace System.Drawing
 		private string _name;
 
 		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Editor ("System.Drawing.Design.FontNameEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+		[Editor ("System.Drawing.Design.FontNameEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 		[TypeConverter (typeof (FontConverter.FontNameConverter))]
 		public string Name {
 			get {

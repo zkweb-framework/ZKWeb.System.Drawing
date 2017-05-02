@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	[Flags]
 	public enum ImageFlags {

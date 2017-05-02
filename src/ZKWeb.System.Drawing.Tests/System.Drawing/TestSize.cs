@@ -29,7 +29,7 @@
 
 using NUnit.Framework;
 using System;
-using System.Drawing;
+using System.DrawingCore;
 using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing 

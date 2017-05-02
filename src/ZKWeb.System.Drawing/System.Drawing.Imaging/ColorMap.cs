@@ -36,7 +36,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 	public sealed class ColorMap {
 
 		private Color newColor;

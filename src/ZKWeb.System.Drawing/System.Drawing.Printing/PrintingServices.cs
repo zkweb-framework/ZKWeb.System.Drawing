@@ -27,11 +27,11 @@
 
 using System.Runtime.InteropServices;
 using System.Collections;
-using System.Drawing.Printing;
+using System.DrawingCore.Printing;
 using System.ComponentModel;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	/// <summary>
 	/// This class is designed to cache the values retrieved by the 

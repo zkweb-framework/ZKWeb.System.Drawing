@@ -29,11 +29,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Drawing.Text;
+using System.DrawingCore.Text;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public sealed class FontFamily : MarshalByRefObject, IDisposable 
 	{

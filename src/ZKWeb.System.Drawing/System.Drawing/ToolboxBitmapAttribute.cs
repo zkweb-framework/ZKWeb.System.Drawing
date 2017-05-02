@@ -35,7 +35,7 @@
 using System;
 using System.Reflection;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[AttributeUsage (AttributeTargets.Class)]
 	public class ToolboxBitmapAttribute : Attribute

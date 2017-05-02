@@ -31,7 +31,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	[StructLayout (LayoutKind.Sequential, Pack=2)]
 	public sealed class WmfPlaceableFileHeader {

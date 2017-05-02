@@ -34,7 +34,7 @@
 
 using System;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public sealed class SystemPens
 	{

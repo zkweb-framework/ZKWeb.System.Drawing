@@ -34,7 +34,7 @@
 
 using System.Security.Permissions;
 
-namespace System.Drawing.Design
+namespace System.DrawingCore.Design
 {
 #if !NETCORE
 	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]

@@ -37,7 +37,7 @@ using System.Text.RegularExpressions;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
-namespace System.Drawing.Printing {
+namespace System.DrawingCore.Printing {
 	/// <summary>
 	/// Summary description for MarginsConverter.
 	/// </summary>

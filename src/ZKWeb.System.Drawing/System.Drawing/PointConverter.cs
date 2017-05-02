@@ -34,7 +34,7 @@ using System.Globalization;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public class PointConverter : TypeConverter
 	{

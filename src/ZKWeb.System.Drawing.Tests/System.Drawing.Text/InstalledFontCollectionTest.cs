@@ -28,8 +28,8 @@
 
 using System;
 using System.IO;
-using System.Drawing;
-using System.Drawing.Text;
+using System.DrawingCore;
+using System.DrawingCore.Text;
 using System.Security.Permissions;
 using NUnit.Framework;
 

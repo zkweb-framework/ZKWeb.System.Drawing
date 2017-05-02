@@ -28,9 +28,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+using System.DrawingCore;
+using System.DrawingCore.Drawing2D;
+using System.DrawingCore.Imaging;
 using System.Security.Permissions;
 using NUnit.Framework;
 

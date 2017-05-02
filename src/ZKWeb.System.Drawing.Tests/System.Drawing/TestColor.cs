@@ -29,7 +29,7 @@
 
 using System;
 using System.IO;
-using System.Drawing;
+using System.DrawingCore;
 using System.Runtime.Serialization;
 #if !NETCORE
 using System.Runtime.Serialization.Formatters.Binary;

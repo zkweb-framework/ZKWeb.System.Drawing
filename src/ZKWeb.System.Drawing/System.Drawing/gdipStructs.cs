@@ -27,10 +27,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing 
+namespace System.DrawingCore 
 {
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct GdiplusStartupInput

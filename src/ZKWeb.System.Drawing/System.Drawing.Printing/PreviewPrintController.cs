@@ -33,9 +33,9 @@
 #if !NETCORE
 using System;
 using System.Collections;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	public class PreviewPrintController : PrintController
 	{

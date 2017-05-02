@@ -28,7 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	[Serializable]
 	public enum PaperSourceKind {

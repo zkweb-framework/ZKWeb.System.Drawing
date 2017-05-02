@@ -28,7 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Drawing.Drawing2D {
+namespace System.DrawingCore.Drawing2D {
 
 	public enum CompositingQuality {
 		AssumeLinear = 4,

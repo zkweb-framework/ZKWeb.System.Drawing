@@ -34,7 +34,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Drawing2D
+namespace System.DrawingCore.Drawing2D
 {
 	public sealed class GraphicsPath : MarshalByRefObject, ICloneable, IDisposable
 	{

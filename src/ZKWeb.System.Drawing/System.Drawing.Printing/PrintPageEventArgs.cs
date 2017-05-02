@@ -31,8 +31,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Drawing;
-namespace System.Drawing.Printing {
+using System.DrawingCore;
+namespace System.DrawingCore.Printing {
 	/// <summary>
 	/// Summary description for PrintPageEventArgs.
 	/// </summary>

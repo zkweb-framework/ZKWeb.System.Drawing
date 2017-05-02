@@ -31,10 +31,10 @@
 //
 
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
+using System.DrawingCore.Drawing2D;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public sealed class Pen : MarshalByRefObject, ICloneable, IDisposable
 	{

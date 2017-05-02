@@ -30,7 +30,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[ComVisibleAttribute(true)]
 	public enum CopyPixelOperation {

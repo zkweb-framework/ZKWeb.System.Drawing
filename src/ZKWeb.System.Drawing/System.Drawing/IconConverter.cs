@@ -37,7 +37,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 	/// <summary>
 	/// Summary description for IconConverter.
 	/// </summary>

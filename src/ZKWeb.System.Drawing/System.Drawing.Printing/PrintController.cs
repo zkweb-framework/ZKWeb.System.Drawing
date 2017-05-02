@@ -28,7 +28,7 @@
 //
 
 #if !NETCORE
-namespace System.Drawing.Printing {
+namespace System.DrawingCore.Printing {
 
 	public abstract class PrintController {
 

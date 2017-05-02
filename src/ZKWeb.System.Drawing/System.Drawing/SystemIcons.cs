@@ -30,7 +30,7 @@
 //
 
 #if false
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	// LAME: I don't see why the "old" (win 2.x) names were exposed in the fx :|
 

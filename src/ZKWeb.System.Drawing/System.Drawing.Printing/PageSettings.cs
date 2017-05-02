@@ -35,7 +35,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	[Serializable]
 	public class PageSettings : ICloneable

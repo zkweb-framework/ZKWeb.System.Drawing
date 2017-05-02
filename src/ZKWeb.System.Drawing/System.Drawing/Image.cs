@@ -38,15 +38,15 @@ using System.Runtime.Remoting;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.IO;
 using System.Reflection;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 [Serializable]
 [ComVisible (true)]
-[Editor ("System.Drawing.Design.ImageEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+[Editor ("System.Drawing.Design.ImageEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 [TypeConverter (typeof(ImageConverter))]
 [ImmutableObject (true)]
 public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISerializable 

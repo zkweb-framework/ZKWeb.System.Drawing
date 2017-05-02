@@ -32,7 +32,7 @@
 //
 using System;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	/// <summary>
 	/// Summary description for PaperSize.

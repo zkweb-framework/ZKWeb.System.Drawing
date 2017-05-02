@@ -26,7 +26,7 @@
 //
 
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public sealed class SystemFonts {
 		

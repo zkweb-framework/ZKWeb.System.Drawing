@@ -29,10 +29,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Drawing;
+using System.DrawingCore;
 using System.ComponentModel;
 
-namespace System.Drawing.Design
+namespace System.DrawingCore.Design
 {
 	public interface IPropertyValueUIService
 	{

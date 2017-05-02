@@ -31,7 +31,7 @@
 //
 using System;
 //NOTE: Complete! Aparently just a redifiniton of CancleEventArgs specific to Printing.
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	/// <summary>
 	/// Summary description for PrintEventArgs.

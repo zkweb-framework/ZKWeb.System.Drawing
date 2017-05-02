@@ -28,7 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	internal static class KnownColors {
 		// FindColorMatch relies on the index + 1 == KnowColor match

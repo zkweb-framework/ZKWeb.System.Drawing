@@ -34,7 +34,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace System.Drawing.Printing {
+namespace System.DrawingCore.Printing {
 	[Serializable]
 	public class InvalidPrinterException : Exception {
 

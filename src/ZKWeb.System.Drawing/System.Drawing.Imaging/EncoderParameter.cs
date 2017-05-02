@@ -36,7 +36,7 @@ using System.Text;
 
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	[StructLayout(LayoutKind.Sequential)]
 	public sealed class EncoderParameter : IDisposable {

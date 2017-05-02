@@ -27,11 +27,11 @@
 
 using System.Runtime.InteropServices;
 using System.Collections;
-using System.Drawing.Printing;
+using System.DrawingCore.Printing;
 using System.ComponentModel;
 using System.Text;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	internal class PrintingServicesWin32 : PrintingServices
 	{

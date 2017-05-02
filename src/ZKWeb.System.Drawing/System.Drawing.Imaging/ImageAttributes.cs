@@ -30,10 +30,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Drawing.Drawing2D;
+using System.DrawingCore.Drawing2D;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	[StructLayout(LayoutKind.Sequential)]
 	public sealed class ImageAttributes :

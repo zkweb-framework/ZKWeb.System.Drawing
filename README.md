@@ -3,6 +3,8 @@
 This is a .Net Core compatible System.Drawing implementation modified from mono project.<br/>
 Works on windows and linux.
 
+Since 3.0, namespace is replaced to `System.DrawingCore`, please modify your code after upgrade.
+
 [![NuGet](https://buildstats.info/nuget/ZKWeb.System.Drawing)](http://www.nuget.org/packages/ZKWeb.System.Drawing)
 
 These system are tested:
@@ -26,7 +28,7 @@ Known issues:
 
 # How can I get it work?
 
-On windows, just install package `ZKWeb.System.Drawing` from nuget, nothing else need.
+On windows, just install package `ZKWeb.System.Drawing` from nuget.
 
 On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need install `libgdiplus`.<br/>
 
@@ -51,6 +53,8 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 	- cd /usr/lib64/
 	- ln -s /usr/local/lib/libgdiplus.so gdiplus.dll
 
+**Then you should replace all `System.Drawing` To `System.DrawingCore` in your code**
+
 # Huh? What's the different with CoreCompat.System.Drawing?
 
 - No fake strong name is used, will not mess up Asp.Net and OWIN.
@@ -63,15 +67,8 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 	- Linux
 		- .Net Core Test Count: 1857, Passed: 1510, Failed: 339, Inconclusive: 0, Skipped: 8
 - No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
+- Namespace is renamed from `System.Drawing` to `System.DrawingCore` because vs2017's new project system is so stupid
 
 # Mac support
 
 I'm a poor man doesn't have a shiny mac book now, so I can't test with macosx, somebody can please tell me.
-
-# Remark
-
-To run dotnet on Fedora 24 please see https://github.com/dotnet/cli/issues/2018
-
-When upgraded to vs 2017 you may see an error about this package confict with .Net Framework's System.Drawing,
-
-To solve this problem, please add `<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>` under PropertyGroup section.

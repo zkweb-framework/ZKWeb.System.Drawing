@@ -33,7 +33,7 @@
 using System;
 using System.ComponentModel;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[AttributeUsage(AttributeTargets.All)]
 	internal sealed class SRDescriptionAttribute : DescriptionAttribute {

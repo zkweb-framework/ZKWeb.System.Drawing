@@ -36,7 +36,7 @@ using System.Text;
 using System.ComponentModel.Design.Serialization;
 using System.Reflection;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public class RectangleConverter : TypeConverter
 	{

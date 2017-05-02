@@ -33,9 +33,9 @@ using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	[Serializable]
 	public class PrinterSettings : ICloneable

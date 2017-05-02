@@ -30,7 +30,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Imaging 
+namespace System.DrawingCore.Imaging 
 {
 	public sealed class EncoderParameters : IDisposable
 	{

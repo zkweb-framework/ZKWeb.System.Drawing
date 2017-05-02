@@ -27,7 +27,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
-using System.Drawing;
+using System.DrawingCore;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Linq;

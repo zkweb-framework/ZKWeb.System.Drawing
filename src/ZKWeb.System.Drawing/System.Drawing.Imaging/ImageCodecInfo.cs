@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 using System.Collections;
 using System.IO;
 
-namespace System.Drawing.Imaging {
+namespace System.DrawingCore.Imaging {
 
 	public sealed class ImageCodecInfo {
 		private Guid clsid;

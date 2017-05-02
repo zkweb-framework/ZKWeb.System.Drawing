@@ -33,7 +33,7 @@ using System.IO;
 using System.Security.Permissions;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Text {
+namespace System.DrawingCore.Text {
 
 	public sealed class PrivateFontCollection : FontCollection {
 

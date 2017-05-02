@@ -29,13 +29,13 @@
 using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Drawing.Printing;
+using System.DrawingCore.Printing;
 using System.ComponentModel;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.Text;
 using System.IO;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	internal class PrintingServicesUnix : PrintingServices
 	{

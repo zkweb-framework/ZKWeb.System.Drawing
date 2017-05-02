@@ -27,10 +27,10 @@
 //
 
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
+using System.DrawingCore;
+using System.DrawingCore.Drawing2D;
+using System.DrawingCore.Imaging;
+using System.DrawingCore.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 using NUnit.Framework;

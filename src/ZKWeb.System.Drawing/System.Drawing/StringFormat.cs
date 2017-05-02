@@ -30,9 +30,9 @@
 //
 
 using System.ComponentModel;
-using System.Drawing.Text;
+using System.DrawingCore.Text;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public sealed class StringFormat : MarshalByRefObject, IDisposable, ICloneable
 	{

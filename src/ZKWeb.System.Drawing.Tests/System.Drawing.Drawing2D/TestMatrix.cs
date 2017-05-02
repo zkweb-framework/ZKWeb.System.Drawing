@@ -29,8 +29,8 @@
 
 using NUnit.Framework;
 using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+using System.DrawingCore;
+using System.DrawingCore.Drawing2D;
 using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing.Drawing2D

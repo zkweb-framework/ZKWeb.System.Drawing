@@ -28,11 +28,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Drawing.Drawing2D;
+using System.DrawingCore.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public sealed class Region : MarshalByRefObject, IDisposable
 	{

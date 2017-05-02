@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using STATSTG = System.Runtime.InteropServices.ComTypes.STATSTG;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	// Stream to IStream wrapper for COM interop
 	internal sealed class ComIStreamWrapper : IStream

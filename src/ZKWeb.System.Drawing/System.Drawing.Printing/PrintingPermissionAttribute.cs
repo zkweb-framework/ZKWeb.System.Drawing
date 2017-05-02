@@ -33,7 +33,7 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Drawing.Printing {
+namespace System.DrawingCore.Printing {
 
 	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
 	// strangely this class isn't [Serializable] like other permission classes

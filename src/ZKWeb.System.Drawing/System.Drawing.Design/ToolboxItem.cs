@@ -39,7 +39,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace System.Drawing.Design 
+namespace System.DrawingCore.Design 
 {
 	[Serializable]
 	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
@@ -272,7 +272,7 @@ namespace System.Drawing.Design
 			TypeName = type.FullName;
 			
 			// seems to be a right place to create the bitmap
-			System.Drawing.Image image = null;
+			System.DrawingCore.Image image = null;
 			foreach (object attribute in type.GetCustomAttributes(true)) {
 				ToolboxBitmapAttribute tba = attribute as ToolboxBitmapAttribute;
 				if (tba != null) {

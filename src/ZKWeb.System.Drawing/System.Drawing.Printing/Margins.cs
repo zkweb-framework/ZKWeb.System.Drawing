@@ -31,7 +31,7 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing.Printing
+namespace System.DrawingCore.Printing
 {
 	[Serializable]
 	[TypeConverter (typeof (MarginsConverter))]

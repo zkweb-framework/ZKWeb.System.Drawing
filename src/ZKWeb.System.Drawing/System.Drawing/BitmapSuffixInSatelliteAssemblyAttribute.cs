@@ -29,7 +29,7 @@
 using System;
 using System.ComponentModel;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[AttributeUsage (AttributeTargets.Assembly)]
 	public class BitmapSuffixInSatelliteAssemblyAttribute : Attribute {

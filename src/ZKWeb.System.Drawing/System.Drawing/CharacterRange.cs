@@ -30,7 +30,7 @@
 
 using System;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public struct CharacterRange
 	{

@@ -29,7 +29,7 @@
 
 using NUnit.Framework;
 using System;
-using System.Drawing;
+using System.DrawingCore;
 using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing {
@@ -1342,7 +1342,7 @@ namespace MonoTests.System.Drawing {
 // Following code was used to generate the TestProperties method.
 /*
 using System;
-using System.Drawing;
+using System.DrawingCore;
 using System.Reflection;
 class Program {
 	static void Main ()

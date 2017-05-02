@@ -28,7 +28,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-namespace System.Drawing.Design
+namespace System.DrawingCore.Design
 {
 	public enum  UITypeEditorEditStyle{
 			DropDown=3,

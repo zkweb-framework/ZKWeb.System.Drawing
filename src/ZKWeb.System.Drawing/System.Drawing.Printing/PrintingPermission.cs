@@ -34,7 +34,7 @@ using System.Globalization;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Drawing.Printing {
+namespace System.DrawingCore.Printing {
 	[Serializable]
 	public sealed class PrintingPermission : CodeAccessPermission, IUnrestrictedPermission {
 

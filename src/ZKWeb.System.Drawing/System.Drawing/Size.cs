@@ -36,7 +36,7 @@ using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	[Serializable]
 	[ComVisible (true)]

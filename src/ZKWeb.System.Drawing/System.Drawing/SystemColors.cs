@@ -29,7 +29,7 @@
 //	Sebastien Pouliot  <sebastien@ximian.com>
 //
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	public sealed class SystemColors {
 

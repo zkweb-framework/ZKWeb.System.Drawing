@@ -31,10 +31,10 @@
 
 #if !NETCORE
 using System.Collections;
-using System.Drawing.Imaging;
+using System.DrawingCore.Imaging;
 using System.Threading;
 
-namespace System.Drawing {
+namespace System.DrawingCore {
 
 	class AnimateEventArgs : EventArgs {
 

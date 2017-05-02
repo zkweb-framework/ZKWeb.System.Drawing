@@ -29,7 +29,7 @@
 
 using System.ComponentModel;
 
-namespace System.Drawing
+namespace System.DrawingCore
 {
 	public interface IDeviceContext : IDisposable
 	{
