@@ -1,0 +1,15 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+before_build:
+- cmd: dotnet restore
+build:
+  project: ZKWeb.System.Drawing.sln
+  verbosity: minimal
+after_build:
+- cmd: >-
+    rem cd src\ZKWeb.System.Drawing.Console
+
+    rem dotnet run -f net461
+
+    rem dotnet run -f netcoreapp1.0
+test: off
