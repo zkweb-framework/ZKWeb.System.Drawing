@@ -29,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.Collections;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
@@ -100,4 +99,3 @@ namespace System.DrawingCore.Design {
 		void SetSelectedToolboxItem (ToolboxItem toolboxItem);
 	}
 }
-#endif

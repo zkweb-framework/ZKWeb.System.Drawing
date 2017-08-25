@@ -33,7 +33,6 @@ namespace MonoTests.System.Drawing
 {
 
 	[TestFixture]
-	
 	public class TestRectangleF {
 
 		RectangleF rect_0;

@@ -925,6 +925,7 @@ namespace System.DrawingCore.Printing
 
 		#endregion
 
+#pragma warning disable 649
 		#region Struct
 		public struct DOCINFO
 		{
@@ -1037,6 +1038,7 @@ namespace System.DrawingCore.Printing
 		}
 		
 		#endregion
+#pragma warning restore 649
 	}
 
 	class GlobalPrintingServicesUnix : GlobalPrintingServices

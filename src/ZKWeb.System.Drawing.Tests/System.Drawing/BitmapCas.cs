@@ -33,10 +33,9 @@ using System.DrawingCore;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-#if !NETCORE
 using System.Security.Policy;
-#endif
 
+#if false
 namespace MonoCasTests.System.Drawing {
 
 	[TestFixture]
@@ -47,7 +46,7 @@ namespace MonoCasTests.System.Drawing {
 		private MethodInfo getHbitmap2;
 		private MethodInfo getHicon;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetUp ()
 		{
 			// this executes at fulltrust
@@ -59,14 +58,12 @@ namespace MonoCasTests.System.Drawing {
 		[SetUp]
 		public void SetUp ()
 		{
-#if !NETCORE
 			if (!SecurityManager.SecurityEnabled)
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-#endif
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHbitmap ()
 		{
 			Bitmap b = new Bitmap (10, 10);
@@ -85,7 +82,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHicon ()
 		{
 			Bitmap b = new Bitmap (10, 10);
@@ -102,7 +99,7 @@ namespace MonoCasTests.System.Drawing {
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHbitmap_Empty_LinkDemand ()
 		{
 			Assert.Throws<SecurityException>(() =>
@@ -114,7 +111,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHbitmap_Color_LinkDemand ()
 		{
 			Assert.Throws<SecurityException>(() =>
@@ -126,7 +123,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHicon_LinkDemand ()
 		{
 			Assert.Throws<SecurityException>(() =>
@@ -138,3 +135,4 @@ namespace MonoCasTests.System.Drawing {
 		}
 	}
 }
+#endif

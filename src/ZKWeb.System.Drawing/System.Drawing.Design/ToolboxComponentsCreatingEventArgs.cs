@@ -30,14 +30,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.ComponentModel.Design;
 using System.Security.Permissions;
 
 namespace System.DrawingCore.Design
 {
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
 	public class ToolboxComponentsCreatingEventArgs : EventArgs
 	{
 		private IDesignerHost host;
@@ -54,5 +51,5 @@ namespace System.DrawingCore.Design
 		}
 	}	
 }
-#endif
+
 

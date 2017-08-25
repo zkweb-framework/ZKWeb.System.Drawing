@@ -30,7 +30,6 @@
 
 using System.DrawingCore.Drawing2D;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 
 namespace System.DrawingCore
 {
@@ -510,7 +509,6 @@ namespace System.DrawingCore
 			return result;			
 		}
 		
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
 		public static Region FromHrgn (IntPtr hrgn)
 		{
 			if (hrgn == IntPtr.Zero)
@@ -639,7 +637,6 @@ namespace System.DrawingCore
 			}
 		}
 		// why is this a instance method ? and not static ?
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
 		public void ReleaseHrgn (IntPtr regionHandle)		
 		{
 			if (regionHandle == IntPtr.Zero) 

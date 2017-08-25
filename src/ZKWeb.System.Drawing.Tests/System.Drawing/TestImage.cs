@@ -40,13 +40,12 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing{
 
 	[TestFixture]
-	
 	public class ImageTest {
 
 		private string fname;
 		private bool callback;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetup ()
 		{
 			fname = Path.GetTempFileName ();
@@ -71,9 +70,7 @@ namespace MonoTests.System.Drawing{
 		[Test]
 		public void FileDoesNotExists ()
 		{
-			Assert.Throws<FileNotFoundException>(() =>
-			{
-			Image.FromFile ("FileDoesNotExists.jpg");});
+			Assert.Throws<FileNotFoundException> (() => Image.FromFile ("FileDoesNotExists.jpg"));
 		}
 
 		private bool CallbackTrue ()
@@ -104,21 +101,17 @@ namespace MonoTests.System.Drawing{
 		[Test]
 		public void GetThumbnailImage_Height_Zero ()
 		{
-			Assert.Throws<OutOfMemoryException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
-				Image tn = bmp.GetThumbnailImage (5, 0, new Image.GetThumbnailImageAbort (CallbackFalse), IntPtr.Zero);
-			}});
+				Assert.Throws<OutOfMemoryException> (() => bmp.GetThumbnailImage (5, 0, new Image.GetThumbnailImageAbort (CallbackFalse), IntPtr.Zero));
+			}
 		}
 
 		[Test]
 		public void GetThumbnailImage_Width_Negative ()
 		{
-			Assert.Throws<OutOfMemoryException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
-				Image tn = bmp.GetThumbnailImage (-5, 5, new Image.GetThumbnailImageAbort (CallbackFalse), IntPtr.Zero);
-			}});
+				Assert.Throws<OutOfMemoryException> (() => bmp.GetThumbnailImage (-5, 5, new Image.GetThumbnailImageAbort (CallbackFalse), IntPtr.Zero));
+			}
 		}
 
 		[Test]
@@ -186,9 +179,10 @@ namespace MonoTests.System.Drawing{
 				((Bitmap) img).MakeTransparent (Color.Transparent);
 			}
 			catch (OutOfMemoryException) {
+				int p = (int) Environment.OSVersion.Platform;
 				// libgdiplus (UNIX) doesn't lazy load the image so the
 				// stream may be freed (and this exception will never occur)
-				if (GDIPlus.RunningOnUnix())
+				if ((p == 4) || (p == 128) || (p == 6))
 					throw;
 			}
 		}
@@ -208,14 +202,12 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-#if !NETCORE
 		[Test]
 		[Category ("NotWorking")]	// http://bugzilla.ximian.com/show_bug.cgi?id=80558
 		public void XmlSerialize ()
 		{
 			new XmlSerializer (typeof (Image));
 		}
-#endif
 
 		private void Wmf (Image img)
 		{
@@ -251,13 +243,11 @@ namespace MonoTests.System.Drawing{
 		[Category ("NotWorking")] // https://bugzilla.novell.com/show_bug.cgi?id=338779
 		public void FromStream_Metafile_Wmf_NotOrigin ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			string filename = TestBitmap.getInFile ("bitmaps/telescope_01.wmf");
 			using (FileStream fs = File.OpenRead (filename)) {
 				fs.Position = fs.Length / 2;
-				Image.FromStream (fs);
-			}});
+				Assert.Throws<ArgumentException> (() => Image.FromStream (fs));
+			}
 		}
 
 		private void Emf (Image img)
@@ -294,33 +284,27 @@ namespace MonoTests.System.Drawing{
 		[Category ("NotWorking")] // https://bugzilla.novell.com/show_bug.cgi?id=338779
 		public void FromStream_Metafile_Emf_NotOrigin ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			string filename = TestBitmap.getInFile ("bitmaps/milkmateya01.emf");
 			using (FileStream fs = File.OpenRead (filename)) {
 				fs.Position = fs.Length / 2;
-				Image.FromStream (fs);
-			}});
+				Assert.Throws<ArgumentException> (() => Image.FromStream (fs));
+			}
 		}
 
 		[Test]
 		public void FromFile_Invalid ()
 		{
-			Assert.Throws<OutOfMemoryException>(() =>
-			{
-			string filename = typeof(ImageTest).GetTypeInfo().Assembly.Location;
-			Image.FromFile (filename);});
+			string filename = Assembly.GetExecutingAssembly ().Location;
+			Assert.Throws<OutOfMemoryException> (() => Image.FromFile (filename));
 		}
 
 		[Test]
 		public void FromStream_Invalid ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			string filename = typeof(ImageTest).GetTypeInfo().Assembly.Location;
+			string filename = Assembly.GetExecutingAssembly ().Location;
 			using (FileStream fs = File.OpenRead (filename)) {
-				Image.FromStream (fs);
-			}});
+				Assert.Throws<ArgumentException> (() => Image.FromStream (fs));
+			}
 		}
 
 		private Bitmap GetBitmap ()
@@ -360,8 +344,6 @@ namespace MonoTests.System.Drawing{
 		[Test]
 		public void StreamJunkSaveLoad ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (MemoryStream ms = new MemoryStream ()) {
 				// junk
 				ms.WriteByte (0xff);
@@ -372,17 +354,15 @@ namespace MonoTests.System.Drawing{
 					bmp.Save (ms, ImageFormat.Bmp);
 					Assert.IsTrue (ms.Position > 2, "Position-2");
 					// exception here
-					Image.FromStream (ms);
+					Assert.Throws<ArgumentException> (() => Image.FromStream (ms));
 				}
-			}});
+			}
 		}
 
-#if !NETCORE
 		[Test]
 		public void XmlSerialization ()
 		{
 			new XmlSerializer (typeof (Image));
 		}
-#endif
 	}
 }

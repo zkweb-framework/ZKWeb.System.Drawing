@@ -37,7 +37,6 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]
-	
 	public class SystemPensTest
 	{
 		[TearDown]

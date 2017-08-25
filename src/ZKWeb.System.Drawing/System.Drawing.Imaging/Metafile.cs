@@ -85,7 +85,7 @@ namespace System.DrawingCore.Imaging {
 
 			Status status = GDIPlus.GdipCreateMetafileFromFile (filename, out nativeObject);
 			if (status == Status.GenericError)
-				throw new FileLoadException ("Couldn't load specified file.");
+				throw new ExternalException ("Couldn't load specified file.");
 			GDIPlus.CheckStatus (status);
 		}
 
@@ -219,10 +219,10 @@ namespace System.DrawingCore.Imaging {
 		}
 
 		public Metafile (IntPtr referenceHdc, Rectangle frameRect, MetafileFrameUnit frameUnit, EmfType type,
-			string description)
+			string desc)
 		{
 			Status status = GDIPlus.GdipRecordMetafileI (referenceHdc, type, ref frameRect, frameUnit,
-				description, out nativeObject);
+				desc, out nativeObject);
 			GDIPlus.CheckStatus (status);
 		}
 
@@ -260,8 +260,8 @@ namespace System.DrawingCore.Imaging {
 		}
 		
 		public Metafile (string fileName, IntPtr referenceHdc, RectangleF frameRect, MetafileFrameUnit frameUnit, 
-			string description) : this (fileName, referenceHdc, frameRect, frameUnit, EmfType.EmfPlusDual,
-			description) 
+			string desc) : this (fileName, referenceHdc, frameRect, frameUnit, EmfType.EmfPlusDual,
+			desc) 
 		{
 		}
 		
@@ -329,7 +329,7 @@ namespace System.DrawingCore.Imaging {
 		{
 			return nativeObject;
 		}
-		
+
 		public MetafileHeader GetMetafileHeader ()
 		{
 			IntPtr header = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (MetafileHeader)));
@@ -399,11 +399,11 @@ namespace System.DrawingCore.Imaging {
 			}
 		}
 
-		public static MetafileHeader GetMetafileHeader (IntPtr henhmetafile, WmfPlaceableFileHeader wmfHeader)
+		public static MetafileHeader GetMetafileHeader (IntPtr hmetafile, WmfPlaceableFileHeader wmfHeader)
 		{
 			IntPtr header = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (MetafileHeader)));
 			try {
-				Status status = GDIPlus.GdipGetMetafileHeaderFromEmf (henhmetafile, header);
+				Status status = GDIPlus.GdipGetMetafileHeaderFromEmf (hmetafile, header);
 				GDIPlus.CheckStatus (status);
 				return new MetafileHeader (header);
 			}

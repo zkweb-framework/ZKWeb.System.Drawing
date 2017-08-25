@@ -39,7 +39,6 @@ namespace MonoTests.System.Drawing {
 	/*       Here we exclusively tests non-rectangular (GraphicsPath based) regions. */
 
 	[TestFixture]
-	
 	public class RegionNonRectTest {
 
 		private Bitmap bitmap;
@@ -47,7 +46,7 @@ namespace MonoTests.System.Drawing {
 		private Matrix matrix;
 		private GraphicsPath sp1, sp2, sp3, sp4;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetUp ()
 		{
 			bitmap = new Bitmap (10, 10);

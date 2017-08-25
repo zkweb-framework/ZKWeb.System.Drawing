@@ -29,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 namespace System.DrawingCore.Design
 {
 	public interface IToolboxUser
@@ -39,4 +38,3 @@ namespace System.DrawingCore.Design
 		void ToolPicked (ToolboxItem tool);
 	}
 }
-#endif

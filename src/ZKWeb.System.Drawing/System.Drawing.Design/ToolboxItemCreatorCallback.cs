@@ -26,11 +26,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 namespace System.DrawingCore.Design {
 
 	public delegate ToolboxItem ToolboxItemCreatorCallback(
 				   object serializedObject,
 		        	   string format);
 }
-#endif

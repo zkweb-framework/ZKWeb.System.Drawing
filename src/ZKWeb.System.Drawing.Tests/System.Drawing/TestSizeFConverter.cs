@@ -37,15 +37,12 @@ using System.DrawingCore;
 using System.Globalization;
 using System.Security.Permissions;
 using System.Threading;
-using System.Reflection;
-using System.Linq;
 
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]
-	
 	public class SizeFConverterTest
 	{
 		SizeF sz;
@@ -254,23 +251,19 @@ namespace MonoTests.System.Drawing
 		[Test]
 		public void TestCreateInstance_Int ()
 		{
-			Assert.Throws<InvalidCastException>(() =>
-			{
 			Hashtable ht = new Hashtable ();
 			ht.Add ("Width", 10);
 			ht.Add ("Height", 20);
-			szconv.CreateInstance (null, ht);});
+			Assert.Throws<InvalidCastException> (() => szconv.CreateInstance (null, ht));
 		}
 
 		[Test]
 		public void TestCreateInstance_CaseSensitive ()
 		{
-			Assert.Throws<NullReferenceException>(() =>
-			{
 			Hashtable ht = new Hashtable ();
 			ht.Add ("width", 20);
 			ht.Add ("Height", 30);
-			szconv.CreateInstance (null, ht);});
+			Assert.Throws<NullReferenceException> (() => szconv.CreateInstance (null, ht));
 		}
 
 		[Test]
@@ -303,7 +296,7 @@ namespace MonoTests.System.Drawing
 			Assert.AreEqual (sz.IsEmpty, propsColl["IsEmpty"].GetValue (sz), "GP3#4");
 
 			Type type = typeof (SizeF);
-			attrs = type.GetTypeInfo().GetCustomAttributes().ToArray();
+			attrs = Attribute.GetCustomAttributes (type, true);
 			propsColl = szconv.GetProperties (null, sz, attrs);
 			Assert.AreEqual (0, propsColl.Count, "GP3#5");
 		}
@@ -320,9 +313,7 @@ namespace MonoTests.System.Drawing
 		[Test]
 		public void ConvertFromInvariantString_string_exc_1 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			szconv.ConvertFromInvariantString ("1, 2, 3");});
+			Assert.Throws<ArgumentException> (() => szconv.ConvertFromInvariantString ("1, 2, 3"));
 		}
 
 		[Test]
@@ -342,7 +333,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertFromString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = CultureInfo.CurrentCulture;
+			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
 
 			try {
 				PerformConvertFromStringTest (new CultureInfo ("en-US"));
@@ -350,18 +341,16 @@ namespace MonoTests.System.Drawing
 				PerformConvertFromStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				CultureInfo.CurrentCulture = currentCulture;
+				Thread.CurrentThread.CurrentCulture = currentCulture;
 			}
 		}
 
 		[Test]
 		public void ConvertFromString_string_exc_1 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			CultureInfo culture = CultureInfo.CurrentCulture;
-			szconv.ConvertFromString (string.Format(culture,
-				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator));});
+			Assert.Throws<ArgumentException> (() => szconv.ConvertFromString (string.Format(culture,
+				"1{0} 2{0} 3{0} 4{0} 5", culture.TextInfo.ListSeparator)));
 		}
 
 		[Test]
@@ -390,7 +379,7 @@ namespace MonoTests.System.Drawing
 		public void ConvertToString_string ()
 		{
 			// save current culture
-			CultureInfo currentCulture = CultureInfo.CurrentCulture;
+			CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
 
 			try {
 				PerformConvertToStringTest (new CultureInfo ("en-US"));
@@ -398,7 +387,7 @@ namespace MonoTests.System.Drawing
 				PerformConvertToStringTest (new MyCultureInfo ());
 			} finally {
 				// restore original culture
-				CultureInfo.CurrentCulture = currentCulture;
+				Thread.CurrentThread.CurrentCulture = currentCulture;
 			}
 		}
 
@@ -423,7 +412,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertFromStringTest (CultureInfo culture)
 		{
 			// set current culture
-			CultureInfo.CurrentCulture = culture;
+			Thread.CurrentThread.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (sz, szconv.ConvertFromString (CreateSizeString (culture, sz)),
@@ -435,7 +424,7 @@ namespace MonoTests.System.Drawing
 		private void PerformConvertToStringTest (CultureInfo culture)
 		{
 			// set current culture
-			CultureInfo.CurrentCulture = culture;
+			Thread.CurrentThread.CurrentCulture = culture;
 
 			// perform tests
 			Assert.AreEqual (CreateSizeString (culture, sz), szconv.ConvertToString (sz),
@@ -455,6 +444,7 @@ namespace MonoTests.System.Drawing
 				culture.TextInfo.ListSeparator, size.Height.ToString (culture));
 		}
 
+		[Serializable]
 		private sealed class MyCultureInfo : CultureInfo
 		{
 			internal MyCultureInfo () : base ("en-US")

@@ -42,7 +42,6 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]
-	
 	public class IconConverterTest
 	{
 		Icon icon;		
@@ -73,10 +72,10 @@ namespace MonoTests.System.Drawing
 			} catch (Exception e) {
 				Assert.Fail ("SU#2 Exception thrown while reading. Exception is: "+e.Message);
 			} finally {
-				stream.Dispose ();
+				stream.Close ();
 			}
 		
-			stream.Dispose();
+			stream.Close ();
 
 		}
 

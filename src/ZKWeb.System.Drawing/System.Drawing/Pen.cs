@@ -87,7 +87,7 @@ namespace System.DrawingCore
 
 			set {
 				if ((value < PenAlignment.Center) || (value > PenAlignment.Right))
-					throw new ArgumentException ("Alignment");
+					throw new InvalidEnumArgumentException ("Alignment", (int)value, typeof (PenAlignment));
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenMode (nativeObject, value);
@@ -208,7 +208,7 @@ namespace System.DrawingCore
 
                         set {
 				if ((value < DashCap.Flat) || (value > DashCap.Triangle))
-					throw new ArgumentException ("DashCap");
+					throw new InvalidEnumArgumentException ("DashCap", (int)value, typeof (DashCap));
 
 				if (isModifiable) {
                                 	Status status = GDIPlus.GdipSetPenDashCap197819 (nativeObject, value);
@@ -283,7 +283,7 @@ namespace System.DrawingCore
 
 			set {
 				if ((value < DashStyle.Solid) || (value > DashStyle.Custom))
-					throw new ArgumentException ("DashStyle");
+					throw new InvalidEnumArgumentException ("DashStyle", (int)value, typeof (DashStyle));
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenDashStyle (nativeObject, value);
@@ -304,7 +304,7 @@ namespace System.DrawingCore
 
 			set {
 				if ((value < LineCap.Flat) || (value > LineCap.Custom))
-					throw new ArgumentException ("StartCap");
+					throw new InvalidEnumArgumentException ("StartCap", (int)value, typeof (LineCap));
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenStartCap (nativeObject, value);
@@ -325,7 +325,7 @@ namespace System.DrawingCore
 
 			set {
 				if ((value < LineCap.Flat) || (value > LineCap.Custom))
-					throw new ArgumentException ("EndCap");
+					throw new InvalidEnumArgumentException ("EndCap", (int)value, typeof (LineCap));
 
 				if (isModifiable) {
 					Status status = GDIPlus.GdipSetPenEndCap (nativeObject, value);
@@ -346,7 +346,7 @@ namespace System.DrawingCore
 
                         set {
 				if ((value < LineJoin.Miter) || (value > LineJoin.MiterClipped))
-					throw new ArgumentException ("LineJoin");
+					throw new InvalidEnumArgumentException ("LineJoin", (int)value, typeof (LineJoin));
 
 				if (isModifiable) {
                                 	Status status = GDIPlus.GdipSetPenLineJoin (nativeObject, value);
@@ -371,7 +371,7 @@ namespace System.DrawingCore
                                 	Status status = GDIPlus.GdipSetPenMiterLimit (nativeObject, value);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (string.Format("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                         }
                                 
                 }
@@ -404,7 +404,7 @@ namespace System.DrawingCore
                                 	Status status = GDIPlus.GdipSetPenTransform (nativeObject, value.nativeMatrix);
 					GDIPlus.CheckStatus (status);
 				} else
-					throw new ArgumentException (string.Format("This Pen object can't be modified."));
+					throw new ArgumentException (string.Format ("This Pen object can't be modified."));
                         }
                 }
 

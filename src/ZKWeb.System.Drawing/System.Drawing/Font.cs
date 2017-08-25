@@ -31,9 +31,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.ComponentModel;
 
 namespace System.DrawingCore
@@ -75,7 +75,6 @@ namespace System.DrawingCore
 			GDIPlus.CheckStatus (status);
 		}
 
-#if !NETCORE
        		private Font (SerializationInfo info, StreamingContext context)
 		{
 			string		name;
@@ -90,8 +89,7 @@ namespace System.DrawingCore
  
 			CreateFont(name, size, style, unit, DefaultCharSet, false);
 		}
-#endif
-		
+
 		void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
 		{
 			si.AddValue("Name", Name);
@@ -430,10 +428,7 @@ namespace System.DrawingCore
 		[Browsable(false)]
 		public bool IsSystemFont {
 			get {
-				if (systemFontName == null)
-					return false;
-
-				return StringComparer.Ordinal.Compare (systemFontName, string.Empty) != 0;
+				return !string.IsNullOrEmpty (systemFontName);
 			}
 		}
 
@@ -555,13 +550,13 @@ namespace System.DrawingCore
 
 			return _hashCode;
 		}
-		
-		public static Font FromHdc (IntPtr hdc)
+
+				public static Font FromHdc (IntPtr hdc)
 		{
 			throw new NotImplementedException ();
 		}
-		
-		public static Font FromLogFont (object lf, IntPtr hdc)
+
+				public static Font FromLogFont (object lf, IntPtr hdc)
 		{
 			IntPtr newObject;
 			LOGFONT o = (LOGFONT)lf;
@@ -590,8 +585,7 @@ namespace System.DrawingCore
 				GDIPlus.ReleaseDC (IntPtr.Zero, hDC);
 			}
 		}
-		
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+
 		public void ToLogFont (object logFont)
 		{
 			if (GDIPlus.RunningOnUnix ()) {
@@ -615,22 +609,19 @@ namespace System.DrawingCore
 				}
 			}
 		}
-		
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
+
 		public void ToLogFont (object logFont, Graphics graphics)
 		{
 			if (graphics == null)
 				throw new ArgumentNullException ("graphics");
 
 			if (logFont == null) {
-				throw new ArgumentNullException ("logFont");
+				throw new AccessViolationException ("logFont");
 			}
 
 			Type st = logFont.GetType ();
-#if !NETCORE
-			if (!st.IsLayoutSequential)
+			if (!st.GetTypeInfo ().IsLayoutSequential)
 				throw new ArgumentException ("logFont", string.Format ("Layout must be sequential."));
-#endif
 
 			// note: there is no exception if 'logFont' isn't big enough
 			Type lf = typeof (LOGFONT);

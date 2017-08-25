@@ -87,7 +87,7 @@ namespace System.DrawingCore
 					//came here means destinationType is byte array ;
 					MemoryStream ms = new MemoryStream ();
 					((Image)value).Save (ms, ((Image)value).RawFormat);
-					return ms.ToArray();
+					return ms.GetBuffer ();
 				}
 			}
 

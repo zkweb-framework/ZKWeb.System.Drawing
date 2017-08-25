@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>ZKWeb.System.Drawing</id>
-    <version>3.0.0</version>
+    <version>4.0.0-beta-1</version>
     <authors>ZKWeb.System.Drawing</authors>
     <owners>ZKWeb.System.Drawing</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>

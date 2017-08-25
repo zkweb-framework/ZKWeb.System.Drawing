@@ -36,16 +36,15 @@ using System.Collections;
 using System.ComponentModel;
 using System.DrawingCore.Imaging;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Reflection;
 
 namespace System.DrawingCore
 {
 	[Serializable]	
 #if !MONOTOUCH
-	[Editor ("System.Drawing.Design.IconEditor, Systen.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
+	[Editor ("System.Drawing.Design.IconEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 #endif
 	[TypeConverter(typeof(IconConverter))]
 
@@ -137,7 +136,7 @@ namespace System.DrawingCore
 				iconSize = new Size (ii.xHotspot * 2, ii.yHotspot * 2);
 				bitmap = (Bitmap) Image.FromHbitmap (ii.hbmColor);
 
-				// Support alpha icon
+				// ZKWEB_FIX: Support alpha icon
 				var originalBitmap = bitmap;
 				var originalBitmapData = originalBitmap.LockBits(
 					new Rectangle(0, 0, originalBitmap.Width, originalBitmap.Height),
@@ -258,7 +257,11 @@ namespace System.DrawingCore
 			if (resource == null)
 				throw new ArgumentException ("resource");
 
-			using (Stream s = type.GetTypeInfo().Assembly.GetManifestResourceStream (resource)) {
+			// For compatibility with the .NET Framework
+			if (type == null)
+				throw new NullReferenceException();
+
+			using (Stream s = type.GetTypeInfo ().Assembly.GetManifestResourceStream (type, resource)) {
 				if (s == null) {
 					string msg = string.Format ("Resource '{0}' was not found.", resource);
 					throw new FileNotFoundException (msg);
@@ -290,7 +293,7 @@ namespace System.DrawingCore
 
 		internal Icon (string resourceName, bool undisposable)
 		{
-			using (Stream s = typeof (Icon).GetTypeInfo().Assembly.GetManifestResourceStream (resourceName)) {
+			using (Stream s = typeof (Icon).GetTypeInfo ().Assembly.GetManifestResourceStream (resourceName)) {
 				if (s == null) {
 					string msg = string.Format ("Resource '{0}' was not found.", resourceName);
 					throw new FileNotFoundException (msg);
@@ -326,14 +329,15 @@ namespace System.DrawingCore
 				InitFromStreamWithSize (fs, size.Width, size.Height);
 			}
 		}
-		
+
 		public static Icon ExtractAssociatedIcon (string filePath)
 		{
 			if (String.IsNullOrEmpty (filePath))
 				throw new ArgumentException (string.Format ("Null or empty path."), "filePath");
 			if (!File.Exists (filePath))
-				throw new FileNotFoundException (string.Format("Couldn't find specified file."), filePath);
-			throw new NotSupportedException();
+				throw new FileNotFoundException (string.Format ("Couldn't find specified file."), filePath);
+
+			return SystemIcons.WinLogo;
 		}	
 
 		public void Dispose ()
@@ -364,7 +368,6 @@ namespace System.DrawingCore
 		}
 		
 #if !MONOTOUCH
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public static Icon FromHandle (IntPtr handle)
 		{
 			if (handle == IntPtr.Zero)
@@ -887,12 +890,12 @@ Console.WriteLine ("\tbih.biClrImportant: {0}", bih.biClrImportant);
 				}
 				
 				imageData [j] = iidata;
-				bihReader.Dispose();
+				bihReader.Dispose ();
 			}			
 
-			reader.Dispose();
+			reader.Dispose ();
 		}
-
+		
 		// Copied from original System.Drawing
 		private unsafe static bool BitmapHasAlpha(BitmapData bmpData) {
 			bool result = false;

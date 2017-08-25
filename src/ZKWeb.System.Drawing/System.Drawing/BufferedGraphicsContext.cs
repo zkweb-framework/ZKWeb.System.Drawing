@@ -30,7 +30,6 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 
 namespace System.DrawingCore
 {
@@ -53,8 +52,7 @@ namespace System.DrawingCore
 			return graphics;			
 		}
 
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public BufferedGraphics Allocate (IntPtr targetDC, Rectangle targetRectangle)
+				public BufferedGraphics Allocate (IntPtr targetDC, Rectangle targetRectangle)
 		{
 			throw new NotImplementedException ();
 		}

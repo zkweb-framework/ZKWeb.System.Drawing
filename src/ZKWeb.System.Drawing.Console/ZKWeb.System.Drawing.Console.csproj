@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFrameworks>net461;netcoreapp1.0</TargetFrameworks>
+		<TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NUnit" Version="3.6.1" />
-		<PackageReference Include="NUnitLite" Version="3.6.1" />
+		<PackageReference Include="NUnit" Version="3.7.1" />
+		<PackageReference Include="NUnitLite" Version="3.7.2" />
 	</ItemGroup>
 
 	<ItemGroup>

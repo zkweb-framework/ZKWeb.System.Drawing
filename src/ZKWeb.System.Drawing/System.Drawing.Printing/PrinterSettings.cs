@@ -255,7 +255,7 @@ namespace System.DrawingCore.Printing
 			set { 
 				if (value != PrintRange.AllPages && value != PrintRange.Selection &&
 					value != PrintRange.SomePages)
-					throw new ArgumentException ("The value of the PrintRange property is not one of the PrintRange values");
+					throw new InvalidEnumArgumentException ("The value of the PrintRange property is not one of the PrintRange values");
 				
 				print_range = value;
 			}
@@ -298,57 +298,57 @@ namespace System.DrawingCore.Printing
 			return ps;
 		}
 
-		public Graphics CreateMeasurementGraphics()
+				public Graphics CreateMeasurementGraphics()
 		{
 			throw new NotImplementedException();
 		}
-		public Graphics CreateMeasurementGraphics(bool honorOriginAtMargins)		
-		{
-			throw new NotImplementedException();
-		}
-		
-		public Graphics CreateMeasurementGraphics(PageSettings pageSettings)		
+				public Graphics CreateMeasurementGraphics(bool honorOriginAtMargins)		
 		{
 			throw new NotImplementedException();
 		}
 		
-		public Graphics CreateMeasurementGraphics (PageSettings pageSettings, bool honorOriginAtMargins)		
+				public Graphics CreateMeasurementGraphics(PageSettings pageSettings)		
+		{
+			throw new NotImplementedException();
+		}
+		
+				public Graphics CreateMeasurementGraphics (PageSettings pageSettings, bool honorOriginAtMargins)		
 		{
 			throw new NotImplementedException();
 		} 
 
-		public IntPtr GetHdevmode()
+				public IntPtr GetHdevmode()
 		{
 			throw new NotImplementedException();
 		}
 
-		public IntPtr GetHdevmode(PageSettings pageSettings)
+				public IntPtr GetHdevmode(PageSettings pageSettings)
 		{
 			throw new NotImplementedException();
 		}
 
-		public IntPtr GetHdevnames()
+				public IntPtr GetHdevnames()
 		{
 			throw new NotImplementedException();
 		}
 		
 
-		public bool IsDirectPrintingSupported (Image image)
+				public bool IsDirectPrintingSupported (Image image)
 		{
 			throw new NotImplementedException();
 		}
 		
-		public bool IsDirectPrintingSupported (ImageFormat imageFormat)
+				public bool IsDirectPrintingSupported (ImageFormat imageFormat)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void SetHdevmode(IntPtr hdevmode)
+				public void SetHdevmode(IntPtr hdevmode)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void SetHdevnames(IntPtr hdevnames)
+				public void SetHdevnames(IntPtr hdevnames)
 		{
 			throw new NotImplementedException();
 		}

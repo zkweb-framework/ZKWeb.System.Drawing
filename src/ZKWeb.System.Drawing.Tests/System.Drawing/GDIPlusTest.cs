@@ -41,7 +41,7 @@ namespace MonoTests.System.Drawing {
 	public class GDIPlusTest {
 
 		// for the moment this LOGFONT is different (and ok) from the one defined internally in SD
-		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+		[StructLayout (LayoutKind.Sequential, CharSet = CharSet.Auto)]
 		public class LOGFONT {
 			public int lfHeight = 0;
 			public int lfWidth = 0;
@@ -98,7 +98,6 @@ namespace MonoTests.System.Drawing {
 		[Category ("NotWorking")]
 		public void DeleteFontFamily_DoubleDispose ()
 		{
-			Assert.Fail("Wont pass on linux");
 			IntPtr font_family;
 			GDIPlus.GdipGetGenericFontFamilySerif (out font_family);
 			// first dispose
@@ -323,7 +322,6 @@ namespace MonoTests.System.Drawing {
 		[Category ("NotWorking")] // incomplete GdipDrawImageRectRect[I] support
 		public void Graphics_FromImage_Metafile ()
 		{
-			Assert.Fail("This test case will cause memory error, ignore for now");
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppArgb)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
 					IntPtr metafile = IntPtr.Zero;
@@ -915,8 +913,6 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void GdipLoadImageFromFile_FileNotFound ()
 		{
-			Assert.Throws<FileNotFoundException>(() =>
-			{
 			string filename = "filenotfound";
 
 			IntPtr image;
@@ -924,21 +920,19 @@ namespace MonoTests.System.Drawing {
 			Assert.AreEqual (IntPtr.Zero, image, "image handle");
 
 			// this doesn't throw a OutOfMemoryException
-			Image.FromFile (filename);});
+			Assert.Throws<FileNotFoundException> (() => Image.FromFile (filename));
 		}
 
 		[Test]
 		public void GdipCreateBitmapFromFile_FileNotFound ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			string filename = "filenotfound";
 
 			IntPtr bitmap;
 			Assert.AreEqual (Status.InvalidParameter, GDIPlus.GdipCreateBitmapFromFile (filename, out bitmap), "GdipCreateBitmapFromFile");
 			Assert.AreEqual (IntPtr.Zero, bitmap, "bitmap handle");
 
-			new Bitmap (filename);});
+			Assert.Throws<ArgumentException> (() => new Bitmap (filename));
 		}
 
 		[Test]
@@ -1186,8 +1180,8 @@ namespace MonoTests.System.Drawing {
 					 "DrawCurve with 1 pt");
 			Assert.AreEqual (Status.Ok,
 					 GDIPlus.GdipDrawCurveI (graphics, pen,
-								 new Point [] { new Point (1, 1),
-										new Point (2, 2) }, 2),
+					                         new Point [] { new Point (1, 1),
+					                                        new Point (2, 2) }, 2),
 					 "DrawCurve with 2 pts");
 
 			// DrawClosedCurve
@@ -1197,12 +1191,12 @@ namespace MonoTests.System.Drawing {
 					 "DrawClosedCurve with no pts");
 			Assert.AreEqual (Status.InvalidParameter,
 					 GDIPlus.GdipDrawClosedCurveI (graphics, pen,
-								       new Point [] { new Point (1, 1) }, 1),
+					                               new Point [] { new Point (1, 1) }, 1),
 					 "DrawClosedCurve with 1 pt");
 			Assert.AreEqual (Status.InvalidParameter,
 					 GDIPlus.GdipDrawClosedCurveI (graphics, pen,
-								       new Point [] { new Point (1, 1),
-										      new Point (2, 2) }, 2),
+					                               new Point [] { new Point (1, 1),
+					                                              new Point (2, 2) }, 2),
 					 "DrawClosedCurve with 2 pt2");
 
 			// DrawPolygon
@@ -1212,7 +1206,7 @@ namespace MonoTests.System.Drawing {
 					 "DrawPolygon with no pts");
 			Assert.AreEqual (Status.InvalidParameter,
 					 GDIPlus.GdipDrawPolygonI (graphics, pen,
-								   new Point [] { new Point (1, 1) }, 1),
+					                           new Point [] { new Point (1, 1) }, 1),
 					 "DrawPolygon with only one pt");
 
 			GDIPlus.GdipDeletePen (pen);			
@@ -1228,12 +1222,12 @@ namespace MonoTests.System.Drawing {
 					 "FillClosedCurve with no pts");
 			Assert.AreEqual (Status.Ok,
 					 GDIPlus.GdipFillClosedCurveI (graphics, brush, 
-								       new Point [] { new Point (1, 1) }, 1),
+												new Point [] { new Point (1, 1) }, 1),
 					 "FillClosedCurve with 1 pt");
 			Assert.AreEqual (Status.Ok,
 					 GDIPlus.GdipFillClosedCurveI (graphics, brush,
-								       new Point [] { new Point (1, 1),
-										      new Point (2, 2) }, 2),
+					                               new Point [] { new Point (1, 1),
+					                                              new Point (2, 2) }, 2),
 					 "FillClosedCurve with 2 pts");
 			
 			GDIPlus.GdipDeleteBrush (brush);

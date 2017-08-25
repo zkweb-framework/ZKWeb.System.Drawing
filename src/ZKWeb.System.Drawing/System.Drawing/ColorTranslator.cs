@@ -123,7 +123,7 @@ namespace System.DrawingCore {
 				case KnownColor.Window:
 				case KnownColor.WindowFrame:
 				case KnownColor.WindowText:
-					return KnownColors.GetName (kc).ToLower ();
+					return KnownColors.GetName (kc).ToLower (CultureInfo.InvariantCulture);
 
 				case KnownColor.ActiveCaptionText:
 					return "captiontext";

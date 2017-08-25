@@ -58,7 +58,7 @@ namespace System.DrawingCore {
 		{
 			if (destinationType == typeof (string))
 				return true;
-			
+
 			if (destinationType == typeof (InstanceDescriptor))
 				return true;
 
@@ -115,7 +115,7 @@ namespace System.DrawingCore {
 					sb.Append (rect.Height.ToString (culture));
 					return sb.ToString ();
 				} else if (destinationType == typeof (InstanceDescriptor)) {
-					ConstructorInfo ctor = typeof(Rectangle).GetTypeInfo().GetConstructor (new Type[] {typeof(int), typeof(int), typeof(int), typeof(int)} );
+					ConstructorInfo ctor = typeof(Rectangle).GetConstructor (new Type[] {typeof(int), typeof(int), typeof(int), typeof(int)} );
 					return new InstanceDescriptor (ctor, new object[] {rect.X, rect.Y, rect.Width, rect.Height});
 				}
 			}

@@ -32,13 +32,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.Collections;
 using System.Security.Permissions;
 
 namespace System.DrawingCore.Design
 {
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
 	public sealed class ToolboxItemCollection : ReadOnlyCollectionBase
 	{
 
@@ -72,4 +70,3 @@ namespace System.DrawingCore.Design
 		}
 	}
 }
-#endif

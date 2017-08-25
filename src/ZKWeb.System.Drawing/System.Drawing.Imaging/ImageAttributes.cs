@@ -36,13 +36,7 @@ using System.Runtime.InteropServices;
 namespace System.DrawingCore.Imaging {
 
 	[StructLayout(LayoutKind.Sequential)]
-	public sealed class ImageAttributes :
-#if NETCORE
-		IDisposable
-#else
-		ICloneable, IDisposable
-#endif
-	{
+	public sealed class ImageAttributes : ICloneable, IDisposable {
 		
 		private IntPtr nativeImageAttr;
 		
@@ -166,22 +160,22 @@ namespace System.DrawingCore.Imaging {
 			SetColorKey (colorLow, colorHigh, ColorAdjustType.Default);
 		}
 
-		public void SetColorMatrix (ColorMatrix colorMatrix)
+		public void SetColorMatrix (ColorMatrix newColorMatrix)
 		{
-			SetColorMatrix (colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
+			SetColorMatrix (newColorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
 		}
 
-		public void SetColorMatrix (ColorMatrix colorMatrix, ColorMatrixFlag colorMatrixFlag)
+		public void SetColorMatrix (ColorMatrix newColorMatrix, ColorMatrixFlag flags)
 		{
-			SetColorMatrix (colorMatrix, colorMatrixFlag, ColorAdjustType.Default);
+			SetColorMatrix (newColorMatrix, flags, ColorAdjustType.Default);
 		}
 
-		public void SetColorMatrix (ColorMatrix colorMatrix, ColorMatrixFlag colorMatrixFlag, ColorAdjustType colorAdjustType)
+		public void SetColorMatrix (ColorMatrix newColorMatrix, ColorMatrixFlag mode, ColorAdjustType type)
 		{
-			IntPtr cm = ColorMatrix.Alloc (colorMatrix);
+			IntPtr cm = ColorMatrix.Alloc (newColorMatrix);
 			try {
 				Status status = GDIPlus.GdipSetImageAttributesColorMatrix (nativeImageAttr, 
-					colorAdjustType, true, cm, IntPtr.Zero, colorMatrixFlag);
+					type, true, cm, IntPtr.Zero, mode);
 				GDIPlus.CheckStatus (status);
 			}
 			finally {
@@ -214,7 +208,7 @@ namespace System.DrawingCore.Imaging {
 			return new ImageAttributes (imgclone);
 		}
 
-		public void GetAdjustedPalette (ColorPalette palette, ColorAdjustType type)
+				public void GetAdjustedPalette (ColorPalette palette, ColorAdjustType type)
 		{
 			IntPtr colorPalette = palette.getGDIPalette ();
 			try {
@@ -299,9 +293,9 @@ namespace System.DrawingCore.Imaging {
 			SetGamma (gamma, ColorAdjustType.Default);
 		}
 
-		public void SetGamma (float gamma, ColorAdjustType coloradjust)
+		public void SetGamma (float gamma, ColorAdjustType type)
 		{
-			Status status = GDIPlus.GdipSetImageAttributesGamma (nativeImageAttr, coloradjust, true, gamma);
+			Status status = GDIPlus.GdipSetImageAttributesGamma (nativeImageAttr, type, true, gamma);
 			GDIPlus.CheckStatus (status);						
 		}	
 		
@@ -316,23 +310,23 @@ namespace System.DrawingCore.Imaging {
 			GDIPlus.CheckStatus (status);
 		}
 
-		public void SetOutputChannel (ColorChannelFlag flags)
+				public void SetOutputChannel (ColorChannelFlag flags)
 		{
 			SetOutputChannel (flags, ColorAdjustType.Default);
 		}
-		
-		public void SetOutputChannel (ColorChannelFlag flags, ColorAdjustType type)
+
+				public void SetOutputChannel (ColorChannelFlag flags, ColorAdjustType type)
 		{
 			Status status = GDIPlus.GdipSetImageAttributesOutputChannel (nativeImageAttr, type, true, flags);
 			GDIPlus.CheckStatus (status);
 		}
-		
-		public void SetOutputChannelColorProfile (string colorProfileFilename)
+
+				public void SetOutputChannelColorProfile (string colorProfileFilename)
 		{
 			SetOutputChannelColorProfile (colorProfileFilename, ColorAdjustType.Default);
 		}
-		
-		public void SetOutputChannelColorProfile (string colorProfileFilename, ColorAdjustType type)
+
+				public void SetOutputChannelColorProfile (string colorProfileFilename, ColorAdjustType type)
 		{
 			Status status = GDIPlus.GdipSetImageAttributesOutputChannelColorProfile (nativeImageAttr, 
 				type, true, colorProfileFilename);
@@ -369,12 +363,12 @@ namespace System.DrawingCore.Imaging {
 			}
 		}		
 
-		public void SetThreshold (float threshold)
+				public void SetThreshold (float threshold)
 		{
 			SetThreshold (threshold, ColorAdjustType.Default);
 		}
 
-		public void SetThreshold (float threshold, ColorAdjustType type)
+				public void SetThreshold (float threshold, ColorAdjustType type)
 		{
 			Status status = GDIPlus.GdipSetImageAttributesThreshold (nativeImageAttr, type, true, 0);
 			GDIPlus.CheckStatus (status);

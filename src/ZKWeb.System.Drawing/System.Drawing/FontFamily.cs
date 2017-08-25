@@ -161,7 +161,7 @@ namespace System.DrawingCore {
 
 			return (int) outProperty;
 		}
-		
+
 		public bool IsStyleAvailable (FontStyle style)
 		{
 			bool outProperty;

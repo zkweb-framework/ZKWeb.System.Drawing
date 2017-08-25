@@ -29,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.Security;
 using System.Security.Permissions;
 
@@ -37,16 +36,24 @@ namespace System.DrawingCore.Printing {
 
 	[AttributeUsage (AttributeTargets.All, AllowMultiple=true)]
 	// strangely this class isn't [Serializable] like other permission classes
-	public sealed class PrintingPermissionAttribute : CodeAccessSecurityAttribute {
+	public sealed class PrintingPermissionAttribute
+#if NETCORE
+		: Attribute
+#else
+		: CodeAccessSecurityAttribute
+#endif
+		{
 
 		private PrintingPermissionLevel _level;
-		
+
+#if !NETCORE
 		public PrintingPermissionAttribute (SecurityAction action)
 			: base (action)
 		{
 			// seems to always assign PrintingPermissionLevel.NoPrinting ...
 		}
-		
+#endif
+
 		public PrintingPermissionLevel Level {
 			get { return _level; }
 			set {
@@ -57,14 +64,15 @@ namespace System.DrawingCore.Printing {
 				_level = value;
 			}
 		}
-		
+
+#if !NETCORE
 		public override IPermission CreatePermission ()
 		{
 			if (base.Unrestricted)
-				return new PrintingPermission (PermissionState.Unrestricted);
+				return new PrintingPermission (PrintingPermissionLevel.AllPrinting);
 			else
 				return new PrintingPermission (_level);
 		}
+#endif
 	}
 }
-#endif

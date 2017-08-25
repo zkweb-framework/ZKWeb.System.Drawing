@@ -35,6 +35,7 @@ using System.Security;
 using System.Security.Permissions;
 using NUnit.Framework;
 
+#if false
 namespace MonoCasTests.System.Drawing.Text {
 
 	[TestFixture]
@@ -51,23 +52,17 @@ namespace MonoCasTests.System.Drawing.Text {
 		// TODO - tests for AddFontFile
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void AddMemoryFont_Deny_UnmanagedCode () 
 		{
-			Assert.Throws<SecurityException>(() =>
-			{
-				new PrivateFontCollection().AddMemoryFont(IntPtr.Zero, 1024);
-			});
+			Assert.Throws<SecurityException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
 		}
 
 		[Test]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		public void AddMemoryFont_PermitOnly_UnmanagedCode ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				new PrivateFontCollection().AddMemoryFont(IntPtr.Zero, 1024);
-			});
+			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
 		}
 
 		// yes, that fails with FileNotFoundException ;-)
@@ -76,36 +71,27 @@ namespace MonoCasTests.System.Drawing.Text {
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		public void AddMemoryFont_NegativeLength ()
 		{
-			Assert.Throws<FileNotFoundException>(() =>
-			{
-				IntPtr ptr = Marshal.AllocHGlobal(1024);
-				try
-				{
-					new PrivateFontCollection().AddMemoryFont(ptr, -1024);
-				}
-				finally
-				{
-					Marshal.FreeHGlobal(ptr);
-				}
-			});
+			IntPtr ptr = Marshal.AllocHGlobal (1024);
+			try {
+				Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, -1024));
+			}
+			finally {
+				Marshal.FreeHGlobal (ptr);
+			}
 		}
 
 		[Test]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		public void AddMemoryFont_InvalidData ()
 		{
-			Assert.Throws<FileNotFoundException>(() =>
-			{
-				IntPtr ptr = Marshal.AllocHGlobal(1024);
-				try
-				{
-					new PrivateFontCollection().AddMemoryFont(ptr, 1024);
-				}
-				finally
-				{
-					Marshal.FreeHGlobal(ptr);
-				}
-			});
+			IntPtr ptr = Marshal.AllocHGlobal (1024);
+			try {
+				Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, 1024));
+			}
+			finally {
+				Marshal.FreeHGlobal (ptr);
+			}
 		}
 	}
 }
+#endif

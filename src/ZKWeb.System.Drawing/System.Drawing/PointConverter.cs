@@ -54,7 +54,7 @@ namespace System.DrawingCore {
 		{
 			if (destinationType == typeof (string))
 				return true;
-			
+
 			if (destinationType == typeof (InstanceDescriptor))
 				return true;
 
@@ -102,7 +102,7 @@ namespace System.DrawingCore {
 					return point.X.ToString (culture) + culture.TextInfo.ListSeparator 
 						+ " " + point.Y.ToString (culture);
 				} else if (destinationType == typeof (InstanceDescriptor)) {
-					ConstructorInfo ctor = typeof(Point).GetTypeInfo().GetConstructor (new Type[] {typeof(int), typeof(int)} );
+					ConstructorInfo ctor = typeof(Point).GetConstructor (new Type[] {typeof(int), typeof(int)} );
 					return new InstanceDescriptor (ctor, new object[] {point.X, point.Y });
 				}
 			}

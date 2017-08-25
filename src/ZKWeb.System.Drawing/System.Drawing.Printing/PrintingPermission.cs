@@ -29,24 +29,30 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.Globalization;
 using System.Security;
 using System.Security.Permissions;
 
 namespace System.DrawingCore.Printing {
+
 	[Serializable]
-	public sealed class PrintingPermission : CodeAccessPermission, IUnrestrictedPermission {
+	public sealed class PrintingPermission
+#if !NETCORE
+		: CodeAccessPermission, IUnrestrictedPermission
+#endif
+		{
 
 		private const int version = 1;
 
 		private PrintingPermissionLevel _Level;
-		
+
+#if !NETCORE
 		public PrintingPermission (PermissionState state) 
 		{
 			if (CheckPermissionState (state, true) == PermissionState.Unrestricted)
 				_Level = PrintingPermissionLevel.AllPrinting;
 		}
+#endif
 
 		public PrintingPermission (PrintingPermissionLevel printingLevel) 
 		{
@@ -67,12 +73,14 @@ namespace System.DrawingCore.Printing {
 		}
 
 		// methods
-
+#if !NETCORE
 		public override IPermission Copy ()
 		{
 			return new PrintingPermission (this.Level);
 		}
-		
+#endif
+
+#if !NETCORE
 		public override void FromXml (SecurityElement esd)
 		{
 			CheckSecurityElement (esd, "esd", version, version);
@@ -91,7 +99,9 @@ namespace System.DrawingCore.Printing {
 					_Level = PrintingPermissionLevel.NoPrinting;
 			}
 		}
-		
+#endif
+
+#if !NETCORE
 		public override IPermission Intersect (IPermission target)
 		{
 			PrintingPermission pp = Cast (target);
@@ -101,7 +111,9 @@ namespace System.DrawingCore.Printing {
 			PrintingPermissionLevel level = (_Level <= pp.Level) ? _Level : pp.Level;
 			return new PrintingPermission (level);
 		}
-		
+#endif
+
+#if !NETCORE
 		public override bool IsSubsetOf (IPermission target)
 		{
 			PrintingPermission pp = Cast (target);
@@ -110,12 +122,14 @@ namespace System.DrawingCore.Printing {
 			
 			return (_Level <= pp.Level);
 		}
-		
+#endif
+
 		public bool IsUnrestricted ()
 		{
 			return (_Level == PrintingPermissionLevel.AllPrinting);
 		}
-		
+
+#if !NETCORE
 		public override SecurityElement ToXml ()
 		{
 			SecurityElement se = Element (version);
@@ -125,20 +139,23 @@ namespace System.DrawingCore.Printing {
 				se.AddAttribute ("Level", _Level.ToString ());
 			return se;
 		}
-		
+#endif
+
+#if !NETCORE
 		public override IPermission Union (IPermission target)
 		{
 			PrintingPermission pp = Cast (target);
 			if (pp == null)
 				return new PrintingPermission (_Level);
 			if (IsUnrestricted () || pp.IsUnrestricted ())
-				return new PrintingPermission (PermissionState.Unrestricted);
+				return new PrintingPermission (PrintingPermissionLevel.AllPrinting);
 			if (IsEmpty () && pp.IsEmpty ())
 				return null;
 
 			PrintingPermissionLevel level = (_Level > pp.Level) ? _Level : pp.Level;
 			return new PrintingPermission (level);
 		}
+#endif
 
 		// Internal helpers methods
 
@@ -147,6 +164,7 @@ namespace System.DrawingCore.Printing {
 			return (_Level == PrintingPermissionLevel.NoPrinting);
 		}
 
+#if !NETCORE
 		private PrintingPermission Cast (IPermission target)
 		{
 			if (target == null)
@@ -159,6 +177,7 @@ namespace System.DrawingCore.Printing {
 
 			return pp;
 		}
+#endif
 
 		// NOTE: The following static methods should be moved out to a (static?) class 
 		// if (ever) System.Drawing.dll gets more than one permission in it's assembly.
@@ -173,6 +192,7 @@ namespace System.DrawingCore.Printing {
 			return se;
 		}
 
+#if !NETCORE
 		internal static PermissionState CheckPermissionState (PermissionState state, bool allowUnrestricted)
 		{
 			string msg;
@@ -186,11 +206,12 @@ namespace System.DrawingCore.Printing {
 				}
 				break;
 			default:
-				msg = String.Format (string.Format ("Invalid enum {0}"), state);
+				msg = string.Format("Invalid enum {0}", state);
 				throw new ArgumentException (msg, "state");
 			}
 			return state;
 		}
+#endif
 
 		// logic isn't identical to CodeAccessPermission.CheckSecurityElement - see unit tests
 		internal static int CheckSecurityElement (SecurityElement se, string parameterName, int minimumVersion, int maximumVersion) 
@@ -242,4 +263,3 @@ namespace System.DrawingCore.Printing {
 		}
 	}
 }
-#endif

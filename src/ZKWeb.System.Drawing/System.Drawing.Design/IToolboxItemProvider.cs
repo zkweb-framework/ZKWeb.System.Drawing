@@ -26,7 +26,7 @@
 //
 //
 
-#if !NETCORE
+
 namespace System.DrawingCore.Design
 {
 	public interface IToolboxItemProvider
@@ -34,5 +34,5 @@ namespace System.DrawingCore.Design
 		ToolboxItemCollection Items { get; }
 	}
 }
-#endif
+
 

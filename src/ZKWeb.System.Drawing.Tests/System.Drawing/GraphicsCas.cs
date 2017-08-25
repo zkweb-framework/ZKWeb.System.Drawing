@@ -33,10 +33,9 @@ using System.DrawingCore;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-#if !NETCORE
 using System.Security.Policy;
-#endif
 
+#if false
 namespace MonoCasTests.System.Drawing {
 
 	[TestFixture]
@@ -48,7 +47,7 @@ namespace MonoCasTests.System.Drawing {
 		private MethodInfo releaseHdcInternal;
 		private Bitmap bitmap;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetUp ()
 		{
 			// this executes at fulltrust
@@ -61,10 +60,8 @@ namespace MonoCasTests.System.Drawing {
 		[SetUp]
 		public void SetUp ()
 		{
-#if !NETCORE
 			if (!SecurityManager.SecurityEnabled)
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-#endif
 		}
 
 		private Graphics GetGraphics ()
@@ -73,7 +70,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void FromHdcInternal ()
 		{
 			try {
@@ -87,7 +84,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[Category ("NotWorking")]
 		public void FromHwndInternal ()
 		{
@@ -102,7 +99,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void ReleaseHdcInternal ()
 		{
 			try {
@@ -121,7 +118,7 @@ namespace MonoCasTests.System.Drawing {
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void FromHdcInternal_LinkDemand ()
 		{
 			Assert.Throws<SecurityException>(() =>
@@ -132,7 +129,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void FromHwndInternal_LinkDemand ()
 		{
 			Assert.Throws<SecurityException>(() =>
@@ -143,7 +140,7 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void ReleaseHdcInternal_LinkDemand ()
 		{
 			Assert.Throws<SecurityException>(() =>
@@ -155,3 +152,4 @@ namespace MonoCasTests.System.Drawing {
 		}
 	}
 }
+#endif

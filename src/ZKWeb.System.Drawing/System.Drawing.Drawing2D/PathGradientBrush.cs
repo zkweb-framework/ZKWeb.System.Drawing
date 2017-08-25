@@ -32,7 +32,8 @@
 using System.ComponentModel;
 
 namespace System.DrawingCore.Drawing2D {
-	public sealed class PathGradientBrush : Brush {
+
+		public sealed class PathGradientBrush : Brush {
 
 		internal PathGradientBrush (IntPtr native) : base (native)
 		{
@@ -60,7 +61,7 @@ namespace System.DrawingCore.Drawing2D {
 			if (points == null)
 				throw new ArgumentNullException ("points");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new ArgumentException ("WrapMode");
+				throw new InvalidEnumArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreatePathGradientI (points, points.Length, wrapMode, out nativeObject);
 			GDIPlus.CheckStatus (status);
@@ -71,7 +72,7 @@ namespace System.DrawingCore.Drawing2D {
 			if (points == null)
 				throw new ArgumentNullException ("points");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new ArgumentException ("WrapMode");
+				throw new InvalidEnumArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreatePathGradient (points, points.Length, wrapMode, out nativeObject);
 			GDIPlus.CheckStatus (status);
@@ -281,7 +282,7 @@ namespace System.DrawingCore.Drawing2D {
 			}
 			set {
 				if ((value < WrapMode.Tile) || (value > WrapMode.Clamp))
-					throw new ArgumentException ("WrapMode");
+					throw new InvalidEnumArgumentException ("WrapMode");
 
 				Status status = GDIPlus.GdipSetPathGradientWrapMode (nativeObject, value);
 				GDIPlus.CheckStatus (status);

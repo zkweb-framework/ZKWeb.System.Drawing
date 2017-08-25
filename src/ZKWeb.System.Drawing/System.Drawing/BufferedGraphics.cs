@@ -30,7 +30,6 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 
 namespace System.DrawingCore
 {
@@ -105,8 +104,7 @@ namespace System.DrawingCore
 			target.DrawImage (membmp, size);
 		}
 
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-	      	public void Render (IntPtr targetDC)
+			      	public void Render (IntPtr targetDC)
 		{
 			throw new NotImplementedException ();
 		}

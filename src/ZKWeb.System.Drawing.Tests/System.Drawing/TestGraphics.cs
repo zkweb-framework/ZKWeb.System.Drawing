@@ -40,13 +40,12 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	
 	public class GraphicsTest {
 
 		private RectangleF[] rects;
 		private Font font;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetUp ()
 		{
 			try {
@@ -361,7 +360,6 @@ namespace MonoTests.System.Drawing {
 			g.Dispose ();
 		}
 
-#if !NETCORE
 		[Test]
 		[Category ("NotWorking")] // looks like MS PNG codec promote indexed format to 32bpp ARGB
 		public void LoadIndexed_PngStream ()
@@ -378,28 +376,23 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-#endif
 
 		[Test]
 		public void LoadIndexed_BmpFile ()
 		{
-			Assert.Throws<Exception>(() =>
-			{
 			// Tests that we can load an indexed file, but...
 			string sInFile = TestBitmap.getInFile ("bitmaps/almogaver1bit.bmp");
 			// note: file is misnamed (it's a 4bpp bitmap)
 			using (Image img = Image.FromFile (sInFile)) {
 				Assert.AreEqual (PixelFormat.Format4bppIndexed, img.PixelFormat, "PixelFormat");
-				Graphics.FromImage (img);
-			}});
+				Assert.Throws<Exception> (() => Graphics.FromImage (img));
+			}
 		}
 
 		[Test]
 		public void FromImage ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-			Graphics g = Graphics.FromImage (null);});
+			Assert.Throws<ArgumentNullException> (() => Graphics.FromImage (null));
 		}
 
 		private Graphics Get (int w, int h)
@@ -464,33 +457,27 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Transform_NonInvertibleMatrix ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
 			Assert.IsFalse (matrix.IsInvertible, "IsInvertible");
 			Graphics g = Get (16, 16);
-			g.Transform = matrix;});
+			Assert.Throws<ArgumentException> (() => g.Transform = matrix);
 		}
 
 
 		[Test]
 		public void Multiply_NonInvertibleMatrix ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
 			Assert.IsFalse (matrix.IsInvertible, "IsInvertible");
 			Graphics g = Get (16, 16);
-			g.MultiplyTransform (matrix);});
+			Assert.Throws<ArgumentException> (() => g.MultiplyTransform (matrix));
 		}
 
 		[Test]
 		public void Multiply_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Graphics g = Get (16, 16);
-			g.MultiplyTransform (null);});
+			Assert.Throws<ArgumentNullException> (() => g.MultiplyTransform (null));
 		}
 
 		private void CheckBounds (string msg, RectangleF bounds, float x, float y, float w, float h)
@@ -766,19 +753,15 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void ScaleTransform_X0 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Graphics g = Get (16, 16);
-			g.ScaleTransform (0, 1);});
+			Assert.Throws<ArgumentException> (() => g.ScaleTransform (0, 1));
 		}
 
 		[Test]
 		public void ScaleTransform_Y0 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Graphics g = Get (16, 16);
-			g.ScaleTransform (1, 0);});
+			Assert.Throws<ArgumentException> (() => g.ScaleTransform (1, 0));
 		}
 
 		[Test]
@@ -825,31 +808,25 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawCurve_PenNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.DrawCurve (null, SmallCurveF);});
+			Assert.Throws<ArgumentNullException> (() => g.DrawCurve (null, SmallCurveF));
 		}
 
 		[Test]
 		public void DrawCurve_PointFNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.DrawCurve (Pens.Black, (PointF[]) null);});
+			Assert.Throws<ArgumentNullException> (() => g.DrawCurve (Pens.Black, (PointF[]) null));
 		}
 
 		[Test]
 		public void DrawCurve_PointNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.DrawCurve (Pens.Black, (Point[]) null);});
+			Assert.Throws<ArgumentNullException> (() => g.DrawCurve (Pens.Black, (Point[]) null));
 		}
 
 		[Test]
@@ -869,25 +846,19 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawCurve_SinglePoint ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				Bitmap bitmap = new Bitmap(20, 20);
-				Graphics g = Graphics.FromImage(bitmap);
-				g.DrawCurve(Pens.Black, new Point[1] { new Point(10, 10) }, 0.5f);
-				// a single point isn't enough});
-			});
+			Bitmap bitmap = new Bitmap (20, 20);
+			Graphics g = Graphics.FromImage (bitmap);
+			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, new Point[1] { new Point (10, 10) }, 0.5f));
+			// a single point isn't enough
 		}
 
 		[Test]
 		public void DrawCurve3_NotEnoughPoints ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				Bitmap bitmap = new Bitmap(20, 20);
-				Graphics g = Graphics.FromImage(bitmap);
-				g.DrawCurve(Pens.Black, TooSmallCurve, 0, 2, 0.5f);
-				// aha, this is API dependent});
-			});
+			Bitmap bitmap = new Bitmap (20, 20);
+			Graphics g = Graphics.FromImage (bitmap);
+			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, TooSmallCurve, 0, 2, 0.5f));
+			// aha, this is API dependent
 		}
 
 		[Test]
@@ -930,34 +901,27 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawCurve_ZeroSegments ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.DrawCurve (Pens.Black, SmallCurveF, 0, 0);});
+			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, SmallCurveF, 0, 0));
 		}
 
 		[Test]
 		public void DrawCurve_NegativeSegments ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.DrawCurve (Pens.Black, SmallCurveF, 0, -1);});
+			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, SmallCurveF, 0, -1));
 		}
 
 		[Test]
 		public void DrawCurve_OffsetTooLarge ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				Bitmap bitmap = new Bitmap(20, 20);
-				Graphics g = Graphics.FromImage(bitmap);
-				// starting offset 1 doesn't give 3 points to make a curve
-				g.DrawCurve(Pens.Black, SmallCurveF, 1, 2);
-				// and in this case 2 points aren't enough to draw something});
-			});
+			Bitmap bitmap = new Bitmap (20, 20);
+			Graphics g = Graphics.FromImage (bitmap);
+			// starting offset 1 doesn't give 3 points to make a curve
+			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, SmallCurveF, 1, 2));
+			// and in this case 2 points aren't enough to draw something
 		}
 
 		[Test]
@@ -1227,9 +1191,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void BeginContainer_GraphicsUnit_Display ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			BeginContainer_GraphicsUnit (GraphicsUnit.Display);});
+			Assert.Throws<ArgumentException> (() => BeginContainer_GraphicsUnit(GraphicsUnit.Display));
 		}
 
 		[Test]
@@ -1245,27 +1207,21 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void BeginContainer_GraphicsUnit_World ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			BeginContainer_GraphicsUnit (GraphicsUnit.World);});
+			Assert.Throws<ArgumentException> (() => BeginContainer_GraphicsUnit(GraphicsUnit.World));
 		}
 
 		[Test]
 		public void BeginContainer_GraphicsUnit_Bad ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			BeginContainer_GraphicsUnit ((GraphicsUnit) Int32.MinValue);});
+			Assert.Throws<ArgumentException> (() => BeginContainer_GraphicsUnit((GraphicsUnit) Int32.MinValue));
 		}
 
 		[Test]
 		public void EndContainer_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.EndContainer (null);});
+			Assert.Throws<ArgumentNullException> (() => g.EndContainer (null));
 		}
 
 		[Test]
@@ -1312,83 +1268,69 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Restore_Null ()
 		{
-			Assert.Throws<NullReferenceException>(() =>
-			{
 			Bitmap bitmap = new Bitmap (20, 20);
 			Graphics g = Graphics.FromImage (bitmap);
-			g.Restore (null);});
+			Assert.Throws<NullReferenceException> (() => g.Restore (null));
 		}
 
 		[Test]
 		public void FillRectangles_BrushNull_Rectangle ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.FillRectangles (null, new Rectangle[1]);
+					Assert.Throws<ArgumentNullException> (() => g.FillRectangles (null, new Rectangle[1]));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void FillRectangles_Rectangle_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.FillRectangles (Brushes.Red, (Rectangle[]) null);
+					Assert.Throws<ArgumentNullException> (() => g.FillRectangles (Brushes.Red, (Rectangle[]) null));
 				}
-			}});
+			}
 		}
 
 		[Test] // see bug #78408
 		public void FillRectanglesZeroRectangle ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.FillRectangles (Brushes.Red, new Rectangle[0]);
+					Assert.Throws<ArgumentException> (() => g.FillRectangles (Brushes.Red, new Rectangle[0]));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void FillRectangles_BrushNull_RectangleF ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.FillRectangles (null, new RectangleF[1]);
+					Assert.Throws<ArgumentNullException> (() => g.FillRectangles (null, new RectangleF[1]));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void FillRectangles_RectangleF_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.FillRectangles (Brushes.Red, (RectangleF[]) null);
+					Assert.Throws<ArgumentNullException> (() => g.FillRectangles (Brushes.Red, (RectangleF[]) null));
 				}
-			}});
+			}
 		}
 
 		[Test] // see bug #78408
 		public void FillRectanglesZeroRectangleF ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.FillRectangles (Brushes.Red, new RectangleF[0]);
+					Assert.Throws<ArgumentException> (() => g.FillRectangles (Brushes.Red, new RectangleF[0]));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -1893,13 +1835,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void MeasureString_StringFont_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.MeasureString ("a", null);
+					Assert.Throws<ArgumentNullException> (() => g.MeasureString ("a", null));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -2191,13 +2131,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void MeasureCharacterRanges_FontNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.MeasureCharacterRanges ("a", null, new RectangleF (), null);
+					Assert.Throws<ArgumentNullException> (() => g.MeasureCharacterRanges ("a", null, new RectangleF (), null));
 				}
-			}});
+			}
 		}
 
 		[Test] // adapted from bug #78777
@@ -2251,19 +2189,15 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void MeasureCharacterRanges_FirstTooFar ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			string text = "this\nis a test";
-			MeasureCharacterRanges (text, text.Length, 1);});
+			Assert.Throws<ArgumentException> (() => MeasureCharacterRanges(text, text.Length, 1));
 		}
 
 		[Test]
 		public void MeasureCharacterRanges_LengthTooLong ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			string text = "this\nis a test";
-			MeasureCharacterRanges (text, 0, text.Length + 1);});
+			Assert.Throws<ArgumentException> (() => MeasureCharacterRanges(text, 0, text.Length + 1));
 		}
 
 		[Test]
@@ -2307,16 +2241,14 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void MeasureCharacterRanges_NullStringFormat ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			if (font == null)
 				Assert.Ignore ("Couldn't create required font");
 
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.MeasureCharacterRanges ("Mono", font, new RectangleF (), null);
+					Assert.Throws<ArgumentException> (() => g.MeasureCharacterRanges ("Mono", font, new RectangleF (), null));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -2494,10 +2426,10 @@ namespace MonoTests.System.Drawing {
 		}
 
 		static CharacterRange [] ranges = new CharacterRange [] {
-                    new CharacterRange (0, 1),
-                    new CharacterRange (1, 1),
-                    new CharacterRange (2, 1)
-                };
+					new CharacterRange (0, 1),
+					new CharacterRange (1, 1),
+					new CharacterRange (2, 1)
+				};
 
 		Region [] Measure (Graphics gfx, RectangleF rect)
 		{
@@ -2646,27 +2578,23 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void ReleaseHdcInternal_IntPtrZero ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap b = new Bitmap (10, 10)) {
 				using (Graphics g = Graphics.FromImage (b)) {
-					g.ReleaseHdcInternal (IntPtr.Zero);
+					Assert.Throws<ArgumentException> (() => g.ReleaseHdcInternal (IntPtr.Zero));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void ReleaseHdcInternal_TwoTimes ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap b = new Bitmap (10, 10)) {
 				using (Graphics g = Graphics.FromImage (b)) {
 					IntPtr hdc = g.GetHdc ();
 					g.ReleaseHdcInternal (hdc);
-					g.ReleaseHdcInternal (hdc);
+					Assert.Throws<ArgumentException> (() => g.ReleaseHdcInternal (hdc));
 				}
-			}});
+			}
 		}
 		[Test]
 		public void TestReleaseHdc ()
@@ -2685,27 +2613,23 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void TestReleaseHdcException ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap b = new Bitmap (10, 10)) {
 				using (Graphics g = Graphics.FromImage (b)) {
-					g.ReleaseHdc ();
+					Assert.Throws<ArgumentException> (() => g.ReleaseHdc ());
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void TestReleaseHdcException2 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap b = new Bitmap (10, 10)) {
 				using (Graphics g = Graphics.FromImage (b)) {
 					g.GetHdc ();
 					g.ReleaseHdc ();
-					g.ReleaseHdc ();
+					Assert.Throws<ArgumentException> (() => g.ReleaseHdc ());
 				}
-			}});
+			}
 		}
 		[Test]
 		public void VisibleClipBound ()
@@ -2844,16 +2768,13 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawIcon_NullRectangle ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawIcon (null, new Rectangle (0, 0, 32, 32));
+					Assert.Throws<ArgumentNullException> (() => g.DrawIcon (null, new Rectangle (0, 0, 32, 32)));
 				}
-			}});
+			}
 		}
 
-#if false
 		[Test]
 		public void DrawIcon_IconRectangle ()
 		{
@@ -2871,21 +2792,17 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-#endif
 
 		[Test]
 		public void DrawIcon_NullIntInt ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawIcon (null, 4, 2);
+					Assert.Throws<ArgumentNullException> (() => g.DrawIcon (null, 4, 2));
 				}
-			}});
+			}
 		}
 
-#if false
 		[Test]
 		public void DrawIcon_IconIntInt ()
 		{
@@ -2896,21 +2813,17 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-#endif
 
 		[Test]
 		public void DrawIconUnstretched_NullRectangle ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawIconUnstretched (null, new Rectangle (0, 0, 40, 20));
+					Assert.Throws<ArgumentNullException> (() => g.DrawIconUnstretched (null, new Rectangle (0, 0, 40, 20)));
 				}
-			}});
+			}
 		}
 
-#if false
 		[Test]
 		public void DrawIconUnstretched_IconRectangle ()
 		{
@@ -2928,18 +2841,15 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-#endif
 
 		[Test]
 		public void DrawImage_NullRectangleF ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new RectangleF (0, 0, 0, 0));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new RectangleF (0, 0, 0, 0)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -2958,13 +2868,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullPointF ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new PointF (0, 0));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new PointF (0, 0)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -2980,37 +2888,31 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullPointFArray ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new PointF[0]);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new PointF[0]));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawImage_ImagePointFArrayNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (bmp, (PointF[]) null);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (bmp, (PointF[]) null));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawImage_ImagePointFArrayEmpty ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (bmp, new PointF[0]);
+					Assert.Throws<ArgumentException> (() => g.DrawImage (bmp, new PointF[0]));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3027,13 +2929,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullRectangle ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new Rectangle (0, 0, 0, 0));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new Rectangle (0, 0, 0, 0)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3056,13 +2956,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullPoint ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new Point (0, 0));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new Point (0, 0)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3078,37 +2976,31 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullPointArray ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new Point[0]);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new Point[0]));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawImage_ImagePointArrayNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (bmp, (Point[]) null);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (bmp, (Point[]) null));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawImage_ImagePointArrayEmpty ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (bmp, new Point[0]);
+					Assert.Throws<ArgumentException> (() => g.DrawImage (bmp, new Point[0]));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3125,25 +3017,21 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullIntInt ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, Int32.MaxValue, Int32.MinValue);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, Int32.MaxValue, Int32.MinValue));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawImage_ImageIntInt_Overflow ()
 		{
-			Assert.Throws<OverflowException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (bmp, Int32.MaxValue, Int32.MinValue);
+					Assert.Throws<OverflowException> (() => g.DrawImage (bmp, Int32.MaxValue, Int32.MinValue));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3159,25 +3047,21 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullFloat ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, Single.MaxValue, Single.MinValue);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, Single.MaxValue, Single.MinValue));
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawImage_ImageFloatFloat_Overflow ()
 		{
-			Assert.Throws<OverflowException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (bmp, Single.MaxValue, Single.MinValue);
+					Assert.Throws<OverflowException> (() => g.DrawImage (bmp, Single.MaxValue, Single.MinValue));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3193,13 +3077,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_NullRectangleRectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, new Rectangle (), new Rectangle (), GraphicsUnit.Display);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, new Rectangle (), new Rectangle (), GraphicsUnit.Display));
 				}
-			}});
+			}
 		}
 
 		private void DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit unit)
@@ -3215,33 +3097,25 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Display ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Display);});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Display));
 		}
 
 		[Test]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Document ()
 		{
-			Assert.Throws<NotImplementedException>(() =>
-			{
-			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Document);});
+			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Document));
 		}
 
 		[Test]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Inch ()
 		{
-			Assert.Throws<NotImplementedException>(() =>
-			{
-			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Inch);});
+			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit(GraphicsUnit.Inch));
 		}
 
 		[Test]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Millimeter ()
 		{
-			Assert.Throws<NotImplementedException>(() =>
-			{
-			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Millimeter);});
+			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Millimeter));
 		}
 
 		[Test]
@@ -3254,31 +3128,25 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Point ()
 		{
-			Assert.Throws<NotImplementedException>(() =>
-			{
-			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Point);});
+			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Point));
 		}
 
 		[Test]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_World ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.World);});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.World));
 		}
 
 		[Test]
 		public void DrawImage_NullPointRectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Rectangle r = new Rectangle (1, 2, 3, 4);
 			Point[] pts = new Point[3] { new Point (1, 1), new Point (2, 2), new Point (3, 3) };
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, pts, r, GraphicsUnit.Pixel);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, pts, r, GraphicsUnit.Pixel));
 				}
-			}});
+			}
 		}
 
 		private void DrawImage_ImagePointRectangleGraphicsUnit (Point[] pts)
@@ -3294,35 +3162,27 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_ImageNullRectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-			DrawImage_ImagePointRectangleGraphicsUnit (null);});
+			Assert.Throws<ArgumentNullException> (() => DrawImage_ImagePointRectangleGraphicsUnit (null));
 		}
 
 		[Test]
 		public void DrawImage_ImagePoint0RectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			DrawImage_ImagePointRectangleGraphicsUnit (new Point[0]);});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[0]));
 		}
 
 		[Test]
 		public void DrawImage_ImagePoint1RectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Point p = new Point (1, 1);
-			DrawImage_ImagePointRectangleGraphicsUnit (new Point[1] { p });});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[1] { p }));
 		}
 
 		[Test]
 		public void DrawImage_ImagePoint2RectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			Point p = new Point (1, 1);
-			DrawImage_ImagePointRectangleGraphicsUnit (new Point[2] { p, p });});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[2] { p, p }));
 		}
 
 		[Test]
@@ -3335,24 +3195,20 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_ImagePoint4RectangleGraphicsUnit ()
 		{
-			Assert.Throws<NotImplementedException>(() =>
-			{
 			Point p = new Point (1, 1);
-			DrawImage_ImagePointRectangleGraphicsUnit (new Point[4] { p, p, p, p });});
+			Assert.Throws<NotImplementedException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[4] { p, p, p, p }));
 		}
 
 		[Test]
 		public void DrawImage_NullPointFRectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			Rectangle r = new Rectangle (1, 2, 3, 4);
 			PointF[] pts = new PointF[3] { new PointF (1, 1), new PointF (2, 2), new PointF (3, 3) };
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImage (null, pts, r, GraphicsUnit.Pixel);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImage (null, pts, r, GraphicsUnit.Pixel));
 				}
-			}});
+			}
 		}
 
 		private void DrawImage_ImagePointFRectangleGraphicsUnit (PointF[] pts)
@@ -3368,35 +3224,27 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_ImageNullFRectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-			DrawImage_ImagePointFRectangleGraphicsUnit (null);});
+			Assert.Throws<ArgumentNullException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (null));
 		}
 
 		[Test]
 		public void DrawImage_ImagePointF0RectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[0]);});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[0]));
 		}
 
 		[Test]
 		public void DrawImage_ImagePointF1RectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			PointF p = new PointF (1, 1);
-			DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[1] { p });});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[1] { p }));
 		}
 
 		[Test]
 		public void DrawImage_ImagePointF2RectangleGraphicsUnit ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			PointF p = new PointF (1, 1);
-			DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[2] { p, p });});
+			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[2] { p, p }));
 		}
 
 		[Test]
@@ -3409,10 +3257,8 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImage_ImagePointF4RectangleGraphicsUnit ()
 		{
-			Assert.Throws<NotImplementedException>(() =>
-			{
 			PointF p = new PointF (1, 1);
-			DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[4] { p, p, p, p });});
+			Assert.Throws<NotImplementedException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[4] { p, p, p, p }));
 		}
 
 		[Test]
@@ -3445,13 +3291,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImageUnscaled_NullPoint ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImageUnscaled (null, new Point (0, 0));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImageUnscaled (null, new Point (0, 0)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3467,13 +3311,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImageUnscaled_NullRectangle ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImageUnscaled (null, new Rectangle (0, 0, -1, -1));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImageUnscaled (null, new Rectangle (0, 0, -1, -1)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3489,13 +3331,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImageUnscaled_NullIntInt ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImageUnscaled (null, 0, 0);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImageUnscaled (null, 0, 0));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3511,13 +3351,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImageUnscaled_NullIntIntIntInt ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImageUnscaled (null, 0, 0, -1, -1);
+					Assert.Throws<ArgumentNullException> (() => g.DrawImageUnscaled (null, 0, 0, -1, -1));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3532,13 +3370,11 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawImageUnscaledAndClipped_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawImageUnscaledAndClipped (null, new Rectangle (0, 0, 0, 0));
+					Assert.Throws<ArgumentNullException> (() => g.DrawImageUnscaledAndClipped (null, new Rectangle (0, 0, 0, 0)));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3565,27 +3401,23 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void DrawPath_Pen_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
 					using (GraphicsPath path = new GraphicsPath ()) {
-						g.DrawPath (null, path);
+						Assert.Throws<ArgumentNullException> (() => g.DrawPath (null, path));
 					}
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void DrawPath_Path_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.DrawPath (Pens.Black, null);
+					Assert.Throws<ArgumentNullException> (() => g.DrawPath (Pens.Black, null));
 				}
-			}});
+			}
 		}
 
 		[Test]
@@ -3620,27 +3452,23 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void FillPath_Brush_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
 					using (GraphicsPath path = new GraphicsPath ()) {
-						g.FillPath (null, path);
+						Assert.Throws<ArgumentNullException> (() => g.FillPath (null, path));
 					}
 				}
-			}});
+			}
 		}
 
 		[Test]
 		public void FillPath_Path_Null ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
-					g.FillPath (Brushes.Black, null);
+					Assert.Throws<ArgumentNullException> (() => g.FillPath (Brushes.Black, null));
 				}
-			}});
+			}
 		}
 
 		[Test]

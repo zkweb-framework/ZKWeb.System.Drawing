@@ -34,7 +34,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	
 	public class SolidBrushTest {
 
 		[Test]
@@ -60,11 +59,9 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Dispose_Clone ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
 			sb.Dispose ();
-			sb.Clone ();});
+			Assert.Throws<ArgumentException> (() => sb.Clone ());
 		}
 
 		[Test]

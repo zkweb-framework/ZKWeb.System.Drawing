@@ -30,24 +30,21 @@
 //
 
 using System.ComponentModel;
-using System.Security.Permissions;
 using System.Collections;
 
 namespace System.DrawingCore.Design
 {
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
 	public class UITypeEditor {
 
 		static UITypeEditor ()
 		{
 			Hashtable editors = new Hashtable ();
-			editors [typeof (Array)] = "System.ComponentModel.Design.ArrayEditor, System.Design";
-			editors [typeof (byte [])] = "System.ComponentModel.Design.BinaryEditor, System.Design";
-			editors [typeof (DateTime)] = "System.ComponentModel.Design.DateTimeEditor, System.Design";
-			editors [typeof (IList)] = "System.ComponentModel.Design.CollectionEditor, System.Design";
-			editors [typeof (ICollection)] = "System.ComponentModel.Design.CollectionEditor, System.Design";
-			editors [typeof (string[])] = "System.Windows.Forms.Design.StringArrayEditor, System.Design";
+			editors[typeof(Array)] = "System.ComponentModel.Design.ArrayEditor, System.Design";
+			editors[typeof(byte[])] = "System.ComponentModel.Design.BinaryEditor, System.Design";
+			editors[typeof(DateTime)] = "System.ComponentModel.Design.DateTimeEditor, System.Design";
+			editors[typeof(IList)] = "System.ComponentModel.Design.CollectionEditor, System.Design";
+			editors[typeof(ICollection)] = "System.ComponentModel.Design.CollectionEditor, System.Design";
+			editors[typeof(string[])] = "System.Windows.Forms.Design.StringArrayEditor, System.Design";
 #if !MOBILE
 			TypeDescriptor.AddEditorTable (typeof (UITypeEditor), editors);
 #endif

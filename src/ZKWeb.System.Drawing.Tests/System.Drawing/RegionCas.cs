@@ -33,10 +33,9 @@ using System.DrawingCore;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-#if !NETCORE
 using System.Security.Policy;
-#endif
 
+#if false
 namespace MonoCasTests.System.Drawing {
 
 	[TestFixture]
@@ -47,7 +46,7 @@ namespace MonoCasTests.System.Drawing {
 		private MethodInfo fromHwndInternal;
 		private MethodInfo releaseHdcInternal;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetUp ()
 		{
 			// this executes at fulltrust
@@ -59,20 +58,17 @@ namespace MonoCasTests.System.Drawing {
 		[SetUp]
 		public void SetUp ()
 		{
-#if !NETCORE
 			if (!SecurityManager.SecurityEnabled)
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-#endif
 		}
 
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void FromHrgn_Deny_UnmanagedCode ()
 		{
 			Assert.Throws<SecurityException>(() =>
 			{
-				Region.FromHrgn (IntPtr.Zero);
-			});
+			Region.FromHrgn (IntPtr.Zero);});
 		}
 
 		[Test]
@@ -81,17 +77,15 @@ namespace MonoCasTests.System.Drawing {
 		{
 			Assert.Throws<ArgumentException>(() =>
 			{
-				Region.FromHrgn (IntPtr.Zero);
-			});
+			Region.FromHrgn (IntPtr.Zero);});
 		}
 		[Test]
-		
+		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void ReleaseHrgn_Deny_UnmanagedCode ()
 		{
 			Assert.Throws<SecurityException>(() =>
 			{
-				new Region ().ReleaseHrgn (IntPtr.Zero);
-			});
+			new Region ().ReleaseHrgn (IntPtr.Zero);});
 		}
 
 		[Test]
@@ -100,8 +94,8 @@ namespace MonoCasTests.System.Drawing {
 		{
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-				new Region ().ReleaseHrgn (IntPtr.Zero);
-			});
+			new Region ().ReleaseHrgn (IntPtr.Zero);});
 		}
 	}
 }
+#endif

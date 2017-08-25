@@ -29,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if false
 namespace System.DrawingCore {
 
 	// LAME: I don't see why the "old" (win 2.x) names were exposed in the fx :|
@@ -110,4 +109,3 @@ namespace System.DrawingCore {
 		}
 	}
 }
-#endif

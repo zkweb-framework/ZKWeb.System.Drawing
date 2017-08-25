@@ -38,7 +38,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Drawing2D
 {
 	[TestFixture]
-	
 	public class HatchBrushTest {
 		Graphics gr;
 		Bitmap bmp;
@@ -612,8 +611,9 @@ namespace MonoTests.System.Drawing.Drawing2D
 		internal string getOutSufix()
 		{
 			string s;
-			
-			if (GDIPlus.RunningOnUnix())
+
+			int p = (int) Environment.OSVersion.Platform;
+			if ((p == 4) || (p == 128) || (p == 6))
 				s = "-unix";
 			else
 				s = "-windows";

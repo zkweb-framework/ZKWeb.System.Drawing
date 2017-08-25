@@ -36,7 +36,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Text {
 
 	[TestFixture]
-	
 	public class InstalledFontCollectionTest {
 
 		[Test]

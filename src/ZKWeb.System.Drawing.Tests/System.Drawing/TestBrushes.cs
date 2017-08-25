@@ -35,7 +35,6 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	
 	public class BrushesTest {
 
 		[Test]
@@ -50,13 +49,10 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Dispose ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				Brushes.YellowGreen.Dispose();
-				// a "normal" SolidBrush would throw an ArgumentException here
-				Brushes.YellowGreen.Clone();
-				// and it is! so watch your brushes ;-)});
-			});
+			Brushes.YellowGreen.Dispose ();
+			// a "normal" SolidBrush would throw an ArgumentException here
+			Assert.Throws<ArgumentException> (() => Brushes.YellowGreen.Clone ());
+			// and it is! so watch your brushes ;-)
 		}
 
 		[Test]

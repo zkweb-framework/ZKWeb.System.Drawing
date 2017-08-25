@@ -47,8 +47,7 @@ namespace MonoTests {
 				return;
 
 			if (File.Exists (IgnoreListName)) {
-				using (Stream stream = File.OpenRead(IgnoreListName))
-				using (StreamReader sr = new StreamReader (stream)) {
+				using (StreamReader sr = new StreamReader (IgnoreListName)) {
 					string line = sr.ReadLine ();
 					while (line != null) {
 						if (line.StartsWith (hostname)) {

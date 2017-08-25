@@ -39,7 +39,6 @@ using System.Security.Permissions;
 namespace MonoTests.System.Drawing
 {
 	[TestFixture]
-	
 	public class ImageFormatConverterTest
 	{
 		ImageFormat imageFmt;		

@@ -4,6 +4,7 @@ This is a .Net Core compatible System.Drawing implementation modified from mono 
 Works on windows and linux.
 
 Since 3.0, namespace is replaced to `System.DrawingCore`, please modify your code after upgrade.
+Since 4.0, netstandard 2.0 is required, and code is updated to mono 5.2.0.215.
 
 [![NuGet](https://buildstats.info/nuget/ZKWeb.System.Drawing)](http://www.nuget.org/packages/ZKWeb.System.Drawing)
 
@@ -25,6 +26,12 @@ These features should work:
 Known issues:
 
 - #1 Save icon file large than 255x255 will cause arithmetic overflow error
+
+# Warning
+
+Microsoft will ship their [System.Drawing](https://github.com/dotnet/corefx/tree/master/src/System.Drawing.Common) soon,<br/>
+it's also modified from mono and I believe it's more stable than mine,<br/>
+so this project may discontinue soon after offical System.Drawing available.<br/>
 
 # How can I get it work?
 
@@ -58,17 +65,17 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 # Huh? What's the different with CoreCompat.System.Drawing?
 
 - No fake strong name is used, will not mess up Asp.Net and OWIN.
-- Copied all files from mono 4.6.1.13, you will actually compile it without seeing hundreds error
+- Copied all files from mono 5.2.0.215, you will actually compile it without seeing hundreds error
 - Really tested on linux and really work
 - You can actually run tests from `dotnet test`, no joke
 	- Windows
-		- .Net Core Test Count: 1857, Passed: 1517, Failed: 331, Inconclusive: 0, Skipped: 9
-		- .Net Framework Test Count: 1869, Passed: 1524, Failed: 336, Inconclusive: 0, Skipped: 9
+		- .Net Core: Test Count: 1856, Passed: 1480, Failed: 367, Warnings: 0, Inconclusive: 0, Skipped: 9
+		- .Net Framework: Test Count: 1856, Passed: 1479, Failed: 368, Warnings: 0, Inconclusive: 0, Skipped: 9
 	- Linux
-		- .Net Core Test Count: 1857, Passed: 1510, Failed: 339, Inconclusive: 0, Skipped: 8
+		- .Net Core: TODO
 - No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
 - Namespace is renamed from `System.Drawing` to `System.DrawingCore` because vs2017's new project system is so stupid
 
 # Mac support
 
-I'm a poor man doesn't have a shiny mac book now, so I can't test with macosx, somebody can please tell me.
+Not tested yet.

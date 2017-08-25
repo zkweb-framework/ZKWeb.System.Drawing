@@ -31,7 +31,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -42,8 +41,9 @@ using System.Security.Permissions;
 namespace System.DrawingCore.Design 
 {
 	[Serializable]
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
+
+
+
 	public class ToolboxItem : ISerializable {
 
 		private bool locked = false;
@@ -392,4 +392,3 @@ namespace System.DrawingCore.Design
 		public event ToolboxComponentsCreatingEventHandler ComponentsCreating;
 	}
 }
-#endif

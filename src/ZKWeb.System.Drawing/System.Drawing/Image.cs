@@ -32,9 +32,6 @@
 //
 
 using System;
-#if !NETCORE
-using System.Runtime.Remoting;
-#endif
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
@@ -64,8 +61,7 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 	internal  Image()
 	{	
 	}
-
-#if !NETCORE
+	
 	internal Image (SerializationInfo info, StreamingContext context)
 	{
 		foreach (SerializationEntry serEnum in info) {
@@ -82,7 +78,6 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 			}
 		}
 	}
-#endif
 
 	// FIXME - find out how metafiles (another decoder-only codec) are handled
 	void ISerializable.GetObjectData (SerializationInfo si, StreamingContext context)
@@ -150,6 +145,7 @@ public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISer
 		return LoadFromStream (stream, false);
 	}
 
+	// See http://support.microsoft.com/default.aspx?scid=kb;en-us;831419 for performance discussion	
 	public static Image FromStream (Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
 	{
 		return LoadFromStream (stream, false);

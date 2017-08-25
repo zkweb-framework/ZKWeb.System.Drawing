@@ -48,11 +48,12 @@ namespace System.DrawingCore.Printing
 
 		// create a new default Margins object (is 1 inch for all margins)
 		Margins margins = new Margins();
-
+#pragma warning disable 649
 		float hardMarginX;
 		float hardMarginY;
 		RectangleF printableArea;		
 		PrinterSettings printerSettings;
+#pragma warning restore 649
 		
 		public PageSettings() : this(new PrinterSettings())
 		{
@@ -209,11 +210,13 @@ namespace System.DrawingCore.Printing
 			return ps;
 		}
 
-		public void CopyToHdevmode (IntPtr hdevmode){
+
+				public void CopyToHdevmode (IntPtr hdevmode){
 			throw new NotImplementedException ();
 		}
 
-		public void SetHdevmode (IntPtr hdevmode){
+
+				public void SetHdevmode (IntPtr hdevmode){
 			throw new NotImplementedException ();
 		}	
 

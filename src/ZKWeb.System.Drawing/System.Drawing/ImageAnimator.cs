@@ -29,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System.Collections;
 using System.DrawingCore.Imaging;
 using System.Threading;
@@ -182,4 +181,3 @@ namespace System.DrawingCore {
 		}
 	}
 }
-#endif

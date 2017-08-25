@@ -27,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 namespace System.DrawingCore.Printing {
 
 	public abstract class PrintController {
@@ -53,4 +52,3 @@ namespace System.DrawingCore.Printing {
 		}
 	}
 }
-#endif

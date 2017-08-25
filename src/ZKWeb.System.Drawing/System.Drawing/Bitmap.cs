@@ -37,13 +37,10 @@
 
 using System.IO;
 using System.DrawingCore.Imaging;
-#if !NETCORE
+using System.Reflection;
 using System.Runtime.Serialization;
-#endif
 using System.Runtime.InteropServices;
 using System.ComponentModel;
-using System.Reflection;
-using System.Security.Permissions;
 
 namespace System.DrawingCore
 {
@@ -52,7 +49,7 @@ namespace System.DrawingCore
 	[Editor ("System.Drawing.Design.BitmapEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	public sealed class Bitmap : Image
 	{
-#region constructors
+		#region constructors
 		// constructors
 
 		// required for XmlSerializer (#323246)
@@ -136,7 +133,11 @@ namespace System.DrawingCore
 			if (resource == null)
 				throw new ArgumentException ("resource");
 
-			Stream s = type.GetTypeInfo().Assembly.GetManifestResourceStream (resource);
+			// For compatibility with the .NET Framework
+			if (type == null)
+				throw new NullReferenceException();
+
+			Stream s = type.GetTypeInfo ().Assembly.GetManifestResourceStream (type, resource);
 			if (s == null) {
 				string msg = string.Format ("Resource '{0}' was not found.", resource);
 				throw new FileNotFoundException (msg);
@@ -165,14 +166,12 @@ namespace System.DrawingCore
 			nativeObject = bmp;						 								
 		}
 
-#if !NETCORE
 		private Bitmap (SerializationInfo info, StreamingContext context)
 			: base (info, context)
 		{
 		}
-#endif
 
-#endregion
+		#endregion
 		// methods
 		public Color GetPixel (int x, int y) {
 			
@@ -233,14 +232,12 @@ namespace System.DrawingCore
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public IntPtr GetHbitmap ()
 		{
 			return GetHbitmap(Color.Gray);
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public IntPtr GetHbitmap (Color background)
 		{
 			IntPtr HandleBmp;
@@ -252,7 +249,6 @@ namespace System.DrawingCore
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public IntPtr GetHicon ()
 		{
 			IntPtr HandleIcon;

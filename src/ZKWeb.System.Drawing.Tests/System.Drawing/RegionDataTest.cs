@@ -36,7 +36,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	
 	public class RegionDataTest {
 
 		private Bitmap bitmap;
@@ -44,7 +43,7 @@ namespace MonoTests.System.Drawing {
 		private GraphicsPath sp1;
 		private GraphicsPath sp2;
 
-		[OneTimeSetUp]
+		[TestFixtureSetUp]
 		public void FixtureSetUp ()
 		{
 			bitmap = new Bitmap (10, 10);
@@ -60,12 +59,10 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void RegionData_Null ()
 		{
-			Assert.Throws<NullReferenceException>(() =>
-			{
 			RegionData data = new Region ().GetRegionData ();
 			data.Data = null;
 			Assert.IsNull (data.Data, "Data");
-			Region region = new Region (data);});
+			Assert.Throws<NullReferenceException> (() => new Region (data));
 		}
 
 		[Test]
@@ -77,7 +74,11 @@ namespace MonoTests.System.Drawing {
 			try {
 				new Region (data);
 			}
-			catch (Exception) {
+			catch (ExternalException) {
+				// MS
+			}
+			catch (ArgumentException) {
+				// Mono
 			}
 		}
 

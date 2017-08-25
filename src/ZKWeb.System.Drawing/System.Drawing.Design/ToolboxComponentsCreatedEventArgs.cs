@@ -29,14 +29,11 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-#if !NETCORE
+
 using System.ComponentModel;
-using System.Security.Permissions;
 
 namespace System.DrawingCore.Design
 {
-	[PermissionSet (SecurityAction.LinkDemand, Unrestricted = true)]
-	[PermissionSet (SecurityAction.InheritanceDemand, Unrestricted = true)]
 	public class ToolboxComponentsCreatedEventArgs : EventArgs
 	{
 		private IComponent[] components;
@@ -52,4 +49,3 @@ namespace System.DrawingCore.Design
 		}	
 	}
 }
-#endif

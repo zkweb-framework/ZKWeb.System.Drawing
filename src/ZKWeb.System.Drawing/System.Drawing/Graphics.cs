@@ -35,12 +35,12 @@ using System.DrawingCore.Imaging;
 using System.DrawingCore.Text;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.Text;
 
 namespace System.DrawingCore
 {
-	public sealed class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
+	public sealed class Graphics : MarshalByRefObject, IDisposable
+	, IDeviceContext
 	{
 		internal IntPtr nativeObject = IntPtr.Zero;
 		internal IMacContext maccontext;
@@ -55,11 +55,12 @@ namespace System.DrawingCore
 							    IntPtr data,
 							    PlayRecordCallback callbackData);
 		
-		public delegate bool DrawImageAbort (IntPtr callbackData);
+		public delegate bool DrawImageAbort (IntPtr callbackdata);
 
 		internal Graphics (IntPtr nativeGraphics)
 		{
 			nativeObject = nativeGraphics;
+			if (nativeObject == IntPtr.Zero) { }
 		}
 
 		~Graphics ()
@@ -101,7 +102,7 @@ namespace System.DrawingCore
 			}
 		}
 		
-		public void AddMetafileComment (byte [] data)
+				public void AddMetafileComment (byte [] data)
 		{
 			throw new NotImplementedException ();
 		}
@@ -143,13 +144,12 @@ namespace System.DrawingCore
  			status = GDIPlus.GdipGraphicsClear (nativeObject, color.ToArgb ());
  			GDIPlus.CheckStatus (status);
 		}
-
 		public void CopyFromScreen (Point upperLeftSource, Point upperLeftDestination, Size blockRegionSize)
 		{
 			CopyFromScreen (upperLeftSource.X, upperLeftSource.Y, upperLeftDestination.X, upperLeftDestination.Y,
 				blockRegionSize, CopyPixelOperation.SourceCopy);				
 		}
-		
+
 		public void CopyFromScreen (Point upperLeftSource, Point upperLeftDestination, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
 		{
 			CopyFromScreen (upperLeftSource.X, upperLeftSource.Y, upperLeftDestination.X, upperLeftDestination.Y,
@@ -161,11 +161,11 @@ namespace System.DrawingCore
 			CopyFromScreen (sourceX, sourceY, destinationX, destinationY, blockRegionSize,
 				CopyPixelOperation.SourceCopy);
 		}
-		
+
 		public void CopyFromScreen (int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
 		{
 			if (!Enum.IsDefined (typeof (CopyPixelOperation), copyPixelOperation))
-				throw new ArgumentException (string.Format ("Enum argument value '{0}' is not valid for CopyPixelOperation", copyPixelOperation));
+				throw new InvalidEnumArgumentException (string.Format ("Enum argument value '{0}' is not valid for CopyPixelOperation", copyPixelOperation));
 
 			if (GDIPlus.UseX11Drawable) {
 				CopyFromScreenX11 (sourceX, sourceY, destinationX, destinationY, blockRegionSize, copyPixelOperation);
@@ -281,9 +281,13 @@ namespace System.DrawingCore
 						maccontext.Release ();
 				}
 
-				status = GDIPlus.GdipDeleteGraphics (nativeObject);
-				nativeObject = IntPtr.Zero;
-				GDIPlus.CheckStatus (status);
+				// ZKWEB_FIX: delete null pointer will cause invalid parameter
+				if (nativeObject != IntPtr.Zero)
+				{
+					status = GDIPlus.GdipDeleteGraphics(nativeObject);
+					nativeObject = IntPtr.Zero;
+					GDIPlus.CheckStatus(status);
+				}
 				disposed = true;				
 			}
 
@@ -1187,183 +1191,183 @@ namespace System.DrawingCore
 		}
 
 		private const string MetafileEnumeration = "Metafiles enumeration, for both WMF and EMF formats, isn't supported.";
-		
-		public void EnumerateMetafile (Metafile metafile, Point [] destPoints, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point destPoint, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF destPoint, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF destPoint, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point destPoint, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point [] destPoints, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point destPoint, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF destPoint, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Point [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public void EnumerateMetafile (Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+
+				public void EnumerateMetafile (Metafile metafile, Point [] destPoints, EnumerateMetafileProc callback)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+				public void EnumerateMetafile (Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+				public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, EnumerateMetafileProc callback)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, Point [] destPoints, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+				public void EnumerateMetafile (Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, Point [] destPoints, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+				public void EnumerateMetafile (Metafile metafile, Point destPoint, EnumerateMetafileProc callback)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+				public void EnumerateMetafile (Metafile metafile, PointF destPoint, EnumerateMetafileProc callback)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+				public void EnumerateMetafile (Metafile metafile, PointF destPoint, EnumerateMetafileProc callback, IntPtr callbackData)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+				public void EnumerateMetafile (Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback, IntPtr callbackData)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+				public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void EnumerateMetafile (Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+				public void EnumerateMetafile (Metafile metafile, Point destPoint, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point [] destPoints, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point destPoint, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF destPoint, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point [] destPoints, Rectangle srcRect, GraphicsUnit srcUnit, EnumerateMetafileProc callback, IntPtr callbackData)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point [] destPoints, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF [] destPoints, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
+		{
+			throw new NotImplementedException ();
+		}
+
+				public void EnumerateMetafile (Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes imageAttr)
 		{
 			throw new NotImplementedException ();
 		}
@@ -1640,15 +1644,14 @@ namespace System.DrawingCore
 			GDIPlus.CheckStatus (status);
 			return new Graphics (graphics);
 		}
-		
-		[EditorBrowsable (EditorBrowsableState.Advanced)]
+
+				[EditorBrowsable (EditorBrowsableState.Advanced)]
 		public static Graphics FromHdc (IntPtr hdc, IntPtr hdevice)
 		{
 			throw new NotImplementedException ();
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public static Graphics FromHdcInternal (IntPtr hdc)
 		{
 			GDIPlus.Display = hdc;
@@ -1700,7 +1703,6 @@ namespace System.DrawingCore
 		}
 		
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public static Graphics FromHwndInternal (IntPtr hwnd)
 		{
 			return FromHwnd (hwnd);
@@ -1737,7 +1739,7 @@ namespace System.DrawingCore
 			return new Graphics (graphics);
 		}
 
-		public static IntPtr GetHalftonePalette ()
+				public static IntPtr GetHalftonePalette ()
 		{
 			throw new NotImplementedException ();
 		}
@@ -1970,20 +1972,17 @@ namespace System.DrawingCore
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
 		public void ReleaseHdc (IntPtr hdc)
 		{
 			ReleaseHdcInternal (hdc);
 		}
-		
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
+
 		public void ReleaseHdc ()
 		{
 			ReleaseHdcInternal (deviceContextHdc);
 		}
 
 		[EditorBrowsable (EditorBrowsableState.Never)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
 		public void ReleaseHdcInternal (IntPtr hdc)
 		{
 			Status status = Status.InvalidParameter;
@@ -2295,8 +2294,8 @@ namespace System.DrawingCore
 				GDIPlus.CheckStatus (status);
 			}
 		}
-		
-		public PixelOffsetMode PixelOffsetMode {
+
+				public PixelOffsetMode PixelOffsetMode {
 			get {
 			        PixelOffsetMode pixelOffset = PixelOffsetMode.Invalid;
                                 
@@ -2338,8 +2337,8 @@ namespace System.DrawingCore
 				GDIPlus.CheckStatus (status);
 			}
 		}
-		
-		public int TextContrast {
+
+				public int TextContrast {
 			get {	
                                 int contrast;
 					
@@ -2394,8 +2393,8 @@ namespace System.DrawingCore
                                 return rect;
 			}
 		}
-		
-		[EditorBrowsable (EditorBrowsableState.Never)]
+
+				[EditorBrowsable (EditorBrowsableState.Never)]
 		public object GetContextInfo ()
 		{
 			// only known source of information @ http://blogs.wdevs.com/jdunlap/Default.aspx

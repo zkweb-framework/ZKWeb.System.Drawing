@@ -35,7 +35,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Drawing2D {
 
 	[TestFixture]
-	
 	public class PathDataTest {
 
 		[Test]

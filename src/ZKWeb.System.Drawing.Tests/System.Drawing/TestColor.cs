@@ -31,16 +31,13 @@ using System;
 using System.IO;
 using System.DrawingCore;
 using System.Runtime.Serialization;
-#if !NETCORE
 using System.Runtime.Serialization.Formatters.Binary;
-#endif
 using System.Security.Permissions;
 using NUnit.Framework;
 
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
-	
 	public class ColorTest {
 
 		[Test]
@@ -910,12 +907,12 @@ namespace MonoTests.System.Drawing {
 			Assert.AreEqual (1.0f, Color.White.GetBrightness (), "BrightnessWhite");
 		
 			Color c1 = Color.FromArgb (0, 13, 45, 7); //just some random color
-			Assert.IsTrue (       FloatsAlmostEqual (110.5263f, c1.GetHue ()), "Hue1");
+			Assert.IsTrue (FloatsAlmostEqual (110.5263f, c1.GetHue ()), "Hue1");
 			Assert.IsTrue (FloatsAlmostEqual (0.1019608f, c1.GetBrightness ()), "Brightness1");
 			Assert.IsTrue (FloatsAlmostEqual (0.7307692f, c1.GetSaturation ()), "Saturation1");
 	
 			Color c2 = Color.FromArgb (0, 112, 75, 29); //another random color
-			Assert.IsTrue (       FloatsAlmostEqual (33.25302f, c2.GetHue ()), "Hue2");
+			Assert.IsTrue (FloatsAlmostEqual (33.25302f, c2.GetHue ()), "Hue2");
 			Assert.IsTrue (FloatsAlmostEqual (0.2764706f, c2.GetBrightness ()), "Brightness2");
 			Assert.IsTrue (FloatsAlmostEqual (0.5886525f, c2.GetSaturation ()), "Saturation2");
 		}
@@ -1023,129 +1020,97 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void FromArgb_InvalidAlpha1 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (-1, Color.Red);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (-1, Color.Red));
 		}
 
 		[Test]
 		public void FromArgb_InvalidAlpha2 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (256, Color.Red);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (256, Color.Red));
 		}
 
 		[Test]
 		public void FromArgb_InvalidAlpha3 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (-1, 0, 0, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (-1, 0, 0, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidAlpha4 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (256, 0, 0, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (256, 0, 0, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidRed1 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (-1, 0, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (-1, 0, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidRed2 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (256, 0, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (256, 0, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidRed3 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, -1, 0, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, -1, 0, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidRed4 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 256, 0, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 256, 0, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidGreen1 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, -1, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, -1, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidGreen2 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 256, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 256, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidGreen3 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 0, -1, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 0, -1, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidGreen4 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 0, 256, 0);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 0, 256, 0));
 		}
 
 		[Test]
 		public void FromArgb_InvalidBlue1 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 0, -1);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 0, -1));
 		}
 
 		[Test]
 		public void FromArgb_InvalidBlue2 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 0, 256);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 0, 256));
 		}
 
 		[Test]
 		public void FromArgb_InvalidBlue3 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 0, 0, -1);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 0, 0, -1));
 		}
 
 		[Test]
 		public void FromArgb_InvalidBlue4 ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Color.FromArgb (0, 0, 0, 256);});
+			Assert.Throws<ArgumentException> (() => Color.FromArgb (0, 0, 0, 256));
 		}
 
 		[Test]
@@ -1169,7 +1134,6 @@ namespace MonoTests.System.Drawing {
 			Assert.IsTrue (!color.IsSystemColor, "IsSystemColor");
 		}
 
-#if !NETCORE
 		[Test]
 		public void SerializationRoundtrip ()
 		{
@@ -1184,7 +1148,6 @@ namespace MonoTests.System.Drawing {
 			Color color = (Color) bf.Deserialize (ms);
 			CheckRed ("deserialized", color);
 		}
-#endif
 
 		// serialized under MS 2.0, can be deserialized on both MS 1.1 SP1 and 2.0
 		static byte[] color_red = { 0x00, 0x01, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x00, 0x00, 0x00, 
@@ -1200,7 +1163,6 @@ namespace MonoTests.System.Drawing {
 			0x07, 0x07, 0x02, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x8D, 0x00, 
 			0x01, 0x00, 0x0B };
 
-#if !NETCORE
 		[Test]
 		public void Deserialize ()
 		{
@@ -1209,7 +1171,6 @@ namespace MonoTests.System.Drawing {
 			Color color = (Color) bf.Deserialize (ms);
 			CheckRed ("deserialized", color);
 		}
-#endif
 
 		static byte [] color_blue = {
 			0,1,0,0,0,255,255,255,255,1,0,0,0,0,0,0,0,12,2,0,0,0,81,83,121,115,116,101,109,46,68,114,97,119,105,
@@ -1219,7 +1180,6 @@ namespace MonoTests.System.Drawing {
 			110,103,46,67,111,108,111,114,4,0,0,0,4,110,97,109,101,5,118,97,108,117,101,10,107,110,111,119,110,
 			67,111,108,111,114,5,115,116,97,116,101,1,0,0,0,9,7,7,2,0,0,0,10,0,0,0,0,0,0,0,0,37,0,1,0,11 };
 
-#if !NETCORE
 		[Test]
 		public void Deserialize2 ()
 		{
@@ -1236,7 +1196,6 @@ namespace MonoTests.System.Drawing {
 			Assert.IsTrue (color.IsNamedColor, "IsNamedColor");
 			Assert.IsTrue (!color.IsSystemColor, "IsSystemColor");
 		}
-#endif
 
 		static byte [] color_blue_fromargb = {
 			0,1,0,0,0,255,255,255,255,1,0,0,0,0,0,0,0,12,2,0,0,0,81,83,121,115,116,101,109,46,68,114,97,119,105,
@@ -1246,7 +1205,6 @@ namespace MonoTests.System.Drawing {
 			110,103,46,67,111,108,111,114,4,0,0,0,4,110,97,109,101,5,118,97,108,117,101,10,107,110,111,119,110,
 			67,111,108,111,114,5,115,116,97,116,101,1,0,0,0,9,7,7,2,0,0,0,10,255,0,0,255,0,0,0,0,0,0,2,0,11};
 
-#if !NETCORE
 		[Test]
 		public void Deserialize3 ()
 		{
@@ -1263,7 +1221,6 @@ namespace MonoTests.System.Drawing {
 			Assert.IsTrue (!color.IsNamedColor, "IsNamedColor");
 			Assert.IsTrue (!color.IsSystemColor, "IsSystemColor");
 		}
-#endif
 
 		static byte [] _serializedV11 = {
 			0x00, 0x01, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x01,
@@ -1287,7 +1244,6 @@ namespace MonoTests.System.Drawing {
 			0x00, 0x00, 0x00, 0x00, 0x4f, 0x00, 0x01, 0x00, 0x0a, 0x0b
 		};
 
-#if !NETCORE
 		[Test]
 		public void Deserialize4 ()
 		{
@@ -1302,7 +1258,6 @@ namespace MonoTests.System.Drawing {
 				Assert.AreEqual (Color.Green, c, "#1");
 			}
 		}
-#endif
 
 		private void Compare (KnownColor kc, GetSysColorIndex index)
 		{

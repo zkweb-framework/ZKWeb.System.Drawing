@@ -29,6 +29,7 @@
 //
 
 using System;
+using System.ComponentModel;
 using System.DrawingCore;
 using System.DrawingCore.Imaging;
 using System.IO;
@@ -39,7 +40,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]	
-	
 	public class IconTest {
 		
 		Icon icon;
@@ -51,7 +51,7 @@ namespace MonoTests.System.Drawing {
 		// static ctor are executed outside the Deny
 		static IconTest ()
 		{
-			filename_dll = typeof(IconTest).GetTypeInfo().Assembly.Location;
+			filename_dll = Assembly.GetExecutingAssembly ().Location;
 		}
 		
 		[SetUp]
@@ -72,7 +72,7 @@ namespace MonoTests.System.Drawing {
 		public void TearDown ()
 		{
 			if (fs1 != null)
-				fs1.Dispose();
+				fs1.Close ();
 			if (File.Exists ("newIcon.ico"))
 				File.Delete ("newIcon.ico");
 		}
@@ -95,9 +95,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Constructor_IconNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			new Icon ((Icon)null, 32, 32);});
+			Assert.Throws<ArgumentException> (() => new Icon ((Icon)null, 32, 32));
 		}
 
 		[Test]
@@ -111,9 +109,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Constructor_IconNull_Size ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			new Icon ((Icon) null, new Size (32, 32));});
+			Assert.Throws<ArgumentException> (() => new Icon ((Icon) null, new Size (32, 32)));
 		}
 
 		[Test]
@@ -177,64 +173,48 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Constructor_StreamNull ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			new Icon ((Stream) null);});
+			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null));
 		}
 
 		[Test]
 		public void Constructor_StreamNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			new Icon ((Stream) null, 32, 32);});
+			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null, 32, 32));
 		}
 
 		[Test]
 		public void Constructor_StringNull ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-			new Icon ((string) null);});
+			Assert.Throws<ArgumentNullException> (() => new Icon ((string) null));
 		}
 
 		[Test]
 		public void Constructor_TypeNull_String ()
 		{
-			Assert.Throws<NullReferenceException>(() =>
-			{
-			new Icon ((Type) null, "mono.ico");});
+			Assert.Throws<NullReferenceException> (() => new Icon ((Type) null, "mono.ico"));
 		}
 
 		[Test]
 		public void Constructor_Type_StringNull ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			new Icon (typeof (Icon), null);});
+			Assert.Throws<ArgumentException> (() => new Icon (typeof (Icon), null));
 		}
 		[Test]
 		public void Constructor_StreamNull_Size ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			new Icon ((Stream) null, new Size (32, 32));});
+			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null, new Size (32, 32)));
 		}
 
 		[Test]
 		public void Constructor_StringNull_Size ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-			new Icon ((string) null, new Size (32, 32));});
+			Assert.Throws<ArgumentNullException> (() => new Icon ((string) null, new Size (32, 32)));
 		}
 
 		[Test]
 		public void Constructor_StringNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
-			{
-			new Icon ((string) null, 32, 32);});
+			Assert.Throws<ArgumentNullException> (() => new Icon ((string) null, 32, 32));
 		}
 
 		[Test]
@@ -256,7 +236,6 @@ namespace MonoTests.System.Drawing {
 			Assert.AreEqual (32, clone.Size.Height, "Size.Height");
 		}
 
-#if false
 		[Test]
 		public void CloneHandleIcon ()
 		{
@@ -266,7 +245,6 @@ namespace MonoTests.System.Drawing {
 			Assert.AreEqual (SystemIcons.Hand.Size.Width, clone.Size.Width, "Size.Width");
 			Assert.AreEqual (SystemIcons.Hand.Size.Height, clone.Size.Height, "Size.Height");
 		}
-#endif
 
 		private void XPIcon (int size)
 		{
@@ -388,15 +366,13 @@ namespace MonoTests.System.Drawing {
 			var saved = new MemoryStream ();
 			using (Icon icon = new Icon (filepath))
 				icon.Save (saved);
-			CollectionAssert.AreEqual(orig.ToArray(), saved.ToArray());
+			FileAssert.AreEqual (orig, saved, "binary comparison");
 		}
 
 		[Test]
 		public void Save_Null ()
 		{
-			Assert.Throws<NullReferenceException>(() =>
-			{
-			icon.Save (null);});
+			Assert.Throws<NullReferenceException> (() => icon.Save (null));
 		}
 
 		[Test]
@@ -515,43 +491,35 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void Only256InFile ()
 		{
-			Assert.Throws<Exception>(() =>
-			{
-				using (FileStream fs = File.OpenRead(TestBitmap.getInFile("bitmaps/only256.ico")))
-				{
-					Icon icon = new Icon(fs, 0, 0);
-				}
-			});
+			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/only256.ico"))) {
+				Assert.Throws<Win32Exception> (() => new Icon (fs, 0, 0));
+			}
 		}
 
 
 		[Test]
 		public void ExtractAssociatedIcon_Null ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Icon.ExtractAssociatedIcon (null);});
+			Assert.Throws<ArgumentException> (() => Icon.ExtractAssociatedIcon (null));
 		}
 
 		[Test]
 		public void ExtractAssociatedIcon_Empty ()
 		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-			Icon.ExtractAssociatedIcon (String.Empty);});
+			Assert.Throws<ArgumentException> (() => Icon.ExtractAssociatedIcon (String.Empty));
 		}
 
 		[Test]
 		public void ExtractAssociatedIcon_DoesNotExists ()
 		{
-			Assert.Throws<FileNotFoundException>(() =>
-			{
-			Icon.ExtractAssociatedIcon ("does-not-exists.png");});
+			Assert.Throws<FileNotFoundException> (() => Icon.ExtractAssociatedIcon ("does-not-exists.png"));
 		}
 
 		private static bool RunningOnUnix {
 			get {
-				return GDIPlus.RunningOnUnix();
+				int p = (int) Environment.OSVersion.Platform;
+
+				return (p == 4) || (p == 6) || (p == 128);
 			}
 		}
 	}
@@ -561,7 +529,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void ExtractAssociatedIcon ()
 		{
-			string filename_dll = typeof(IconFullTrustTest).GetTypeInfo().Assembly.Location;
+			string filename_dll = Assembly.GetExecutingAssembly ().Location;
 			Assert.IsNotNull (Icon.ExtractAssociatedIcon (filename_dll), "dll");
 		}
 

@@ -62,7 +62,7 @@ namespace System.DrawingCore {
 			if (image == null)
 				throw new ArgumentNullException ("image");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new ArgumentNullException ("WrapMode");
+				throw new InvalidEnumArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreateTexture (image.nativeObject, wrapMode, out nativeObject);
 			GDIPlus.CheckStatus (status);
@@ -78,7 +78,7 @@ namespace System.DrawingCore {
 				dstRect.Width, dstRect.Height, out nativeObject);
 			GDIPlus.CheckStatus (status);
 		}
-		
+
 		public TextureBrush (Image image, RectangleF dstRect, ImageAttributes imageAttr)
 		{	
 			if (image == null)
@@ -95,7 +95,7 @@ namespace System.DrawingCore {
 			if (image == null)
 				throw new ArgumentNullException ("image");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new ArgumentException ("WrapMode");
+				throw new InvalidEnumArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreateTexture2I (image.nativeObject, wrapMode, dstRect.X, dstRect.Y, 
 				dstRect.Width, dstRect.Height, out nativeObject);
@@ -107,7 +107,7 @@ namespace System.DrawingCore {
 			if (image == null)
 				throw new ArgumentNullException ("image");
 			if ((wrapMode < WrapMode.Tile) || (wrapMode > WrapMode.Clamp))
-				throw new ArgumentException ("WrapMode");
+				throw new InvalidEnumArgumentException ("WrapMode");
 
 			Status status = GDIPlus.GdipCreateTexture2 (image.nativeObject, wrapMode, dstRect.X, dstRect.Y, 
 				dstRect.Width, dstRect.Height, out nativeObject);
@@ -155,7 +155,7 @@ namespace System.DrawingCore {
 			}
 			set {
 				if ((value < WrapMode.Tile) || (value > WrapMode.Clamp))
-					throw new ArgumentException ("WrapMode");
+					throw new InvalidEnumArgumentException ("WrapMode");
 
 				Status status = GDIPlus.GdipSetTextureWrapMode (nativeObject, value);
 				GDIPlus.CheckStatus (status);

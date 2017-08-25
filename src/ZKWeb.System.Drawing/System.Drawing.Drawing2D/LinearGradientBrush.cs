@@ -142,7 +142,7 @@ namespace System.DrawingCore.Drawing2D {
 			}
 		}
 
-		public bool GammaCorrection {
+				public bool GammaCorrection {
 			get {
 				bool gammaCorrection;
 				Status status = GDIPlus.GdipGetLineGammaCorrection (nativeObject, out gammaCorrection);
@@ -255,7 +255,7 @@ namespace System.DrawingCore.Drawing2D {
 			set {
 				// note: Clamp isn't valid (context wise) but it is checked in libgdiplus
 				if ((value < WrapMode.Tile) || (value > WrapMode.Clamp))
-					throw new ArgumentException ("WrapMode");
+					throw new InvalidEnumArgumentException ("WrapMode");
 
 				Status status = GDIPlus.GdipSetLineWrapMode (nativeObject, value);
 				GDIPlus.CheckStatus (status);

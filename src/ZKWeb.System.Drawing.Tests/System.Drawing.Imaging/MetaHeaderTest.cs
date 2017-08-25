@@ -35,7 +35,6 @@ using NUnit.Framework;
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
-	
 	public class MetaHeaderTest {
 
 		[Test]

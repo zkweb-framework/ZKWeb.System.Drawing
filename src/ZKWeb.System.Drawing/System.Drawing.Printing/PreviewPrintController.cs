@@ -30,7 +30,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#if !NETCORE
 using System;
 using System.Collections;
 using System.DrawingCore.Imaging;
@@ -50,11 +49,11 @@ namespace System.DrawingCore.Printing
 			get { return true; }
 		}
 
-		public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
+				public override void OnEndPage(PrintDocument document, PrintPageEventArgs e)
 		{
 		}
 
-		public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
+				public override void OnStartPrint(PrintDocument document, PrintEventArgs e)
 		{
 			if (!document.PrinterSettings.IsValid)
 				throw new InvalidPrinterException(document.PrinterSettings);
@@ -66,11 +65,11 @@ namespace System.DrawingCore.Printing
 			pageInfoList.Clear ();
 		}
 
-		public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
+				public override void OnEndPrint(PrintDocument document, PrintEventArgs e)
 		{
 		}
 
-		public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
+				public override Graphics OnStartPage(PrintDocument document, PrintPageEventArgs e)
 		{
 			Image image = new Bitmap (e.PageSettings.PaperSize.Width, e.PageSettings.PaperSize.Height);
 
@@ -99,4 +98,3 @@ namespace System.DrawingCore.Printing
 
 	}
 }
-#endif
