@@ -69,12 +69,12 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 - Really tested on linux and really work
 - You can actually run tests from `dotnet test`, no joke
 	- Windows
-		- .Net Core 2.0: Test Count: 1906, Passed: 1529, Failed: 367, Warnings: 0, Inconclusive: 0, Skipped: 10
-		- .Net Framework 4.6.1: Test Count: 1942, Passed: 1558, Failed: 374, Warnings: 0, Inconclusive: 0, Skipped: 10
+		- .Net Core 2.0: Test Count: 1905, Passed: 1528, Failed: 367, Warnings: 0, Inconclusive: 0, Skipped: 10
+		- .Net Framework 4.6.1: Test Count: 1941, Passed: 1557, Failed: 374, Warnings: 0, Inconclusive: 0, Skipped: 10
 	- Linux
-		- .Net Core 2.0: TODO
+		- .Net Core 2.0: Test Count: 1906, Passed: 1522, Failed: 375, Warnings: 0, Inconclusive: 0, Skipped: 9
 - No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
-- Namespace is renamed from `System.Drawing` to `System.DrawingCore` because vs2017's new project system is so stupid
+- Namespace is renamed from `System.Drawing` to `System.DrawingCore` that make it compatible with .Net Core 2.0
 
 # Mac support
 

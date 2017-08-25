@@ -94,6 +94,8 @@ namespace MonoTests.System.DrawingCore {
 				Assert.Ignore ("Arial isn't available on this platform");
 		}
 
+#if false
+		// SO BAD: double free crash on linux
 		[Test]
 		[Category ("NotWorking")]
 		public void DeleteFontFamily_DoubleDispose ()
@@ -105,6 +107,7 @@ namespace MonoTests.System.DrawingCore {
 			// second dispose
 			Assert.AreEqual (Status.Ok, GDIPlus.GdipDeleteFontFamily (font_family), "second");
 		}
+#endif
 
 		[Test]
 		public void CloneFontFamily ()
