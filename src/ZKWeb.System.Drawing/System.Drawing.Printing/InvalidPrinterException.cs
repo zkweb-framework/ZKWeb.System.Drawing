@@ -1,5 +1,5 @@
 //
-// System.Drawing.InvalidPrinterExecption.cs
+// System.DrawingCore.InvalidPrinterExecption.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

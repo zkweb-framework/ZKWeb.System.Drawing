@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintDocument.cs
+// System.DrawingCore.PrintDocument.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)
@@ -38,7 +38,7 @@ using System.ComponentModel;
 namespace System.DrawingCore.Printing
 {
 	[DefaultEvent ("PrintPage"), DefaultProperty ("DocumentName")]
-	[ToolboxItemFilter ("System.Drawing.Printing", ToolboxItemFilterType.Allow)]
+	[ToolboxItemFilter ("System.DrawingCore.Printing", ToolboxItemFilterType.Allow)]
 	public class PrintDocument : System.ComponentModel.Component
 	{
 		private PageSettings defaultpagesettings;

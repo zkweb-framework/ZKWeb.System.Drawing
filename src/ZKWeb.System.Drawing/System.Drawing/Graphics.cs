@@ -1,5 +1,5 @@
 //
-// System.Drawing.Graphics.cs
+// System.DrawingCore.Graphics.cs
 //
 // Authors:
 //	Gonzalo Paniagua Javier (gonzalo@ximian.com) (stubbed out)

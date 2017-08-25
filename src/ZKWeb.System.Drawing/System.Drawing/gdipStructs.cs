@@ -1,5 +1,5 @@
 //
-// System.Drawing.gdipStructs.cs
+// System.DrawingCore.gdipStructs.cs
 //
 // Author: 
 // Alexandre Pigolkine (pigolkine@gmx.de)

@@ -1,5 +1,5 @@
 //
-// BitmapCas.cs - CAS unit tests for System.Drawing.Bitmap
+// BitmapCas.cs - CAS unit tests for System.DrawingCore.Bitmap
 //
 // Author:
 //	Sebastien Pouliot  <sebastien@ximian.com>

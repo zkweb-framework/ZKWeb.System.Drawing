@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.LinearGradientMode.cs
+// System.DrawingCore.Drawing2D.LinearGradientMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.SmoothingMode.cs
+// System.DrawingCore.Drawing2D.SmoothingMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

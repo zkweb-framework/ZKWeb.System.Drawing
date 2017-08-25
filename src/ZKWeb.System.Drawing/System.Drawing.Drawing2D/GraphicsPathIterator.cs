@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.GraphicsPathIterator.cs
+// System.DrawingCore.Drawing2D.GraphicsPathIterator.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

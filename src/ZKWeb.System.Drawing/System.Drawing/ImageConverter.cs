@@ -1,5 +1,5 @@
 //
-// System.Drawing.ImageConverter.cs
+// System.DrawingCore.ImageConverter.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

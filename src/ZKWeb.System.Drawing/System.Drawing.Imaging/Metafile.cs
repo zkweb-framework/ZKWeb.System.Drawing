@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.Metafile.cs
+// System.DrawingCore.Imaging.Metafile.cs
 //
 // Authors:
 //	Christian Meyer, eMail: Christian.Meyer@cs.tum.edu
@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 namespace System.DrawingCore.Imaging {
 
 	[Serializable]
-	[Editor ("System.Drawing.Design.MetafileEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
+	[Editor ("System.DrawingCore.Design.MetafileEditor, System.DrawingCore.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	public sealed class Metafile : Image {
 
 		// constructors

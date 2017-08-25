@@ -1,5 +1,5 @@
 //
-// System.Drawing.Pen.cs
+// System.DrawingCore.Pen.cs
 //
 // Authors:
 //   Miguel de Icaza (miguel@ximian.com)

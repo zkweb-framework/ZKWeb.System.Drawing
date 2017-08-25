@@ -1,5 +1,5 @@
 //
-// System.Drawing.PointConverter.cs
+// System.DrawingCore.PointConverter.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

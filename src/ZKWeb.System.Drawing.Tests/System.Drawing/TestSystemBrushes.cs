@@ -1,4 +1,4 @@
-// Tests for System.Drawing.SystemBrushes.cs
+// Tests for System.DrawingCore.SystemBrushes.cs
 //
 // Author: Ravindra (rkumar@novell.com)
 //

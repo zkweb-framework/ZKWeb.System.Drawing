@@ -1,5 +1,5 @@
 //
-// System.Drawing.MarginsConverter.cs
+// System.DrawingCore.MarginsConverter.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

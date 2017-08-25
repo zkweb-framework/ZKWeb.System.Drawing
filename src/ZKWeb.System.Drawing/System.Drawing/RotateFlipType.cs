@@ -1,5 +1,5 @@
 //
-// System.Drawing.RotateFlipType .cs
+// System.DrawingCore.RotateFlipType .cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

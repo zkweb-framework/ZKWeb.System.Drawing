@@ -1,5 +1,5 @@
 //
-// System.Drawing.Brush.cs
+// System.DrawingCore.Brush.cs
 //
 // Authors:
 //   Miguel de Icaza (miguel@ximian.com)

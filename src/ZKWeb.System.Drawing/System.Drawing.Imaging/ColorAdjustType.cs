@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorAdjustType.cs
+// System.DrawingCore.Imaging.ColorAdjustType.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

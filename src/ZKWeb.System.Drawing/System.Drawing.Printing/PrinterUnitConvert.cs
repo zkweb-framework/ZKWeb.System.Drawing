@@ -1,5 +1,5 @@
 //
-// System.Drawing.Printing.PrinterUnitConvert.cs
+// System.DrawingCore.Printing.PrinterUnitConvert.cs
 //
 // Authors:
 //   Martin Willemoes Hansen (mwh@sysrq.dk)

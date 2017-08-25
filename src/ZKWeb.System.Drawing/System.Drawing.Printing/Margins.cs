@@ -1,5 +1,5 @@
 //
-// System.Drawing.Margins.cs
+// System.DrawingCore.Margins.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Size.cs
+// System.DrawingCore.Size.cs
 //
 // Author:
 //   Mike Kestner (mkestner@speakeasy.net)

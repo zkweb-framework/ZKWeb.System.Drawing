@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.LineCap.cs
+// System.DrawingCore.Drawing2D.LineCap.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

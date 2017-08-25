@@ -1,5 +1,5 @@
 //
-// System.Drawing.SRDescriptionAttribute.cs
+// System.DrawingCore.SRDescriptionAttribute.cs
 //
 // Authors:
 //   Andreas Nahr (ClassDevelopment@A-SoftTech.com)

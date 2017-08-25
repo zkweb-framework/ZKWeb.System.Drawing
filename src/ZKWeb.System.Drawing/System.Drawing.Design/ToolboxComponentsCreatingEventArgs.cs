@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.ToolboxComponentsCreatingEventArgs.cs
+// System.DrawingCore.Design.ToolboxComponentsCreatingEventArgs.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

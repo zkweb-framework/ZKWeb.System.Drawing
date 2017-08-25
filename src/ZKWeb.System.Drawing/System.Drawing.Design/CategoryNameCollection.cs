@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.CategoryNameCollection.cs
+// System.DrawingCore.Design.CategoryNameCollection.cs
 //
 // Authors:
 // 	Alejandro Sánchez Acosta

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.BitmapData.cs
+// System.DrawingCore.Imaging.BitmapData.cs
 //
 // Author:
 //   Miguel de Icaza (miguel@ximian.com)

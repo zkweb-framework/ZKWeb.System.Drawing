@@ -1,5 +1,5 @@
 //
-// System.Drawing.TextureBrush unit tests
+// System.DrawingCore.TextureBrush unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -34,7 +34,7 @@ using System.DrawingCore.Imaging;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class TextureBrushTest {

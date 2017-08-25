@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.Encoder.cs
+// System.DrawingCore.Imaging.Encoder.cs
 //
 // (C) 2004 Novell, Inc.  http://www.novell.com
 // Author: Ravindra (rkumar@novell.com)

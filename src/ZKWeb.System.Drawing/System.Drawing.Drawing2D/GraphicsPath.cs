@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.GraphicsPath.cs
+// System.DrawingCore.Drawing2D.GraphicsPath.cs
 //
 // Authors:
 //

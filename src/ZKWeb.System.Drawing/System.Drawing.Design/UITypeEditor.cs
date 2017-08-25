@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.UITypeEditor.cs
+// System.DrawingCore.Design.UITypeEditor.cs
 // 
 // Authors:
 //  Alan Tam Siu Lung <Tam@SiuLung.com>

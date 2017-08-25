@@ -1,4 +1,4 @@
-// System.Drawing.Design.IDesignerHost.cs
+// System.DrawingCore.Design.IDesignerHost.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

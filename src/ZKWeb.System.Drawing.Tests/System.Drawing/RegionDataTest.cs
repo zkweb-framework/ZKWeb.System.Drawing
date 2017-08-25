@@ -1,5 +1,5 @@
 //
-// System.Drawing.RegionData unit tests
+// System.DrawingCore.RegionData unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class RegionDataTest {

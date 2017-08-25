@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.Drawing2D.ColorBlend.cs
+// Tests for System.DrawingCore.Drawing2D.ColorBlend.cs
 //
 // Authors:
 //	Ravindra (rkumar@novell.com)
@@ -33,7 +33,7 @@ using System.DrawingCore;
 using System.DrawingCore.Drawing2D;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing.Drawing2D 
+namespace MonoTests.System.DrawingCore.Drawing2D 
 {
 	[TestFixture]	
 	public class ColorBlendTest {

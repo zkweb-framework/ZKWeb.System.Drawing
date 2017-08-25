@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.HatchStyle.cs
+// System.DrawingCore.Drawing2D.HatchStyle.cs
 //
 // Authors:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

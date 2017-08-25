@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.EncoderParameter.cs
+// System.DrawingCore.Imaging.EncoderParameter.cs
 //
 // Author: 
 //	Ravindra (rkumar@novell.com)

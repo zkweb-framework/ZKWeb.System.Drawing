@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.PlayRecordCallback.cs
+// System.DrawingCore.Imaging.PlayRecordCallback.cs
 //
 // Author: Everaldo Canuto
 // eMail: everaldo.canuto@bol.com.br

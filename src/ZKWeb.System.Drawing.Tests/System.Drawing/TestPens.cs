@@ -1,4 +1,4 @@
-// Tests for System.Drawing.Pens.cs
+// Tests for System.DrawingCore.Pens.cs
 //
 // Author:
 //     Ravindra (rkumar@novell.com)

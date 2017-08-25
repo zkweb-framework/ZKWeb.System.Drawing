@@ -1,5 +1,5 @@
 //
-// System.Drawing.ColorConverter
+// System.DrawingCore.ColorConverter
 //
 // Authors:
 //	Gonzalo Paniagua Javier (gonzalo@ximian.com)

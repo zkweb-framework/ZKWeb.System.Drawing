@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.PaletteFlags.cs
+// System.DrawingCore.Imaging.PaletteFlags.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

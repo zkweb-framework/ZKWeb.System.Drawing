@@ -36,7 +36,7 @@ using System.Collections;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.DrawingCore.Imaging {
 
 	[TestFixture]
 	public class ImageCodecInfoTest {

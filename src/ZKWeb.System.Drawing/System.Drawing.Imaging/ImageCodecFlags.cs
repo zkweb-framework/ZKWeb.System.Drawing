@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ImageCodecFlags.cs
+// System.DrawingCore.Imaging.ImageCodecFlags.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

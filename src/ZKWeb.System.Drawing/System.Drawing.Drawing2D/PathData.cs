@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.PathData.cs
+// System.DrawingCore.Drawing2D.PathData.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

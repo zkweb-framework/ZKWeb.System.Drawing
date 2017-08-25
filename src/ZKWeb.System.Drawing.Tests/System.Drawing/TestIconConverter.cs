@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.IconConverter.cs 
+// Tests for System.DrawingCore.IconConverter.cs 
 //
 // Author:
 //	Sanjay Gupta (gsanjay@novell.com)
@@ -39,7 +39,7 @@ using System.Globalization;
 using System.IO;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing
+namespace MonoTests.System.DrawingCore
 {
 	[TestFixture]
 	public class IconConverterTest
@@ -152,7 +152,7 @@ namespace MonoTests.System.Drawing
 			Assert.AreEqual (icon.Width, newIcon.Width, "CF#1a" );
 			
 			try {
-				icoConv.ConvertFrom ("System.Drawing.String");
+				icoConv.ConvertFrom ("System.DrawingCore.String");
 				Assert.Fail ("CF#2: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2");
@@ -160,7 +160,7 @@ namespace MonoTests.System.Drawing
 
 			try {
 				icoConv.ConvertFrom (null, CultureInfo.InvariantCulture,
-						   "System.Drawing.String");
+						   "System.DrawingCore.String");
 				Assert.Fail ("CF#2a: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2a");
@@ -205,7 +205,7 @@ namespace MonoTests.System.Drawing
 			Assert.AreEqual (icon.Width, newIcon.Width, "CF#1Aa");
 			
 			try {
-				icoConvFrmTD.ConvertFrom ("System.Drawing.String");
+				icoConvFrmTD.ConvertFrom ("System.DrawingCore.String");
 				Assert.Fail ("CF#2A: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2A");
@@ -213,7 +213,7 @@ namespace MonoTests.System.Drawing
 
 			try {
 				icoConvFrmTD.ConvertFrom (null, CultureInfo.InvariantCulture,
-						   "System.Drawing.String");
+						   "System.DrawingCore.String");
 				Assert.Fail ("CF#2aA: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2aA");

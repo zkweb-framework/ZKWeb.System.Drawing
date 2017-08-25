@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintingPermissionLevel.cs
+// System.DrawingCore.PrintingPermissionLevel.cs
 //
 // Author:
 //	Dennis Hayes (dennish@raytek.com)

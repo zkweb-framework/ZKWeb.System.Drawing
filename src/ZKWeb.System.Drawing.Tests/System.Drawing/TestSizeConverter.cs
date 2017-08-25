@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.SizeConverter.cs 
+// Tests for System.DrawingCore.SizeConverter.cs 
 //
 // Author:
 //	Ravindra (rkumar@novell.com)

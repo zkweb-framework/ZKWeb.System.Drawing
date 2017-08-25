@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.QualityMode.cs
+// System.DrawingCore.Drawing2D.QualityMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

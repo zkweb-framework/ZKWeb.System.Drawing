@@ -1,4 +1,4 @@
-// System.Drawing.Design.IToolboxUser.cs
+// System.DrawingCore.Design.IToolboxUser.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

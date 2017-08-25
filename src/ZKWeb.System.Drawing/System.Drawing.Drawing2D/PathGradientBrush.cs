@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.PathGradientBrush.cs
+// System.DrawingCore.Drawing2D.PathGradientBrush.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

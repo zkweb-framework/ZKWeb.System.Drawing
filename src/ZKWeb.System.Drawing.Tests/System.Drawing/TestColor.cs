@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.Color.cs
+// Tests for System.DrawingCore.Color.cs
 //
 // Authors:
 //	Ravindra (rkumar@novell.com)
@@ -35,7 +35,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class ColorTest {

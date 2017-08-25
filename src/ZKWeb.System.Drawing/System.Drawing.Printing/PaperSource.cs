@@ -1,5 +1,5 @@
 //
-// System.Drawing.PaperSource.cs
+// System.DrawingCore.PaperSource.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

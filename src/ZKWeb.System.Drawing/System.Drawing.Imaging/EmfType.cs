@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.EmfType.cs
+// System.DrawingCore.Imaging.EmfType.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

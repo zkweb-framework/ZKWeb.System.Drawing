@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.LinearGradientBrush unit tests
+// System.DrawingCore.Drawing2D.LinearGradientBrush unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -33,7 +33,7 @@ using System.DrawingCore.Drawing2D;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Drawing2D {
+namespace MonoTests.System.DrawingCore.Drawing2D {
 
 	[TestFixture]
 	public class LinearGradientBrushTest {

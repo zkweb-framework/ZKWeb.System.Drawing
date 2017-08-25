@@ -1,5 +1,5 @@
 //
-// System.Drawing.StringAligment.cs
+// System.DrawingCore.StringAligment.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

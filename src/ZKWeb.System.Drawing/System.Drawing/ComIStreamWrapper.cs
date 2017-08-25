@@ -1,5 +1,5 @@
 //
-// System.Drawing.ComIStreamWrapper.cs
+// System.DrawingCore.ComIStreamWrapper.cs
 //
 // Author:
 //   Kornél Pál <http://www.kornelpal.hu/>

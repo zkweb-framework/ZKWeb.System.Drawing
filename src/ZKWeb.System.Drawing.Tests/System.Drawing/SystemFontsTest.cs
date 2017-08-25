@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.SystemFontsTest
+// Tests for System.DrawingCore.SystemFontsTest
 //
 // Authors:
 //	Gert Driesen  <drieseng@users.sourceforge.net>
@@ -33,7 +33,7 @@ using System.DrawingCore;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class SystemFontsTest {

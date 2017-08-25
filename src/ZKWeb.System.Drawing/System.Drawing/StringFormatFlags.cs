@@ -1,5 +1,5 @@
 //
-// System.Drawing.StringFormatFlags.cs
+// System.DrawingCore.StringFormatFlags.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

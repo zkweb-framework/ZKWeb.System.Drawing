@@ -1,5 +1,5 @@
 //
-// System.Drawing.SystemBrushes.cs
+// System.DrawingCore.SystemBrushes.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

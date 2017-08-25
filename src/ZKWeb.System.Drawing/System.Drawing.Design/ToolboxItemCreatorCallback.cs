@@ -1,4 +1,4 @@
-// System.Drawing.Design.ToolboxItemCreatorCallback.cs
+// System.DrawingCore.Design.ToolboxItemCreatorCallback.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Printing.PrinterResolution.cs
+// System.DrawingCore.Printing.PrinterResolution.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

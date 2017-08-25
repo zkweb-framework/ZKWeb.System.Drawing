@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorMap.cs
+// System.DrawingCore.Imaging.ColorMap.cs
 //
 // Authors:
 //   Everaldo Canuto (everaldo.canuto@bol.com.br)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.MetafileHeader.cs
+// System.DrawingCore.Imaging.MetafileHeader.cs
 //
 // Author: Everaldo Canuto
 // eMail: everaldo.canuto@bol.com.br

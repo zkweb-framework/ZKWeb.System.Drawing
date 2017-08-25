@@ -1,5 +1,5 @@
 //
-// System.Drawing.carbonFunctions.cs
+// System.DrawingCore.carbonFunctions.cs
 //
 // Authors:
 //      Geoff Norton (gnorton@customerdna.com>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.FillMode.cs
+// System.DrawingCore.Drawing2D.FillMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.DashStyle.cs
+// System.DrawingCore.Drawing2D.DashStyle.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

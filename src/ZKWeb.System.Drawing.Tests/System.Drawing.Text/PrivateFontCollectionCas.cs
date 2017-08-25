@@ -1,5 +1,5 @@
 //
-// System.Drawing.Text.PrivateFontCollection CAS unit tests
+// System.DrawingCore.Text.PrivateFontCollection CAS unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -36,7 +36,7 @@ using System.Security.Permissions;
 using NUnit.Framework;
 
 #if false
-namespace MonoCasTests.System.Drawing.Text {
+namespace MonoCasTests.System.DrawingCore.Text {
 
 	[TestFixture]
 	[Category ("CAS")]

@@ -1,5 +1,5 @@
 //
-// System.Drawing.QueryPageSettingsEventHandler.cs
+// System.DrawingCore.QueryPageSettingsEventHandler.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

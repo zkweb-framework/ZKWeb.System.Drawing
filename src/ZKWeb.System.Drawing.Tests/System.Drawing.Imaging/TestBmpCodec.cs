@@ -37,7 +37,7 @@ using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.DrawingCore.Imaging {
 
 	[TestFixture]
 	public class BmpCodecTest {

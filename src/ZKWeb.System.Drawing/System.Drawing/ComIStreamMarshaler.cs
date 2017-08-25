@@ -1,5 +1,5 @@
 //
-// System.Drawing.ComIStreamMarshaler.cs
+// System.DrawingCore.ComIStreamMarshaler.cs
 //
 // Author:
 //   Kornél Pál <http://www.kornelpal.hu/>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Image.cs
+// System.DrawingCore.Image.cs
 //
 // Authors: 	Christian Meyer (Christian.Meyer@cs.tum.edu)
 // 		Alexandre Pigolkine (pigolkine@gmx.de)
@@ -43,7 +43,7 @@ namespace System.DrawingCore
 {
 [Serializable]
 [ComVisible (true)]
-[Editor ("System.Drawing.Design.ImageEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
+[Editor ("System.DrawingCore.Design.ImageEditor, System.DrawingCore.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 [TypeConverter (typeof(ImageConverter))]
 [ImmutableObject (true)]
 public abstract class Image : MarshalByRefObject, IDisposable , ICloneable, ISerializable 

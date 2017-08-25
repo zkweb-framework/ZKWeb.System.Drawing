@@ -1,5 +1,5 @@
 //
-// System.Drawing.ImageFormatConverter.cs
+// System.DrawingCore.ImageFormatConverter.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

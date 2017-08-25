@@ -1,5 +1,5 @@
 //
-// System.Drawing.WarpMode.cs
+// System.DrawingCore.WarpMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

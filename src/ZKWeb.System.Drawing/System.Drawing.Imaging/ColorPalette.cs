@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorPalette.cs
+// System.DrawingCore.Imaging.ColorPalette.cs
 //
 // (C) 2002 Ximian, Inc.  http://www.ximian.com
 //

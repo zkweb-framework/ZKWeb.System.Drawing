@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.AdjustableArrowCap.cs
+// System.DrawingCore.Drawing2D.AdjustableArrowCap.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)

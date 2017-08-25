@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintPageEventHandler.cs
+// System.DrawingCore.PrintPageEventHandler.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.PointConverter.cs 
+// Tests for System.DrawingCore.PointConverter.cs 
 //
 // Author:
 //	Ravindra (rkumar@novell.com)

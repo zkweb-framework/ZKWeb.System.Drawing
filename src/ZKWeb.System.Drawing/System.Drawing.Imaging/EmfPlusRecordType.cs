@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.EmfPlusRecordType.cs
+// System.DrawingCore.Imaging.EmfPlusRecordType.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

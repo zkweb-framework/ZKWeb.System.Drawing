@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.InterpolationMode.cs
+// System.DrawingCore.Drawing2D.InterpolationMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

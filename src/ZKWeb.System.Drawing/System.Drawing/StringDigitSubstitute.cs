@@ -1,5 +1,5 @@
 //
-// System.Drawing.StringDigitSubstitute.cs
+// System.DrawingCore.StringDigitSubstitute.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

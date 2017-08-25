@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ImageFormat.cs
+// System.DrawingCore.Imaging.ImageFormat.cs
 //
 // Authors:
 //   Everaldo Canuto (everaldo.canuto@bol.com.br)

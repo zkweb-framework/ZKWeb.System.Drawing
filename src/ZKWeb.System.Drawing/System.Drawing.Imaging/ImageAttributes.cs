@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ImageAttributes.cs
+// System.DrawingCore.Imaging.ImageAttributes.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@raytek.com) (stubbed out)

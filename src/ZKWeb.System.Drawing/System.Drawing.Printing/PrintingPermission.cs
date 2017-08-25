@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintingPermission.cs
+// System.DrawingCore.PrintingPermission.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)
@@ -180,7 +180,7 @@ namespace System.DrawingCore.Printing {
 #endif
 
 		// NOTE: The following static methods should be moved out to a (static?) class 
-		// if (ever) System.Drawing.dll gets more than one permission in it's assembly.
+		// if (ever) System.DrawingCore.dll gets more than one permission in it's assembly.
 
 		// snippet moved from FileIOPermission (nickd) to be reused in all derived classes
 		internal SecurityElement Element (int version) 

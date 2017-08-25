@@ -1,5 +1,5 @@
 //
-// System.Drawing.Point.cs
+// System.DrawingCore.Point.cs
 //
 // Author:
 //   Mike Kestner (mkestner@speakeasy.net)

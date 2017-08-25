@@ -37,7 +37,7 @@ using System.Security.Permissions;
 using System.Xml.Serialization;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing{
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class ImageTest {

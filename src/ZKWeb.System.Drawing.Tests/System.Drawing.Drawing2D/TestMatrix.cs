@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.Drawing2D.Matrix.cs
+// Tests for System.DrawingCore.Drawing2D.Matrix.cs
 //
 // Authors:
 //	Jordi Mas i Hernandez <jordi@ximian.com>
@@ -33,7 +33,7 @@ using System.DrawingCore;
 using System.DrawingCore.Drawing2D;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing.Drawing2D
+namespace MonoTests.System.DrawingCore.Drawing2D
 {
 	[TestFixture]
 	public class MatrixTest {

@@ -33,7 +33,7 @@ using System.Security.Permissions;
 
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class ColorConverterTest {

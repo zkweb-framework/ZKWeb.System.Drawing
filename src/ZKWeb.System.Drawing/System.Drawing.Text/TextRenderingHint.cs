@@ -1,5 +1,5 @@
 //
-// System.Drawing.TextRenderingHint.cs
+// System.DrawingCore.TextRenderingHint.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

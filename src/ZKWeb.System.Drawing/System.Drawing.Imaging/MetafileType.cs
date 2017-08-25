@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.MetafileType
+// System.DrawingCore.Imaging.MetafileType
 //
 // Authors:
 //	Gonzalo Paniagua Javier (gonzalo@ximian.com)

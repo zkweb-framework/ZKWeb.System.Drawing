@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.PropertyValueItem.cs
+// System.DrawingCore.Design.PropertyValueItem.cs
 // 
 // Authors:
 //  Alejandro Sánchez Acosta  <raciel@es.gnu.org>

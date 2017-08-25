@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.MetaHeader.cs
+// System.DrawingCore.Imaging.MetaHeader.cs
 //
 // Authors:
 //   Everaldo Canuto (everaldo.canuto@bol.com.br)

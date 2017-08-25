@@ -1,5 +1,5 @@
 //
-// System.Drawing.PageSettings.cs
+// System.DrawingCore.PageSettings.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

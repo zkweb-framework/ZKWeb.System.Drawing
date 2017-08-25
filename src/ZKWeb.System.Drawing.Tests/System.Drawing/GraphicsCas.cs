@@ -1,5 +1,5 @@
 //
-// GraphicsCas.cs - CAS unit tests for System.Drawing.Graphics
+// GraphicsCas.cs - CAS unit tests for System.DrawingCore.Graphics
 //
 // Author:
 //	Sebastien Pouliot  <sebastien@ximian.com>

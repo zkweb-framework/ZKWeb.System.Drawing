@@ -1,5 +1,5 @@
 //
-// System.Drawing.FontStyle.cs
+// System.DrawingCore.FontStyle.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

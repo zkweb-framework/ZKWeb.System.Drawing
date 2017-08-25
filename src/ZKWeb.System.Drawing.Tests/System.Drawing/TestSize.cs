@@ -1,4 +1,4 @@
-// Tests for System.Drawing.Size.cs
+// Tests for System.DrawingCore.Size.cs
 //
 // Author: Ravindra (rkumar@novell.com)
 //

@@ -1,5 +1,5 @@
 //
-// System.Drawing.RectangleF.cs
+// System.DrawingCore.RectangleF.cs
 //
 // Author:
 //   Mike Kestner (mkestner@speakeasy.net)

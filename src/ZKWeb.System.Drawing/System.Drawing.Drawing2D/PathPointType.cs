@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.PathPointType.cs
+// System.DrawingCore.Drawing2D.PathPointType.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

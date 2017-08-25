@@ -1,5 +1,5 @@
 //
-// System.Drawing.ColorTranslator.cs
+// System.DrawingCore.ColorTranslator.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@raytek.com)

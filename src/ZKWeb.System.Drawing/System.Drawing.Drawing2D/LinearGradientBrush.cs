@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.LinearGradientBrush.cs
+// System.DrawingCore.Drawing2D.LinearGradientBrush.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

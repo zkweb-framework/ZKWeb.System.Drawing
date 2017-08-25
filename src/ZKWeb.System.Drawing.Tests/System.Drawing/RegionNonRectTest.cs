@@ -1,5 +1,5 @@
 //
-// System.Drawing.Region non-rectangular unit tests
+// System.DrawingCore.Region non-rectangular unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -33,7 +33,7 @@ using System.DrawingCore.Drawing2D;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	/* NOTE: General tests and rectangular region tests are located in TestRegion.cs */
 	/*       Here we exclusively tests non-rectangular (GraphicsPath based) regions. */

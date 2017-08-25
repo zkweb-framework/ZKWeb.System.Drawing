@@ -1,5 +1,5 @@
 //
-// System.Drawing.Color.cs
+// System.DrawingCore.Color.cs
 //
 // Authors:
 // 	Dennis Hayes (dennish@raytek.com)
@@ -40,7 +40,7 @@ namespace System.DrawingCore
 {
 #if !MONOTOUCH && !MONOMAC && FEATURE_TYPECONVERTER
 	[TypeConverter(typeof(ColorConverter))]
-	[Editor ("System.Drawing.Design.ColorEditor, System.Drawing.Design", typeof (System.Drawing.Design.UITypeEditor))]
+	[Editor ("System.DrawingCore.Design.ColorEditor, System.DrawingCore.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 #endif
 	[Serializable]
 	public struct Color {

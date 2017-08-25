@@ -1,5 +1,5 @@
 //
-// System.Drawing.SolidBrush.cs
+// System.DrawingCore.SolidBrush.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

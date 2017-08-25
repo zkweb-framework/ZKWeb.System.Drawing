@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.RectangleConverter.cs 
+// Tests for System.DrawingCore.RectangleConverter.cs 
 //
 // Author:
 //	Ravindra (rkumar@novell.com)

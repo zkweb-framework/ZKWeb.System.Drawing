@@ -1,5 +1,5 @@
 //
-// System.Drawing.GraphicsUnit.cs
+// System.DrawingCore.GraphicsUnit.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.CustomLineCap.cs
+// System.DrawingCore.Drawing2D.CustomLineCap.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)

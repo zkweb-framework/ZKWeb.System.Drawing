@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.ToolboxItem.cs
+// System.DrawingCore.Design.ToolboxItem.cs
 //
 // Authors:
 //   Alejandro Sánchez Acosta

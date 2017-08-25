@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintController.cs
+// System.DrawingCore.PrintController.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.BitmapSuffixInSameAssemblyAttribute.cs
+// System.DrawingCore.BitmapSuffixInSameAssemblyAttribute.cs
 //
 // Authors:
 //   Andrés G. Aragoneses (knocte@gmail.com)

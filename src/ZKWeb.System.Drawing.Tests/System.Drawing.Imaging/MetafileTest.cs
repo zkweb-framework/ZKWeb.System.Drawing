@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.DrawingCore.Imaging {
 
 	[TestFixture]
 	public class MetafileTest {

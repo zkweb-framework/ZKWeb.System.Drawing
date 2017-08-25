@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ImageCodecInfo.cs
+// System.DrawingCore.Imaging.ImageCodecInfo.cs
 //
 // Authors:
 //   Everaldo Canuto (everaldo.canuto@bol.com.br)

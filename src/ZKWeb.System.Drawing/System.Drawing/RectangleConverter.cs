@@ -1,5 +1,5 @@
 //
-// System.Drawing.RectangleConverter.cs
+// System.DrawingCore.RectangleConverter.cs
 //
 // Authors:
 //   	Dennis Hayes (dennish@Raytek.com)

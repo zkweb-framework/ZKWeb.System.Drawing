@@ -1,5 +1,5 @@
 //
-// System.Drawing.SizeConverter.cs
+// System.DrawingCore.SizeConverter.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.FontConverter.cs
+// System.DrawingCore.FontConverter.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)

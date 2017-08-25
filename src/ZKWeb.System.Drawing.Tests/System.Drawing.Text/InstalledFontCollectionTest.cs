@@ -1,5 +1,5 @@
 //
-// System.Drawing.Text.InstalledFontCollection unit tests
+// System.DrawingCore.Text.InstalledFontCollection unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -33,7 +33,7 @@ using System.DrawingCore.Text;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Text {
+namespace MonoTests.System.DrawingCore.Text {
 
 	[TestFixture]
 	public class InstalledFontCollectionTest {

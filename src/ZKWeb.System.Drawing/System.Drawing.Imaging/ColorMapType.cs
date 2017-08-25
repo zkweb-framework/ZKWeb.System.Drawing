@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorMapType.cs
+// System.DrawingCore.Imaging.ColorMapType.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

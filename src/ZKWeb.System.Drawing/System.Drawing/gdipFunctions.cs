@@ -1,5 +1,5 @@
 //
-// System.Drawing.gdipFunctions.cs
+// System.DrawingCore.gdipFunctions.cs
 //
 // Authors: 
 //	Alexandre Pigolkine (pigolkine@gmx.de)

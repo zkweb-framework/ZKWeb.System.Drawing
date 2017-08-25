@@ -1,5 +1,5 @@
 //
-// System.Drawing.Bitmap.cs
+// System.DrawingCore.Bitmap.cs
 //
 // Copyright (C) 2002 Ximian, Inc.  http://www.ximian.com
 // Copyright (C) 2004 Novell, Inc.  http://www.novell.com
@@ -46,7 +46,7 @@ namespace System.DrawingCore
 {
 	[Serializable]
 	[ComVisible (true)]
-	[Editor ("System.Drawing.Design.BitmapEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
+	[Editor ("System.DrawingCore.Design.BitmapEditor, System.DrawingCore.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	public sealed class Bitmap : Image
 	{
 		#region constructors

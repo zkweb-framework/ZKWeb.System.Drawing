@@ -1,5 +1,5 @@
 //
-// System.Drawing.PaperSize.cs
+// System.DrawingCore.PaperSize.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

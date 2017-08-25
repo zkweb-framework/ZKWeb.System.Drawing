@@ -1,5 +1,5 @@
 //
-// System.Drawing.ImageAnimator.cs
+// System.DrawingCore.ImageAnimator.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)

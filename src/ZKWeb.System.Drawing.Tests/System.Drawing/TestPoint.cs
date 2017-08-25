@@ -1,4 +1,4 @@
-// Tests for System.Drawing.Point.cs
+// Tests for System.DrawingCore.Point.cs
 //
 // Author: Mike Kestner (mkestner@speakeasy.net)
 // 		   Improvements by Jordi Mas i Hernandez <jmas@softcatala.org>

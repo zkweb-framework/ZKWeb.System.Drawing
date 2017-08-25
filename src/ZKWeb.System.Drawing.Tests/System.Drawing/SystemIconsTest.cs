@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.SystemIconsTest.cs 
+// Tests for System.DrawingCore.SystemIconsTest.cs 
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -31,7 +31,7 @@ using System;
 using System.DrawingCore;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class SystemIconsTest {

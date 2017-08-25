@@ -1,4 +1,4 @@
-// System.Drawing.Design.PropertyValueUIHandler.cs
+// System.DrawingCore.Design.PropertyValueUIHandler.cs
 //
 // Author:
 // 	Alejandro Sánchez Acosta  <raciel@es.gnu.org>

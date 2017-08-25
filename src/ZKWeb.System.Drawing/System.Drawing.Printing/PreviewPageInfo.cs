@@ -1,5 +1,5 @@
 //
-// System.Drawing.PreviewPageInfo.cs
+// System.DrawingCore.PreviewPageInfo.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

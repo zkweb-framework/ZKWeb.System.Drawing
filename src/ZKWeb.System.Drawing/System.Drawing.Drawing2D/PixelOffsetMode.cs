@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.PixelOffsetMode.cs
+// System.DrawingCore.Drawing2D.PixelOffsetMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

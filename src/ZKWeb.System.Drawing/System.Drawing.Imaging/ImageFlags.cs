@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ImageFlags.cs
+// System.DrawingCore.Imaging.ImageFlags.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

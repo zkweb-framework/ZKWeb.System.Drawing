@@ -1,4 +1,4 @@
-// Tests for System.Drawing.PointF.cs
+// Tests for System.DrawingCore.PointF.cs
 //
 // Author:
 //	Ravindra (rkumar@novell.com)

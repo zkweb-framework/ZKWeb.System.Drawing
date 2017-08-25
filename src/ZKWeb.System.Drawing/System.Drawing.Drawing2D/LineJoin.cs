@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.LineJoin.cs
+// System.DrawingCore.Drawing2D.LineJoin.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

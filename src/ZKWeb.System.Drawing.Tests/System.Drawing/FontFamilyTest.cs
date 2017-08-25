@@ -1,5 +1,5 @@
 //
-// System.Drawing.FontFamily unit tests
+// System.DrawingCore.FontFamily unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -33,7 +33,7 @@ using System.DrawingCore.Text;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class FontFamilyTest {
@@ -80,7 +80,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void FontFamily_String ()
 		{
-			HostIgnoreList.CheckTest ("MonoTests.System.Drawing.FontFamilyTest.FontFamily_String");
+			HostIgnoreList.CheckTest ("MonoTests.System.DrawingCore.FontFamilyTest.FontFamily_String");
 			FontFamily ff = new FontFamily (name);
 			CheckMono (ff);
 			FontStyle style = FontStyle.Bold;

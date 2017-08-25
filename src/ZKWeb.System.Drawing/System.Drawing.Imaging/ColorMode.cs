@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorMode.cs
+// System.DrawingCore.Imaging.ColorMode.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

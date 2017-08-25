@@ -1,5 +1,5 @@
 //
-// System.Drawing.gdipEnums.cs
+// System.DrawingCore.gdipEnums.cs
 //
 // Authors:
 //	Alexandre Pigolkine (pigolkine@gmx.de)

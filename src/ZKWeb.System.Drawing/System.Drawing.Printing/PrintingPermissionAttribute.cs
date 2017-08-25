@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintingPermissionAttribute.cs
+// System.DrawingCore.PrintingPermissionAttribute.cs
 //
 // Authors:
 //	Dennis Hayes (dennish@Raytek.com)

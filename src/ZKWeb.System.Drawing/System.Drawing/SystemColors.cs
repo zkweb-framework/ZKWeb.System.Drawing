@@ -1,5 +1,5 @@
 //
-// System.Drawing.SystemColors
+// System.DrawingCore.SystemColors
 //
 // Copyright (C) 2002 Ximian, Inc (http://www.ximian.com)
 // Copyright (C) 2004-2005, 2007 Novell, Inc (http://www.novell.com)

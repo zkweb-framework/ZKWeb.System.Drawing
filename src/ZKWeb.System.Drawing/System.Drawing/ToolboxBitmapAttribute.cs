@@ -1,5 +1,5 @@
 //
-// System.Drawing.ToolboxBitmapAttribute.cs
+// System.DrawingCore.ToolboxBitmapAttribute.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

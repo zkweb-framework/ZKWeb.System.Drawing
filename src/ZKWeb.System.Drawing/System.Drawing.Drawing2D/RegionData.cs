@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.RegionData.cs
+// System.DrawingCore.Drawing2D.RegionData.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.ContentAlignment.cs
+// System.DrawingCore.ContentAlignment.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //
@@ -30,7 +30,7 @@ using System.ComponentModel;
 
 namespace System.DrawingCore {
 
-	[Editor ("System.Drawing.Design.ContentAlignmentEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
+	[Editor ("System.DrawingCore.Design.ContentAlignmentEditor, System.DrawingCore.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 	public enum ContentAlignment {
 		TopLeft      = 0x001,
 		TopCenter    = 0x002,

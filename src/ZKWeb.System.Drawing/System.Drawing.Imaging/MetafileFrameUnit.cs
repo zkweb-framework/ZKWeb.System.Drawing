@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.MetafileFrameUnit.cs
+// System.DrawingCore.Imaging.MetafileFrameUnit.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Color.cs
+// System.DrawingCore.Color.cs
 //
 // Author:
 // Dennis Hayes (dennish@raytek.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.IToolboxService.cs
+// System.DrawingCore.Design.IToolboxService.cs
 //
 // Authors:
 //	Alejandro Sánchez Acosta  <raciel@es.gnu.org>

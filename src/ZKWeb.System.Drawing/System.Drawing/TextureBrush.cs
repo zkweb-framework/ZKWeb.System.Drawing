@@ -1,5 +1,5 @@
 //
-// System.Drawing.TextureBrush.cs
+// System.DrawingCore.TextureBrush.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

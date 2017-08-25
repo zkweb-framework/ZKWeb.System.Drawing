@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.Brushes.cs
+// Tests for System.DrawingCore.Brushes.cs
 //
 // Authors:
 //	Ravindra (rkumar@novell.com)
@@ -32,7 +32,7 @@ using System;
 using System.DrawingCore;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class BrushesTest {

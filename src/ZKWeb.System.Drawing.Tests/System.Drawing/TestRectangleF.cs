@@ -1,4 +1,4 @@
-// Tests for System.Drawing.RectangleF.cs
+// Tests for System.DrawingCore.RectangleF.cs
 
 // Copyright (C) 2005, 2006 Novell, Inc (http://www.novell.com)
 //

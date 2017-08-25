@@ -35,7 +35,7 @@ using System.Security.Permissions;
 using System.Text;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.DrawingCore.Imaging {
 
 	[TestFixture]
 	public class GifCodecTest {

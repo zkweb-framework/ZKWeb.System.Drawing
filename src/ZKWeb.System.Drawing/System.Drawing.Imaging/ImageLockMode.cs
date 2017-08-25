@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ImageLockMode.cs
+// System.DrawingCore.Imaging.ImageLockMode.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

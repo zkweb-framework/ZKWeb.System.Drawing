@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.ImageFormatConverter.cs 
+// Tests for System.DrawingCore.ImageFormatConverter.cs 
 //
 // Authors:
 //	Sanjay Gupta (gsanjay@novell.com)
@@ -101,7 +101,7 @@ namespace MonoTests.System.Drawing
 								ImageFormat.Bmp.ToString ()), "CF#1");
 			
 			try {
-				imgFmtConv.ConvertFrom ("System.Drawing.String");
+				imgFmtConv.ConvertFrom ("System.DrawingCore.String");
 				Assert.Fail ("CF#2: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2");
@@ -109,7 +109,7 @@ namespace MonoTests.System.Drawing
 
 			try {
 				imgFmtConv.ConvertFrom (null, CultureInfo.InvariantCulture,
-						   "System.Drawing.String");
+						   "System.DrawingCore.String");
 				Assert.Fail ("CF#2a: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2a");
@@ -152,7 +152,7 @@ namespace MonoTests.System.Drawing
 								ImageFormat.Bmp.ToString ()), "CF#1A");
 			
 			try {
-				imgFmtConvFrmTD.ConvertFrom ("System.Drawing.String");
+				imgFmtConvFrmTD.ConvertFrom ("System.DrawingCore.String");
 				Assert.Fail ("CF#2A: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2A");
@@ -160,7 +160,7 @@ namespace MonoTests.System.Drawing
 
 			try {
 				imgFmtConvFrmTD.ConvertFrom (null, CultureInfo.InvariantCulture,
-						   "System.Drawing.String");
+						   "System.DrawingCore.String");
 				Assert.Fail ("CF#2aA: must throw NotSupportedException");
 			} catch (Exception e) {
 				Assert.IsTrue (e is NotSupportedException, "CF#2aA");

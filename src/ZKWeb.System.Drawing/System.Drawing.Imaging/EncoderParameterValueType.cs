@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.EncoderParameterValueType.cs
+// System.DrawingCore.Imaging.EncoderParameterValueType.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

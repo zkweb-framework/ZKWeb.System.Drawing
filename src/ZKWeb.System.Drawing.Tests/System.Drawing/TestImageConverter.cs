@@ -1,5 +1,5 @@
 //
-// Tests for System.Drawing.ImageConverter.cs 
+// Tests for System.DrawingCore.ImageConverter.cs 
 //
 // Authors:
 //	Sanjay Gupta (gsanjay@novell.com)
@@ -38,7 +38,7 @@ using System.Globalization;
 using System.IO;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing
+namespace MonoTests.System.DrawingCore
 {
 	[TestFixture]
 	public class ImageConverterTest 
@@ -158,13 +158,13 @@ namespace MonoTests.System.Drawing
 		[Test]
 		public void ConvertFrom_BadString ()
 		{
-			Assert.Throws<NotSupportedException> (() => imgConv.ConvertFrom ("System.Drawing.String"));
+			Assert.Throws<NotSupportedException> (() => imgConv.ConvertFrom ("System.DrawingCore.String"));
 		}
 
 		[Test]
 		public void ConvertFrom_BadString_WithCulture ()
 		{
-			Assert.Throws<NotSupportedException> (() => imgConv.ConvertFrom (null, CultureInfo.InvariantCulture, "System.Drawing.String"));
+			Assert.Throws<NotSupportedException> (() => imgConv.ConvertFrom (null, CultureInfo.InvariantCulture, "System.DrawingCore.String"));
 		}
 
 		[Test]
@@ -194,13 +194,13 @@ namespace MonoTests.System.Drawing
 		[Test]
 		public void TypeDescriptor_ConvertFrom_BadString ()
 		{
-			Assert.Throws<NotSupportedException> (() => imgConvFrmTD.ConvertFrom ("System.Drawing.String"));
+			Assert.Throws<NotSupportedException> (() => imgConvFrmTD.ConvertFrom ("System.DrawingCore.String"));
 		}
 
 		[Test]
 		public void TypeDescriptor_ConvertFrom_BadString_Culture ()
 		{
-			Assert.Throws<NotSupportedException> (() => imgConvFrmTD.ConvertFrom (null, CultureInfo.InvariantCulture, "System.Drawing.String"));
+			Assert.Throws<NotSupportedException> (() => imgConvFrmTD.ConvertFrom (null, CultureInfo.InvariantCulture, "System.DrawingCore.String"));
 		}
 
 		[Test]

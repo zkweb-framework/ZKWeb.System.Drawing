@@ -31,7 +31,7 @@ using System.DrawingCore.Imaging;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.DrawingCore.Imaging {
 
 	[TestFixture]
 	public class EmfPlusRecordTypeTest {

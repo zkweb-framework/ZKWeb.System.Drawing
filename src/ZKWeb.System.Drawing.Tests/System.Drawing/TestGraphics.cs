@@ -37,7 +37,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.DrawingCore {
 
 	[TestFixture]
 	public class GraphicsTest {
@@ -1884,7 +1884,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void MeasureString_StringFontInt_LongString ()
 		{
-			HostIgnoreList.CheckTest ("MonoTests.System.Drawing.GraphicsTest.MeasureString_StringFontInt_LongString");
+			HostIgnoreList.CheckTest ("MonoTests.System.DrawingCore.GraphicsTest.MeasureString_StringFontInt_LongString");
 			MeasureString_StringFontInt ("A very long string..."); // see bug #79643
 		}
 
@@ -2543,7 +2543,7 @@ namespace MonoTests.System.Drawing {
 		[Test]
 		public void MeasureString_Wrapping_Dots ()
 		{
-			HostIgnoreList.CheckTest ("MonoTests.System.Drawing.GraphicsTest.MeasureString_Wrapping_Dots");
+			HostIgnoreList.CheckTest ("MonoTests.System.DrawingCore.GraphicsTest.MeasureString_Wrapping_Dots");
 
 			if (font == null)
 				Assert.Ignore ("Couldn't create required font");

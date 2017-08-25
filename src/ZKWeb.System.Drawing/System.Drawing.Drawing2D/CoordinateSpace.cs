@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.CoordinateSpace.cs
+// System.DrawingCore.Drawing2D.CoordinateSpace.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

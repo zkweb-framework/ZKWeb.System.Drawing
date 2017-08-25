@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrintRange.cs
+// System.DrawingCore.PrintRange.cs
 //
 // (C) 2002 Ximian, Inc.  http://www.ximian.com
 // Author: Dennis Hayes (dennish@raytek.com)

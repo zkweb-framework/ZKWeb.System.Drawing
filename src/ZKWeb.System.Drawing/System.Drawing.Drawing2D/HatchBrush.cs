@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.HatchBrush.cs
+// System.DrawingCore.Drawing2D.HatchBrush.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Text.PrivateFontCollection.cs
+// System.DrawingCore.Text.PrivateFontCollection.cs
 //
 // (C) 2002 Ximian, Inc.  http://www.ximian.com
 // Author: Everaldo Canuto everaldo.canuto@bol.com.br

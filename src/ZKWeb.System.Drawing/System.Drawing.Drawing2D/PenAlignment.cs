@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.PenAlignment.cs
+// System.DrawingCore.Drawing2D.PenAlignment.cs
 //
 // Author:
 //   Miguel de Icaza (miguel@ximian.com)

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.WmfPlaceableFileHeader.cs
+// System.DrawingCore.Imaging.WmfPlaceableFileHeader.cs
 //
 // Authors:
 //	Everaldo Canuto  <everaldo.canuto@bol.com.br>

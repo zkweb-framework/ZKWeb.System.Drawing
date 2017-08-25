@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.DashCap.cs
+// System.DrawingCore.Drawing2D.DashCap.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

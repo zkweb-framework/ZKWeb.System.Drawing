@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorChannelFlag.cs
+// System.DrawingCore.Imaging.ColorChannelFlag.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

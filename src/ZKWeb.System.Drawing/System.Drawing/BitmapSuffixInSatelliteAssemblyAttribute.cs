@@ -1,5 +1,5 @@
 //
-// System.Drawing.BitmapSuffixInSatelliteAssemblyAttribute.cs
+// System.DrawingCore.BitmapSuffixInSatelliteAssemblyAttribute.cs
 //
 // Authors:
 //   Andrés G. Aragoneses (knocte@gmail.com)

@@ -1,4 +1,4 @@
-// System.Drawing.Design.IPropertyValueUIService.cs
+// System.DrawingCore.Design.IPropertyValueUIService.cs
 //
 // Author:
 // 	Alejandro Sánchez Acosta  <raciel@es.gnu.org>

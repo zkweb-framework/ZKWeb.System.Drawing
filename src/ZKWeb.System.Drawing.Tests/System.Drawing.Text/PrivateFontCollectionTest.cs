@@ -1,5 +1,5 @@
 //
-// System.Drawing.Text.PrivateFontCollection unit tests
+// System.DrawingCore.Text.PrivateFontCollection unit tests
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
@@ -35,7 +35,7 @@ using System.Security;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Text {
+namespace MonoTests.System.DrawingCore.Text {
 
 	[TestFixture]
 	public class PrivateFontCollectionTest {

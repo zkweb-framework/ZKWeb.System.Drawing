@@ -1,5 +1,5 @@
 //
-// System.Drawing.Design.ToolboxItemCollection.cs
+// System.DrawingCore.Design.ToolboxItemCollection.cs
 //
 // Authors:
 //  Martin Willemoes Hansen (mwh@sysrq.dk)

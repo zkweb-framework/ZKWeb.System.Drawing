@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.CompostingQuality.cs
+// System.DrawingCore.Drawing2D.CompostingQuality.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

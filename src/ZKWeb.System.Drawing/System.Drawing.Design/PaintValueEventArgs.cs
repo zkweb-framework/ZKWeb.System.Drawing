@@ -1,4 +1,4 @@
-// System.Drawing.Design.PaintvalueEventArgs.cs
+// System.DrawingCore.Design.PaintvalueEventArgs.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

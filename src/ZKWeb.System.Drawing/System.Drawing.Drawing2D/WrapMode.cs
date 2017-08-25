@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.WrapMode.cs
+// System.DrawingCore.Drawing2D.WrapMode.cs
 //
 // Authors:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

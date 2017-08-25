@@ -1,5 +1,5 @@
 //
-// System.Drawing.Icon.cs
+// System.DrawingCore.Icon.cs
 //
 // Authors:
 //   Gary Barnett (gary.barnett.mono@gmail.com)
@@ -44,7 +44,7 @@ namespace System.DrawingCore
 {
 	[Serializable]	
 #if !MONOTOUCH
-	[Editor ("System.Drawing.Design.IconEditor, System.Drawing.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
+	[Editor ("System.DrawingCore.Design.IconEditor, System.DrawingCore.Design", typeof (System.DrawingCore.Design.UITypeEditor))]
 #endif
 	[TypeConverter(typeof(IconConverter))]
 
@@ -650,7 +650,7 @@ namespace System.DrawingCore
 
 			// note: we can't return the original image because
 			// (a) we have no control over the bitmap instance we return (i.e. it could be disposed)
-			// (b) the palette, flags won't match MS results. See MonoTests.System.Drawing.Imaging.IconCodecTest.
+			// (b) the palette, flags won't match MS results. See MonoTests.System.DrawingCore.Imaging.IconCodecTest.
 			//     Image16 for the differences
 			return new Bitmap (GetInternalBitmap ());
 		}

@@ -1,5 +1,5 @@
                                                                                                              //
-// System.Drawing.IconConverter.cs
+// System.DrawingCore.IconConverter.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

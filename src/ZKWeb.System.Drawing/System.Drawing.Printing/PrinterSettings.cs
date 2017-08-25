@@ -1,5 +1,5 @@
 //
-// System.Drawing.PrinterSettings.cs
+// System.DrawingCore.PrinterSettings.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

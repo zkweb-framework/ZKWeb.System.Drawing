@@ -1,5 +1,5 @@
 //
-// System.Drawing.Pens.cs
+// System.DrawingCore.Pens.cs
 //
 // Authors:
 //   Matt Stump (mstump@swfo.arizona.edu)

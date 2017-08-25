@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.Matrix.cs
+// System.DrawingCore.Drawing2D.Matrix.cs
 //
 // Authors:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

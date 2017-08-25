@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.PropertyItem.cs
+// System.DrawingCore.Imaging.PropertyItem.cs
 //
 // Authors:
 //   Everaldo Canuto (everaldo.canuto@bol.com.br)

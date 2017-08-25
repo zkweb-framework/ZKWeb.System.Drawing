@@ -1,5 +1,5 @@
 //
-// System.Drawing.StringTrimming.cs
+// System.DrawingCore.StringTrimming.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

@@ -1,5 +1,5 @@
 //
-// System.Drawing.SystemIcons.cs
+// System.DrawingCore.SystemIcons.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

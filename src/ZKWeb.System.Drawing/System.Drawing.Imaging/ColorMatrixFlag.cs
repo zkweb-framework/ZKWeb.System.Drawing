@@ -1,5 +1,5 @@
 //
-// System.Drawing.Imaging.ColorMatrixFlag.cs
+// System.DrawingCore.Imaging.ColorMatrixFlag.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

@@ -1,5 +1,5 @@
 //
-// System.Drawing.PaperKind.cs
+// System.DrawingCore.PaperKind.cs
 //
 // (C) 2002 Ximian, Inc.  http://www.ximian.com
 // Author: Dennis Hayes (dennish@raytek.com)

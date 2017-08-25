@@ -1,5 +1,5 @@
 //
-// System.Drawing.KnownColors
+// System.DrawingCore.KnownColors
 //
 // Authors:
 //	Gonzalo Paniagua Javier (gonzalo@ximian.com)

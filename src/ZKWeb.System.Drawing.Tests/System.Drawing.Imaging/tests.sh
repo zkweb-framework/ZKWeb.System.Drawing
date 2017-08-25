@@ -2,7 +2,7 @@
 
 if [ $# -eq 0 ]; then
 	echo "You should give a list of test names such as: "
-	echo "$0 System.Drawing.TestStringFormat"
+	echo "$0 System.DrawingCore.TestStringFormat"
 	echo "or"
 	echo "$0 all"
 	exit 1

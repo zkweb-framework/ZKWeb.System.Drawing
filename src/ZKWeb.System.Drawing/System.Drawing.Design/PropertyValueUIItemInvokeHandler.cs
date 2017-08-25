@@ -1,4 +1,4 @@
-// System.Drawing.Design.PropertyValueUIItemInvokeHandler.cs
+// System.DrawingCore.Design.PropertyValueUIItemInvokeHandler.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

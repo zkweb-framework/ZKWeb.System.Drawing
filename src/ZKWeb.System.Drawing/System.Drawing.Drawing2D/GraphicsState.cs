@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.GraphicsState.cs
+// System.DrawingCore.Drawing2D.GraphicsState.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)

@@ -1,4 +1,4 @@
-// System.Drawing.Design.ToolboxComponentsCreatedEventArgs.cs
+// System.DrawingCore.Design.ToolboxComponentsCreatedEventArgs.cs
 // 
 // Author:
 //      Alejandro Sánchez Acosta  <raciel@es.gnu.org>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Region.cs
+// System.DrawingCore.Region.cs
 //
 // Author:
 //	Miguel de Icaza (miguel@ximian.com)

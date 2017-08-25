@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.ColorBlend.cs
+// System.DrawingCore.Drawing2D.ColorBlend.cs
 //
 // Authors:
 //   Dennis Hayes (dennish@Raytek.com)

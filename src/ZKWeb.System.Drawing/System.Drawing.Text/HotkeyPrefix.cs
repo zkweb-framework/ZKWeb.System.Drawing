@@ -1,5 +1,5 @@
 //
-// System.Drawing.HotkeyPrefix.cs
+// System.DrawingCore.HotkeyPrefix.cs
 //
 // Author: Dennis Hayes (dennish@raytek.com)
 //

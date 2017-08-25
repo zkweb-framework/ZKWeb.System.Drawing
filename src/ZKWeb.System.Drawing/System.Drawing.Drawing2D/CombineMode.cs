@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.CombineMode.cs
+// System.DrawingCore.Drawing2D.CombineMode.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.FlushIntention.cs
+// System.DrawingCore.Drawing2D.FlushIntention.cs
 //
 // Author:
 //   Stefan Maierhofer <sm@cg.tuwien.ac.at>

@@ -1,5 +1,5 @@
 //
-// System.Drawing.Drawing2D.PenType.cs
+// System.DrawingCore.Drawing2D.PenType.cs
 //
 // Author:
 //   Dennis Hayes (dennish@Raytek.com)
