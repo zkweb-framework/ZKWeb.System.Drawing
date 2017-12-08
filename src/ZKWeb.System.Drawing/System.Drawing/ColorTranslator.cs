@@ -70,14 +70,33 @@ namespace System.DrawingCore {
 				return Color.LightGray;
 			}
 
+			// #abc
 			if (htmlColor[0] == '#' && htmlColor.Length == 4)
 			{
 				char r = htmlColor[1], g = htmlColor[2], b = htmlColor[3];
 				htmlColor = new string ( new char [] { '#', r, r, g, g, b, b } );
 			}
 
-			TypeConverter converter = TypeDescriptor.GetConverter (typeof (Color));
-			return (Color) converter.ConvertFromString (htmlColor);
+			// #aabbcc
+			if (htmlColor[0] == '#' && htmlColor.Length == 7)
+			{
+				int r = Convert.ToInt32(htmlColor.Substring(1, 2), 16);
+				int g = Convert.ToInt32(htmlColor.Substring(3, 2), 16);
+				int b = Convert.ToInt32(htmlColor.Substring(5, 2), 16);
+				return Color.FromArgb(r, g, b);
+			}
+
+			// #xxaabbcc
+			if (htmlColor[0] == '#' && htmlColor.Length == 9)
+			{
+				int a = Convert.ToInt32(htmlColor.Substring(1, 2), 16);
+				int r = Convert.ToInt32(htmlColor.Substring(3, 2), 16);
+				int g = Convert.ToInt32(htmlColor.Substring(5, 2), 16);
+				int b = Convert.ToInt32(htmlColor.Substring(7, 2), 16);
+				return Color.FromArgb(a, r, g, b);
+			}
+
+			throw new NotSupportedException("unsupport color format");
 		}
 
 		internal static Color FromBGR (int bgr)
