@@ -1,3 +1,13 @@
+# Notice
+
+Please use [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common) instead, this is an official fork of mono's system drawing implementation, this project will no longer be maintained.
+
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+
 # System.Drawing for .NET Core, that really work
 
 This is a .Net Core compatible System.Drawing implementation modified from mono project.<br/>
@@ -28,12 +38,6 @@ Known issues:
 
 - #1 Save icon file large than 255x255 will cause arithmetic overflow error
 
-# Warning
-
-Microsoft will ship their [System.Drawing](https://github.com/dotnet/corefx/tree/master/src/System.Drawing.Common) soon,<br/>
-it's also modified from mono and I believe it's more stable than mine,<br/>
-so this project may discontinue soon after offical System.Drawing available.<br/>
-
 # How can I get it work?
 
 On windows, just install package `ZKWeb.System.Drawing` from nuget.
@@ -62,21 +66,3 @@ On Linux, except install package `ZKWeb.System.Drawing` from nuget, you need ins
 	- ln -s /usr/local/lib/libgdiplus.so gdiplus.dll
 
 **Then you should replace all `System.Drawing` To `System.DrawingCore` in your code**
-
-# Huh? What's the different with CoreCompat.System.Drawing?
-
-- No fake strong name is used, will not mess up Asp.Net and OWIN.
-- Copied all files from mono 5.2.0.215, you will actually compile it without seeing hundreds error
-- Really tested on linux and really work
-- You can actually run tests from `dotnet test`, no joke
-	- Windows
-		- .Net Core 2.0: Test Count: 1905, Passed: 1528, Failed: 367, Warnings: 0, Inconclusive: 0, Skipped: 10
-		- .Net Framework 4.6.1: Test Count: 1941, Passed: 1557, Failed: 374, Warnings: 0, Inconclusive: 0, Skipped: 10
-	- Linux
-		- .Net Core 2.0: Test Count: 1906, Passed: 1522, Failed: 375, Warnings: 0, Inconclusive: 0, Skipped: 9
-- No reference to System.Drawing.Primitive, because System.Drawing.Primitive reference original System.Drawing on .Net Framework which may cause conficts error
-- Namespace is renamed from `System.Drawing` to `System.DrawingCore` that make it compatible with .Net Core 2.0
-
-# Mac support
-
-Not tested yet.
